@@ -1,5 +1,5 @@
 ---
-title: "Beyond the chatbot: why 2026 is the year of agentic AI"
+title: "AI that does tasks, not just answers questions"
 description: "AI is moving from answering questions to taking action. What 'agentic' AI means, how it differs from a chatbot, and where it can help your business."
 date: 2026-05-12
 category: Technical execution

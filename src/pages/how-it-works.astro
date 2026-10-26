@@ -16,7 +16,7 @@ const detail = [
   },
   {
     get: ['Technical design of the whole system, including the data it needs', 'Wireframes and workflow maps so you can see how it will work', 'A clear roadmap with milestones, timeline and a fixed price for the build'],
-    note: `Sprint 0 costs ${gbp(pricing.sprintZeroPrice)}. If you go ahead with the build with us, ${gbp(pricing.sprintZeroCredit)} is credited back against your build invoice.`,
+    note: `Sprint 0 starts at ${gbp(pricing.sprintZeroPrice)}. If you go ahead with the build with us, ${pricing.sprintZeroCredit} of what you paid comes off your build invoice.`,
   },
   {
     get: ['Working software delivered in short stages', 'Regular demos so you can give feedback early', 'Testing throughout, including security and performance'],
@@ -43,8 +43,8 @@ const faqs = [
 >
   <PageHero
     eyebrow="How it works"
-    title="Four steps. A fixed plan. No surprises."
-    intro="We don’t start building until you know exactly what you’re getting, how long it will take and what it will cost."
+    title="How it works"
+    intro="Before we build anything, you’ll know what you’re getting, how long it will take and what it will cost."
     crumbs={[{ label: 'How It Works' }]}
   />
 

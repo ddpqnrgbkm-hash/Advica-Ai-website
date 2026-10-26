@@ -4,8 +4,8 @@ shortTitle: Software & Cloud
 order: 2
 seoTitle: Custom Web & Mobile Apps, Cloud and Blockchain Development
 seoDescription: Bespoke web and mobile apps, cloud infrastructure and blockchain builds for UK businesses. Designed around your workflow, built to scale, handed over cleanly.
-headline: Software built around your business, not the other way round.
-summary: When off-the-shelf software forces your team into awkward workarounds, we design and build web and mobile apps that fit how you actually work, on cloud infrastructure that's secure, reliable and easy to maintain.
+headline: Apps and systems built for the way you work.
+summary: If off-the-shelf software doesn't fit the way your business works, we build web and mobile apps that do, running on secure and reliable cloud hosting.
 menuText: Web and mobile apps, cloud, DevOps and blockchain
 accent: lime
 capabilities:
@@ -18,8 +18,8 @@ capabilities:
     text: Apps for iPhone and Android, for your customers or for your teams out in the field, including apps that work offline.
     tags: [iOS & Android, Cross-platform, Offline-ready, Field apps]
   - id: product-engineering
-    name: Product engineering & integrations
-    text: Robust back-ends and connections between the systems you already use, designed so your software is easy to grow and change.
+    name: Connecting your systems
+    text: Linking the systems you already use so information flows between them, and building the behind-the-scenes parts your apps need.
     tags: [APIs & integrations, Microservices, Headless, Modernising old systems]
   - id: cloud
     name: Cloud strategy & migration
@@ -35,7 +35,7 @@ capabilities:
     tags: [Monitoring, Auto-scaling, Cost optimisation, Security]
   - id: blockchain
     name: Blockchain & digital assets
-    text: Smart contracts, tokenisation and decentralised apps, with security reviews built in, where blockchain genuinely fits the problem.
+    text: Smart contracts, tokenisation and decentralised apps, with security reviews built in, where blockchain is the right tool for the job.
     tags: [Smart contracts, Asset tokenisation, DeFi platforms, NFT marketplaces, Layer 2]
 whoFor:
   - Your team relies on spreadsheets, WhatsApp and workarounds to run key processes.

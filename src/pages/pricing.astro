@@ -10,7 +10,7 @@ const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 
 const faqs = [
   { q: 'Why don’t you publish fixed prices for builds?', a: 'Every project is different, and a price without a plan is a guess. Sprint 0 gives you a fixed price based on a proper design. For a rough idea before then, try our project cost estimator.' },
-  { q: 'Is the Sprint 0 credit guaranteed?', a: `If you go ahead with the build with us, ${gbp(pricing.sprintZeroCredit)} of your Sprint 0 fee is credited against your build invoice.` },
+  { q: 'How much does Sprint 0 cost?', a: `Sprint 0 starts at ${gbp(pricing.sprintZeroPrice)}. The exact price depends on the size of the project, and we’ll confirm it before you commit. If you go ahead with the build with us, ${pricing.sprintZeroCredit} of what you paid for Sprint 0 comes off your build invoice.` },
   { q: 'Who provides the monthly financing?', a: 'Independent technology finance providers we work with. They make their own lending decisions and agreements are between you and them.' },
   { q: 'Are there tax benefits to financing?', a: 'Spreading the cost can have tax advantages for some businesses, but it depends on your circumstances. Please speak to your accountant before deciding, as we can’t give tax advice.' },
   { q: 'How are extra engineers priced?', a: 'Usually a monthly or day rate per engineer, depending on skills and seniority. We’ll give you a clear quote before anyone starts.' },
@@ -18,13 +18,13 @@ const faqs = [
 ---
 <BaseLayout
   title="Pricing: Sprint 0, milestone billing and monthly financing"
-  description={`Start with Sprint 0 (${gbp(pricing.sprintZeroPrice)}, with ${gbp(pricing.sprintZeroCredit)} credited if you build with us), then pay by milestone or spread the cost monthly over ${pricing.financeYears} years.`}
+  description={`Start with Sprint 0 (from ${gbp(pricing.sprintZeroPrice)}, with ${pricing.sprintZeroCredit} the fee credited if you build with us), then pay by milestone or spread the cost monthly over ${pricing.financeYears} years.`}
   jsonLd={[{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }]}
 >
   <PageHero
     eyebrow="Pricing"
-    title="Clear pricing. Flexible ways to pay."
-    intro="Start with a fixed-price plan, then choose how you pay for the build: in stages, or spread monthly so your cash stays free for running the business."
+    title="Pricing"
+    intro="Most projects start with Sprint 0, a planning stage. You can then pay for the build in stages, or spread the cost monthly."
     crumbs={[{ label: 'Pricing' }]}
   />
 
@@ -36,18 +36,18 @@ const faqs = [
           <div aria-hidden="true" class="absolute -left-16 -top-16 size-72 rounded-full bg-sky/25 blur-3xl"></div>
           <p class="relative eyebrow">Step 1 · Discovery phase</p>
           <h2 id="s0-h" class="relative mt-4 text-4xl font-semibold text-white">Sprint 0</h2>
-          <p class="text-shine relative mt-10 text-6xl font-semibold tracking-tight sm:text-7xl">{gbp(pricing.sprintZeroPrice)}</p>
-          <p class="relative mt-4 text-lg font-medium text-white"><span class="text-sky">{gbp(pricing.sprintZeroCredit)}</span> credited back when you build with us</p>
+          <p class="relative mt-10 text-lg font-medium text-white/80">From</p><p class="text-shine relative text-6xl font-semibold tracking-tight sm:text-7xl">{gbp(pricing.sprintZeroPrice)}</p>
+          <p class="relative mt-4 text-lg font-medium text-white">Get {pricing.sprintZeroCredit} of it back when you build with us</p>
           {pricing.vatNote && <p class="relative mt-2 text-sm text-mist">{pricing.vatNote}</p>}
           <div class="relative mt-auto pt-10"><BookButton class="btn-primary" label="Discuss Sprint 0" /></div>
         </div>
         <div class="bg-ink-2/60 p-8 sm:p-12">
-          <p class="text-lg leading-relaxed text-mist">Before any build begins, we work with you to design, scope and plan your whole project, so it’s based on real business needs and you know exactly what you’re paying for.</p>
+          <p class="text-lg leading-relaxed text-mist">Before any building starts, we work with you to plan the whole project, so you know exactly what you’re getting and what it will cost.</p>
           <h3 class="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-mist">You get</h3>
           <ul class="mt-5 space-y-5">
             {[
               ['Technical design and data plan', 'A full map of how the system works, the data it needs and where it runs.'],
-              ['Wireframes and workflow maps', 'Visual guides to every screen and process, so there are no surprises.'],
+              ['Wireframes and workflow maps', 'Sketches of every screen and process, so you can see how it will work.'],
               ['A fixed roadmap and price', 'Milestones, timeline and a fixed price for the build.'],
             ].map(([t, x]) => (
               <li class="flex gap-4">
@@ -87,7 +87,7 @@ const faqs = [
           <h3 class="text-3xl font-semibold text-white">Monthly financing</h3>
           <p class="mt-3 text-lg text-mist">Spread the cost over {pricing.financeYears} years through independent finance partners.</p>
           <ul class="mt-8 space-y-3">
-            {['Keep cash free for hiring, stock and growth', 'Start now rather than waiting for next year’s budget', 'Predictable monthly payments'].map((t) => (
+            {['Keep your cash for running the business', 'Start now instead of waiting for next year’s budget', 'Fixed monthly payments'].map((t) => (
               <li class="flex gap-3 text-white/90"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-sky shadow-[0_0_8px_2px_rgba(60,200,255,0.6)]" aria-hidden="true"></span>{t}</li>
             ))}
           </ul>

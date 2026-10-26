@@ -12,7 +12,7 @@ export const steps = [
   },
   {
     name: 'Build',
-    short: 'Regular demos, no surprises',
+    short: 'Regular progress updates',
     text: 'We build and test in short stages with regular demos, so you see progress and can steer as we go.',
   },
   {

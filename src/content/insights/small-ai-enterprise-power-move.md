@@ -1,5 +1,5 @@
 ---
-title: "Why small AI models are a smart move for business"
+title: "Why smaller AI models can be the better choice"
 description: "Bigger isn't always better. Small language models can be cheaper, faster and easier to control. Here's when they make sense."
 date: 2026-04-14
 category: Strategy

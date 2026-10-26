@@ -1,5 +1,5 @@
 ---
-title: "What the latest shifts in AI mean for modern businesses"
+title: "Recent changes in AI and what they mean for your business"
 description: "Generic chatbots are giving way to transparent, task-focused AI systems. What that means for your technology strategy, in plain English."
 date: 2026-08-04
 category: Strategic insights

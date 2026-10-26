@@ -43,8 +43,8 @@ export const site = {
 
 // ---------- Pricing ----------
 export const pricing = {
-  sprintZeroPrice: 4250,   // £, Sprint 0 discovery phase
-  sprintZeroCredit: 2125,  // £ credited back against the build if the client continues with us
+  sprintZeroPrice: 4250,   // £, starting price of Sprint 0 (shown as "from £4,250")
+  sprintZeroCredit: 'half', // how much of the Sprint 0 fee comes off the build invoice if the client goes ahead
   vatNote: '', // e.g. 'All prices exclude VAT.', shown under prices when filled in
   financeYears: '3 to 5',
 };

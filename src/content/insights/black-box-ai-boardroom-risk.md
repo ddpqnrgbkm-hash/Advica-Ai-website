@@ -1,12 +1,12 @@
 ---
-title: "Why 'black box' AI is now a boardroom risk"
+title: "Why you need to be able to explain what your AI is doing"
 description: "If you can't explain or audit what your AI is doing, it's a risk. Three principles for building AI you can trust: auditable logic, data control and reliability."
 date: 2026-06-09
 category: Governance
 readingTime: 4 min read
 ---
 
-The "move fast and break things" era of AI is ending. As regulation tightens and customers ask harder questions, the message for business leaders is simple: if you can't explain or audit what your AI is doing, you shouldn't be relying on it for important decisions.
+Businesses are becoming more careful about how they use AI. As regulation tightens and customers ask harder questions, the message for business leaders is simple: if you can't explain or audit what your AI is doing, you shouldn't be relying on it for important decisions.
 
 ## A prompt is not a strategy
 
@@ -16,7 +16,7 @@ The direction of travel is towards AI you control: owning the business logic, kn
 
 ## Three principles for AI you can trust
 
-AI is only as good as the foundations it sits on. Moving away from the "black box" means focusing on three things:
+AI is only as good as the foundations it sits on. To make sure you can trust your AI, focus on three things:
 
 1. **Auditable logic.** Every important decision an AI system makes should be traceable, so you and your auditors can see why it happened.
 2. **Control over your data.** Sensitive data should stay within your own cloud account or approved services, under rules you decide.

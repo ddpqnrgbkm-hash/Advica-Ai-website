@@ -4,18 +4,18 @@ shortTitle: AI & Data
 order: 1
 seoTitle: AI Engineering, MLOps & Data Platforms
 seoDescription: Custom AI tools, machine learning in production and reliable data platforms for UK SMEs and mid-market firms. Plan first, then build what pays back.
-headline: Put AI to work on the jobs that slow your team down.
-summary: We find the tasks where AI genuinely saves time or money, then build and run tools that fit the way your business already works, on data you can trust.
+headline: Use AI to take care of time-consuming tasks.
+summary: We look at where AI could save your business time or money, then build tools that work with the systems you already use.
 menuText: Custom AI tools, automation, machine learning and data platforms
 accent: sky
 capabilities:
   - id: ai-strategy
     name: AI strategy & discovery
-    text: We look at how your business runs, find the jobs where AI will genuinely pay back, check your data is up to it and give you a clear, prioritised roadmap.
+    text: We look at how your business runs, find the jobs where AI will actually pay for itself, check your data is good enough and give you a clear plan.
     tags: [Opportunity mapping, Data readiness check, AI roadmap]
   - id: generative-ai
     name: AI assistants & generative AI
-    text: Assistants and "knowledge engines" that answer questions, write drafts and summarise documents using your own information, set up so your data stays under your control.
+    text: Assistants that answer questions, write drafts and summarise documents using your own information, set up so your data stays under your control.
     tags: [Custom AI assistants, Large language models, Summarisation, Fine-tuning]
   - id: automation
     name: Intelligent automation & document processing
@@ -26,8 +26,8 @@ capabilities:
     text: Models that forecast demand, spot risks early, recognise what's in images and recommend the right product to the right customer.
     tags: [Forecasting, Computer vision, Recommendations, Personalisation]
   - id: mlops
-    name: MLOps (running AI reliably)
-    text: Getting AI out of the experiment stage and into daily use, with monitoring, retraining and controls so it stays accurate, secure and affordable.
+    name: Keeping AI running smoothly
+    text: Making sure your AI tools keep working well day to day, with monitoring and regular updates so they stay accurate, secure and affordable.
     tags: [Deployment, Monitoring, Retraining, Governance]
   - id: data-platforms
     name: Data platforms & pipelines
@@ -49,7 +49,7 @@ outcomes:
   - An AI assistant that answers staff questions from your own policies and documents, keeping data inside your control.
 process:
   - name: Find the best use case
-    text: A short discovery call to understand your workflow and spot where AI will genuinely pay back.
+    text: A short discovery call to understand your workflow and spot where AI would actually save you time or money.
   - name: Plan in Sprint 0
     text: We check your data, design the solution and give you a fixed plan, cost and timeline.
   - name: Build and test
@@ -58,7 +58,7 @@ process:
     text: We put it live, train your team and either hand it over or keep it running for you.
 faqs:
   - q: Do we need lots of data to use AI?
-    a: Usually not. Many useful AI tools work with the documents and records you already have. During Sprint 0 we check what you have and tell you honestly whether it's enough.
+    a: Usually not. Many useful AI tools work with the documents and records you already have. During Sprint 0 we check what you have and tell you whether it's enough.
   - q: Will our data be sent to public AI services?
     a: Only if you're happy for it to be. We can design systems that keep sensitive data within your own cloud account or use private models, and we agree this with you before building anything.
   - q: How do we know it will be accurate enough?

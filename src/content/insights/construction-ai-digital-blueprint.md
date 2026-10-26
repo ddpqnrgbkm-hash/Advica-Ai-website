@@ -1,5 +1,5 @@
 ---
-title: "The digital blueprint: why construction firms are going all-in on AI"
+title: "How construction firms are using AI"
 description: "Construction has long been one of the least digitised industries. Here's where AI is making a practical difference, and how to add it without disrupting your operations."
 date: 2026-10-06
 category: Industry analysis
@@ -20,7 +20,7 @@ Many contractors who try to modernise hit the same wall: off-the-shelf software 
 
 ## Where AI makes a practical difference
 
-Applied to everyday pain points, tailored AI tools can pay back quickly in three areas:
+Used on everyday problems, AI tools built for your business can pay for themselves quickly in three areas:
 
 ### 1. Take-offs and bidding
 AI can read long specification PDFs and drawings, pick out the line items and quantities, and drop them into your estimating sheet, turning hours of manual work into minutes of checking.

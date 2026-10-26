@@ -65,13 +65,13 @@ export const quizBands = [
   {
     min: 0,
     title: 'Early days',
-    summary: 'You’re at the start of the journey, which is a great time to get the foundations right. Focus on getting your data and processes in order before building anything big.',
+    summary: 'You’re just getting started, which is a good time to get the basics right. Focus on getting your data and processes in order before building anything big.',
     next: { label: 'Explore AI strategy & discovery', href: '/services/ai-and-data#ai-strategy' },
   },
   {
     min: 40,
     title: 'Building foundations',
-    summary: 'You have some of the building blocks in place. A focused pilot on one well-understood problem could deliver real value while you strengthen the rest.',
+    summary: 'You have some of the building blocks in place. A small trial project on one clear problem could pay off while you work on the rest.',
     next: { label: 'See how Sprint 0 works', href: '/how-it-works' },
   },
   {

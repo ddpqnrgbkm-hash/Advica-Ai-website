@@ -16,10 +16,10 @@ const shownTestimonials = testimonials.filter((t) => t.show);
 const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 
 const reasons = [
-  { title: 'Plan before you pay for the build', text: 'Sprint 0 gives you a clear design, scope and fixed price before development starts.', icon: 'M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
-  { title: 'Plain English, always', text: 'No jargon and no black boxes. You’ll understand what we’re building and why.', icon: 'M8 10h8M8 14h5m-9 6l2.5-3H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3' },
-  { title: 'Pay the way that suits you', text: `Milestone billing, or spread the cost monthly over ${pricing.financeYears} years with our finance partners.`, icon: 'M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z' },
-  { title: 'Your choice after launch', text: 'We hand everything over to your team, or keep supporting and improving it for you.', icon: 'M4 12h16m-6-6l6 6-6 6' },
+  { title: 'A plan before you commit', text: 'Sprint 0 gives you a full plan and a fixed price for the build before any development starts.', icon: 'M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
+  { title: 'No jargon', text: 'We explain things clearly, so you always know what we’re building and why.', icon: 'M8 10h8M8 14h5m-9 6l2.5-3H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3' },
+  { title: 'Flexible payment', text: `Pay in stages as the work is delivered, or spread the cost monthly over ${pricing.financeYears} years.`, icon: 'M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z' },
+  { title: 'Support when you need it', text: 'Once it’s finished, we can hand it over to your team or look after it for you.', icon: 'M4 12h16m-6-6l6 6-6 6' },
 ];
 
 const faqs = [
@@ -40,19 +40,19 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
     <FlowLines class="absolute inset-0 -z-10 size-full" />
     <div class="container-x grid items-center gap-20 pb-28 pt-16 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:pb-32 lg:pt-24">
       <div>
-        <p class="eyebrow">AI &amp; software engineering · UK</p>
+        <p class="eyebrow">AI and software for UK businesses</p>
         <h1 class="mt-6 text-[2.6rem] font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4.1rem]">
-          AI and software, built around <span class="text-brand">how your business works.</span>
+          We build AI tools and software <span class="text-brand">for UK businesses.</span>
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
-          We design, build and support custom AI tools, apps and data platforms for UK small and mid-sized businesses, with a clear, fixed plan before the build begins.
+          We help small and medium-sized businesses save time and money with custom AI tools, apps and data systems. You get a clear plan and a fixed price before any work starts.
         </p>
         <div class="mt-10 flex flex-col gap-3 sm:flex-row">
           <BookButton class="btn-primary" label="Book a free call" />
           <a href="/estimate" class="btn-secondary">Estimate your project cost <span aria-hidden="true">→</span></a>
         </div>
         <ul class="mt-10 grid gap-3 text-sm font-medium text-navy sm:flex sm:flex-wrap sm:gap-x-7">
-          {['Fixed plan and price first', 'Plain English throughout', 'Monthly finance available'].map((t) => (
+          {['Fixed price agreed up front', 'No technical jargon', 'Option to pay monthly'].map((t) => (
             <li class="flex items-center gap-2">
               <svg class="size-4 shrink-0 text-teal-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg>{t}
             </li>
@@ -80,9 +80,9 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
   <section class="overflow-x-clip bg-white py-24 sm:py-32" aria-labelledby="build-h">
     <div class="container-x">
       <div class="mx-auto max-w-3xl text-center">
-        <p class="eyebrow">What we build</p>
-        <h2 id="build-h" class="mt-5 text-4xl font-bold sm:text-5xl">Three ways we help</h2>
-        <p class="mt-5 text-lg text-muted">From a single AI tool to a full product build, or skilled engineers for your own team.</p>
+        <p class="eyebrow">What we do</p>
+        <h2 id="build-h" class="mt-5 text-4xl font-bold sm:text-5xl">How we can help</h2>
+        <p class="mt-5 text-lg text-muted">We can build you an AI tool, an app or a full system, or give you extra engineers to work with your team.</p>
       </div>
       <div class="mt-14"><ProductShowcase /></div>
     </div>
@@ -93,10 +93,10 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
     <div class="container-x">
       <div class="grid gap-6 lg:grid-cols-2 lg:items-end">
         <div>
-          <p class="eyebrow">Why Advica</p>
-          <h2 id="why-h" class="mt-5 text-4xl font-bold leading-tight sm:text-5xl">Serious engineering, without the jargon or the surprises.</h2>
+          <p class="eyebrow">Why work with us</p>
+          <h2 id="why-h" class="mt-5 text-4xl font-bold leading-tight sm:text-5xl">Simple to work with, and clear about cost.</h2>
         </div>
-        <p class="text-lg text-muted lg:pb-2">We sit on your side of the table: we plan properly, explain everything in plain English and make sure what’s delivered matches what was agreed.</p>
+        <p class="text-lg text-muted lg:pb-2">We plan everything properly before we start, explain things in everyday language and make sure you get what we agreed.</p>
       </div>
       <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {reasons.map((r) => (
@@ -118,7 +118,7 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
       <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div>
           <p class="eyebrow">How it works</p>
-          <h2 id="how-h" class="mt-5 text-4xl font-bold sm:text-5xl">Four steps. No surprises.</h2>
+          <h2 id="how-h" class="mt-5 text-4xl font-bold sm:text-5xl">How a project works</h2>
         </div>
         <a href="/how-it-works" class="btn-secondary self-start lg:self-auto">See the full process <span aria-hidden="true">→</span></a>
       </div>
@@ -133,7 +133,7 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
           </li>
         ))}
       </ol>
-      <p class="mt-14 rounded-2xl bg-page p-5 text-body">Sprint 0 is <strong class="text-navy">{gbp(pricing.sprintZeroPrice)}</strong>, with <strong class="text-navy">{gbp(pricing.sprintZeroCredit)}</strong> credited back if you build with us. <a href="/pricing" class="link">See pricing</a></p>
+      <p class="mt-14 rounded-2xl bg-page p-5 text-body">Sprint 0 starts at <strong class="text-navy">{gbp(pricing.sprintZeroPrice)}</strong>. If you go ahead with the build, <strong class="text-navy">{pricing.sprintZeroCredit}</strong> of what you paid comes off your build invoice. <a href="/pricing" class="link">See pricing</a></p>
     </div>
   </section>
 
@@ -220,7 +220,7 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
     <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr]">
       <div>
         <p class="eyebrow">FAQ</p>
-        <h2 id="faq-h" class="mt-5 text-4xl font-bold sm:text-5xl">Quick answers</h2>
+        <h2 id="faq-h" class="mt-5 text-4xl font-bold sm:text-5xl">Common questions</h2>
         <p class="mt-5 text-muted">More on <a class="link" href="/how-it-works">how it works</a> and <a class="link" href="/pricing">pricing</a>.</p>
       </div>
       <FAQ items={faqs} />

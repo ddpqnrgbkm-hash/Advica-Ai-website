@@ -128,7 +128,7 @@ const config = { estimator, pricing };
       $('est-text').textContent = `${size.example}.`;
       price.hidden = !(estimator.showPrices && size.max > 0);
       price.textContent = `Indicative build cost: ${gbp(size.min)} to ${gbp(size.max)}`;
-      $('est-next').innerHTML = `<p class="font-semibold">Recommended next step: Sprint 0</p><p class="mt-1">A ${gbp(pricing.sprintZeroPrice)} discovery phase that gives you a full design and a fixed price for the build. ${gbp(pricing.sprintZeroCredit)} is credited back if you build with us. Prefer to spread the build cost? <a class="underline" href="/pricing">Monthly financing</a> is available to eligible businesses.</p>`;
+      $('est-next').innerHTML = `<p class="font-semibold">Recommended next step: Sprint 0</p><p class="mt-1">A planning stage, from ${gbp(pricing.sprintZeroPrice)}, that gives you a full design and a fixed price for the build. If you build with us, ${pricing.sprintZeroCredit} of the Sprint 0 fee comes off your build invoice. Prefer to spread the build cost? <a class="underline" href="/pricing">Monthly financing</a> is available to eligible businesses.</p>`;
       summary = `${size.label} project (${points} points)`;
     }
     (form.querySelector('input[name="result"]') as HTMLInputElement).value = summary;

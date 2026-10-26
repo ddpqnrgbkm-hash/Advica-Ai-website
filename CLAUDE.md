@@ -16,7 +16,7 @@ The owner is not a developer. Explain anything they must do themselves in plain,
 - Never invent clients, statistics, certifications, awards, reviews or case studies. Ask the owner for evidence first.
 - Never name or describe the engineering delivery partner, and never use its clients, case studies, statistics or certifications. It's fine to say delivery is carried out by "our established engineering partner".
 - Not evidenced (do not use): "UK leading", ISO 9001/27001, cloud partner badges, engineer/project/deployment counts.
-- Confirmed facts: company no. 17076839; registered office Towngate House, 116-118 Towngate, Leyland PR25 2LQ; ICO registered; Sprint 0 is £4,250 with £2,125 credited if the client proceeds to build; financing over 3 to 5 years via third-party lenders. The two testimonials are from real clients.
+- Confirmed facts: company no. 17076839; registered office Towngate House, 116-118 Towngate, Leyland PR25 2LQ; ICO registered; Sprint 0 starts at £4,250 (always say "from £4,250"); half the Sprint 0 fee is credited if the client proceeds to build; financing over 3 to 5 years via third-party lenders. The two testimonials are from real clients.
 - Tax: never promise tax benefits; say "consult your accountant".
 - Don't promise response times, call lengths, code ownership or guarantees unless the owner confirms them.
 
