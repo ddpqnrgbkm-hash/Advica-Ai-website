@@ -1,0 +1,65 @@
+---
+/** Hero illustration: an example operations dashboard with an AI summary card (decorative, built in HTML/CSS). */
+---
+<div class="relative mx-auto w-full max-w-xl" aria-hidden="true">
+  <!-- Main window -->
+  <div class="overflow-hidden rounded-2xl border border-line bg-white shadow-[0_50px_100px_-40px_rgba(20,36,73,0.5)]">
+    <div class="flex items-center gap-2 border-b border-line bg-page px-4 py-3">
+      <span class="size-2.5 rounded-full bg-[#f2b8b5]"></span><span class="size-2.5 rounded-full bg-[#f5d9a8]"></span><span class="size-2.5 rounded-full bg-[#bfe3c4]"></span>
+      <span class="ml-3 rounded-md border border-line bg-white px-3 py-1 text-[0.68rem] text-muted">app.yourcompany.co.uk/operations</span>
+    </div>
+    <div class="p-5 sm:p-6">
+      <div class="flex items-center justify-between">
+        <p class="font-display text-sm font-bold text-navy">Operations overview</p>
+        <span class="rounded-full bg-page px-2.5 py-1 text-[0.65rem] font-medium text-muted">Live</span>
+      </div>
+      <div class="mt-4 grid grid-cols-3 gap-3">
+        {[['Quotes processed', '148', '+22%'], ['Hours saved', '61', 'this week'], ['Cash in', '£42.8k', 'on track']].map(([l, v, d]) => (
+          <div class="rounded-xl border border-line p-3">
+            <p class="text-[0.65rem] text-muted">{l}</p>
+            <p class="mt-1 font-display text-lg font-bold text-navy sm:text-xl">{v}</p>
+            <p class="text-[0.62rem] font-semibold text-teal-ink">{d}</p>
+          </div>
+        ))}
+      </div>
+      <!-- Area chart -->
+      <div class="mt-4 rounded-xl border border-line p-3">
+        <div class="flex items-center justify-between text-[0.65rem] text-muted"><span>Jobs completed</span><span>Last 12 weeks</span></div>
+        <svg viewBox="0 0 300 90" class="mt-2 h-24 w-full" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="hv-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2fc6d6" stop-opacity="0.35" /><stop offset="1" stop-color="#2fc6d6" stop-opacity="0" /></linearGradient>
+            <linearGradient id="hv-line" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1f356d" /><stop offset="1" stop-color="#1f9fb3" /></linearGradient>
+          </defs>
+          <g stroke="#e6ebf0" stroke-width="1"><line x1="0" y1="22" x2="300" y2="22" /><line x1="0" y1="45" x2="300" y2="45" /><line x1="0" y1="68" x2="300" y2="68" /></g>
+          <path d="M0 72 L27 66 L54 69 L82 58 L109 61 L136 50 L163 52 L191 41 L218 44 L245 31 L272 27 L300 16 L300 90 L0 90 Z" fill="url(#hv-fill)" />
+          <path d="M0 72 L27 66 L54 69 L82 58 L109 61 L136 50 L163 52 L191 41 L218 44 L245 31 L272 27 L300 16" fill="none" stroke="url(#hv-line)" stroke-width="2.5" stroke-linejoin="round" />
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating AI summary card -->
+  <div class="float absolute -bottom-10 -left-4 w-64 rounded-2xl border border-line bg-white p-4 shadow-[0_30px_60px_-25px_rgba(20,36,73,0.5)] sm:-left-12">
+    <div class="flex items-center gap-2">
+      <img src="/logo-mark.png" alt="" class="h-5 w-auto" />
+      <span class="font-display text-xs font-bold text-navy">AI assistant</span>
+    </div>
+    <p class="mt-2 text-[0.72rem] leading-relaxed text-body">3 supplier quotes are above budget this week. I’ve drafted replies for your review.</p>
+    <div class="mt-3 flex gap-2">
+      <span class="rounded-full bg-navy px-2.5 py-1 text-[0.62rem] font-semibold text-white">Review drafts</span>
+      <span class="rounded-full border border-line px-2.5 py-1 text-[0.62rem] font-semibold text-navy">Later</span>
+    </div>
+  </div>
+
+  <!-- Floating plan card -->
+  <div class="float absolute -right-3 -top-8 hidden rounded-2xl border border-line bg-white px-4 py-3 shadow-[0_25px_50px_-25px_rgba(20,36,73,0.5)] [animation-delay:-3s] sm:block">
+    <p class="text-[0.62rem] font-semibold uppercase tracking-wider text-muted">Sprint 0 plan</p>
+    <p class="mt-0.5 font-display text-sm font-bold text-navy">Fixed scope &amp; price ✓</p>
+  </div>
+  <p class="sr-only">Illustrative example of a custom operations dashboard.</p>
+</div>
+
+<style>
+  .float { animation: float 7s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+</style>

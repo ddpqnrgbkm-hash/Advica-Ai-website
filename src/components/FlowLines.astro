@@ -1,0 +1,14 @@
+---
+/** Faint flowing lines, echoing the Advica LinkedIn banner (decorative). */
+interface Props { class?: string }
+const { class: cls = '' } = Astro.props;
+---
+<svg aria-hidden="true" class:list={['pointer-events-none', cls]} viewBox="0 0 1440 700" preserveAspectRatio="xMidYMid slice" fill="none">
+  <g stroke-linecap="round">
+    <path d="M-50 520 C 250 380, 520 640, 820 470 S 1250 300, 1500 380" stroke="#9fc3dc" stroke-width="1.2" opacity="0.55" />
+    <path d="M-50 560 C 280 430, 540 680, 850 510 S 1260 350, 1500 430" stroke="#b7d3e6" stroke-width="1" opacity="0.5" />
+    <path d="M-50 600 C 300 480, 580 700, 880 560 S 1280 400, 1500 480" stroke="#cfe1ee" stroke-width="1" opacity="0.6" />
+    <path d="M-50 180 C 300 80, 620 260, 960 120 S 1300 40, 1500 90" stroke="#b7d3e6" stroke-width="1" opacity="0.45" />
+    <path d="M-50 220 C 320 130, 650 300, 990 170 S 1320 90, 1500 140" stroke="#cfe1ee" stroke-width="1" opacity="0.5" />
+  </g>
+</svg>

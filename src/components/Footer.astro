@@ -8,7 +8,7 @@ const cols = [
   { title: 'Free tools', links: footerLinks.tools },
 ];
 ---
-<footer class="on-dark border-t border-white/[0.06] bg-void pb-28 pt-16 text-mist lg:pb-12">
+<footer class="on-dark bg-navy-deep pb-28 pt-16 text-white/75 lg:pb-12">
   <div class="container-x">
     <div class="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
       <div class="max-w-sm">
@@ -27,7 +27,7 @@ const cols = [
       </div>
       {cols.map((col) => (
         <nav aria-label={col.title}>
-          <h2 class="font-mono text-xs font-medium uppercase tracking-[0.18em] text-white">{col.title}</h2>
+          <h2 class="font-display text-xs font-semibold uppercase tracking-[0.16em] text-white">{col.title}</h2>
           <ul class="mt-4 space-y-2.5">
             {col.links.map((l) => <li><a class="hover:text-white" href={l.href}>{l.label}</a></li>)}
           </ul>
@@ -35,7 +35,7 @@ const cols = [
       ))}
     </div>
 
-    <div class="mt-14 flex flex-col gap-4 border-t border-white/[0.06] pt-8 text-sm sm:flex-row sm:items-center sm:justify-between">
+    <div class="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm sm:flex-row sm:items-center sm:justify-between">
       <p>
         © {year} {site.legalName}. Registered in {site.registeredIn}{site.companyNumber && `, company no. ${site.companyNumber}`}.
         {[site.address.street, `${site.address.town} ${site.address.postcode}`.trim()].join(', ')}.
