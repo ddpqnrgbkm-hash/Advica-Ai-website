@@ -3,24 +3,25 @@
 @import '@fontsource-variable/inter';
 
 /* ============================================================
-   Advica: calm, premium style in the spirit of apple.com.
-   Inter throughout (the current site's typeface), large clean
-   headlines, generous space, white / light grey / black sections,
-   one blue for links and buttons. No gradients or glows.
+   Advica: calm, premium style in the spirit of apple.com, in the
+   Advica brand colours (navy, mid blue, teal, silver).
+   Inter throughout, large clean headlines, generous space.
+   No gradients or glows.
    ============================================================ */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  --color-ink: #1d1d1f;       /* main text */
-  --color-muted: #6e6e73;     /* secondary text (AA on white) */
-  --color-grey: #f5f5f7;      /* light section background */
-  --color-line: #d2d2d7;      /* hairlines */
-  --color-blue: #0066cc;      /* links and buttons (AA with white) */
-  --color-blue-dark: #0055b0;
-  --color-sky: #2997ff;       /* links on black sections (AA on black) */
-  --color-night: #000000;     /* dark sections */
-  --color-night-2: #161617;   /* cards on dark */
-  --color-dim: #a1a1a6;       /* secondary text on black (AA) */
+  /* Advica brand colours, taken from the logo and LinkedIn page */
+  --color-ink: #142449;       /* deep navy: main text */
+  --color-muted: #5a6478;     /* secondary text (AA on white and silver) */
+  --color-grey: #eef1f5;      /* silver panels */
+  --color-line: #d5dce4;      /* hairlines */
+  --color-blue: #2b5c97;      /* logo mid blue: links and buttons (AA with white) */
+  --color-blue-dark: #1f356d; /* logo navy: button hover */
+  --color-sky: #2fc6d6;       /* logo teal: links and accents on dark panels */
+  --color-night: #142449;     /* deep navy panels */
+  --color-night-2: #1f356d;   /* logo navy: cards on dark panels */
+  --color-dim: #a9b6cc;       /* secondary text on dark panels (AA) */
 }
 
 @layer base {
@@ -74,7 +75,7 @@
 .on-dark { color: #f5f5f7; }
 .on-dark .more, .on-dark .link { color: var(--color-sky); }
 .on-dark .btn-secondary { border-color: var(--color-sky); color: var(--color-sky); }
-.on-dark .btn-secondary:hover { background: var(--color-sky); color: #000; }
+.on-dark .btn-secondary:hover { background: var(--color-sky); color: var(--color-night); }
 
 /* Gentle fade-up as sections enter (transform only, so text keeps full contrast) */
 @supports (animation-timeline: view()) {

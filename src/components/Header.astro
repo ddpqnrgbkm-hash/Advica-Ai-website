@@ -9,7 +9,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 const chevron = 'M6 9l6 6 6-6';
 ---
 <header class="sticky top-0 z-40 border-b border-line/70 bg-white">
-  <div class="container-wide flex h-14 items-center justify-between gap-6">
+  <div class="container-wide flex h-16 items-center justify-between gap-6">
     <a href="/" class="shrink-0" aria-label={`${site.name} home`}><Logo /></a>
 
     <!-- ===== Desktop navigation ===== -->
@@ -57,7 +57,7 @@ const chevron = 'M6 9l6 6 6-6';
         <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke-linecap="round" /></svg>
         <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
       </summary>
-      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-14 overflow-y-auto bg-white px-8 pb-32 pt-6">
+      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-16 overflow-y-auto bg-white px-8 pb-32 pt-6">
         <ul class="space-y-1">
           {nav.map((item) => (
             <li>

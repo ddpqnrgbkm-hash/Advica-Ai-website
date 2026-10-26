@@ -1,14 +1,9 @@
 ---
 /**
- * Logo: the sky-blue "A" mark plus "ADVICA AI" in heavy capitals, as on the current website.
- * Replace public/logo-mark.png with a high-resolution file when you have one.
+ * The Advica AI Solutions logo (from the company's LinkedIn banner).
+ * Replace public/logo.png with the original high-resolution file when available.
  */
-interface Props { dark?: boolean }
-const { dark = false } = Astro.props;
+interface Props { size?: 'sm' | 'md' }
+const { size = 'md' } = Astro.props;
 ---
-<span class="inline-flex items-center gap-2.5">
-  <img src="/logo-mark.png" alt="" width="30" height="34" class="h-[34px] w-auto" />
-  <span class:list={['text-lg font-black uppercase leading-none tracking-tight', dark ? 'text-white' : 'text-ink']}>
-    Advica <span class={dark ? 'text-cyan' : 'text-blue'}>AI</span>
-  </span>
-</span>
+<img src="/logo.png" alt="Advica AI Solutions" width="588" height="200" class:list={['w-auto', size === 'sm' ? 'h-8' : 'h-10']} />
