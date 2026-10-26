@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/bricolage-grotesque';
+
+/* ---------- Brand colours & fonts ---------- */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
+
+  --color-ink: #0a1628;       /* deep navy — main dark */
+  --color-ink-2: #12223a;     /* lighter navy for cards on dark */
+  --color-paper: #f7f5f0;     /* warm off-white background */
+  --color-line: #e3dfd5;      /* hairlines on light */
+  --color-muted: #4f5b6b;     /* secondary text (AA on paper) */
+
+  --color-brand: #0b63ce;     /* primary blue — buttons, links (AA on white) */
+  --color-brand-dark: #084b9c;
+  --color-sky: #3cc8ff;       /* logo cyan — accents on dark only */
+  --color-amber: #ffb547;     /* small highlights on dark */
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-tight text-balance;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--color-sky);
+  }
+  [id] { scroll-margin-top: 6rem; }
+}
+
+@utility container-x {
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+}
+@utility eyebrow {
+  @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand;
+}
+@utility btn {
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[0.95rem] font-semibold transition-colors duration-150;
+}
+@utility btn-primary {
+  @apply btn bg-brand text-white hover:bg-brand-dark;
+}
+@utility btn-secondary {
+  @apply btn border border-ink/20 bg-white text-ink hover:border-ink/40;
+}
+@utility btn-light {
+  @apply btn bg-white text-ink hover:bg-paper;
+}
+@utility card {
+  @apply rounded-2xl border border-line bg-white p-6 sm:p-8;
+}
+@utility link {
+  @apply font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand;
+}
+
+/* Unlayered so they override the utilities above when on a dark background */
+.on-dark .eyebrow { color: var(--color-sky); }
+.on-dark .btn-secondary { border-color: rgb(255 255 255 / 0.3); background: transparent; color: #fff; }
+.on-dark .btn-secondary:hover { border-color: rgb(255 255 255 / 0.7); }
+
+@layer components {
+  /* FAQ accordions built on <details>, so answers are always in the HTML */
+  .faq details { @apply border-b border-line; }
+  .faq summary {
+    @apply flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-display text-lg font-semibold;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: '+';
+    @apply grid size-8 shrink-0 place-items-center rounded-full border border-line text-xl font-normal text-brand transition-transform;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq .answer { @apply pb-6 pr-12 leading-relaxed text-muted; }
+}

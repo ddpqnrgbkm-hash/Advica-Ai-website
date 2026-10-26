@@ -1,0 +1,13 @@
+---
+import { bookingHref, bookingIsExternal } from '../config/site';
+interface Props { class?: string; label?: string }
+const { class: cls = 'btn-primary', label = 'Book a call' } = Astro.props;
+---
+<a
+  href={bookingHref}
+  class={cls}
+  {...(bookingIsExternal ? { target: '_blank', rel: 'noopener' } : {})}
+>
+  {label}
+  {bookingIsExternal && <span class="sr-only">(opens in a new tab)</span>}
+</a>

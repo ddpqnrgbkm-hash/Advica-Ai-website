@@ -1,0 +1,21 @@
+---
+import BookButton from './BookButton.astro';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Tell us what you want to fix. We’ll tell you honestly if we can help.',
+  text = 'Book a free 30-minute discovery call, or send us a few details and we’ll come back within one working day.',
+} = Astro.props;
+---
+<section class="on-dark relative overflow-hidden bg-ink py-20 text-white sm:py-28">
+  <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-40 size-[34rem] rounded-full bg-brand/30 blur-3xl"></div>
+  <div class="container-x relative">
+    <div class="max-w-3xl">
+      <h2 class="text-3xl font-semibold leading-tight sm:text-5xl">{title}</h2>
+      <p class="mt-6 max-w-2xl text-lg text-white/75">{text}</p>
+      <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+        <BookButton class="btn bg-sky text-ink hover:bg-white" label="Book a free call" />
+        <a href="/contact" class="btn-secondary">Send an enquiry</a>
+      </div>
+    </div>
+  </div>
+</section>

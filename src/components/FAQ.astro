@@ -1,0 +1,13 @@
+---
+/** FAQ list using <details>/<summary>, so every answer is in the page HTML for Google and screen readers. */
+interface Props { items: { q: string; a: string }[]; class?: string }
+const { items, class: cls = '' } = Astro.props;
+---
+<div class:list={['faq border-t border-line', cls]}>
+  {items.map((item) => (
+    <details>
+      <summary>{item.q}</summary>
+      <p class="answer">{item.a}</p>
+    </details>
+  ))}
+</div>

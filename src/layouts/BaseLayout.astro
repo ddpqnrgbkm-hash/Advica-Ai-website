@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileBar from '../components/MobileBar.astro';
+import { site } from '../config/site';
+
+interface Props {
+  title: string;          // page title (site name is added automatically)
+  description: string;   // 120–160 characters works best for Google
+  image?: string;        // social share image, e.g. '/images/og/pricing.png'
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+const { title, description, image = '/og-default.png', type = 'website', noindex = false, jsonLd = [] } = Astro.props;
+
+const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1');
+const canonical = new URL(path || '/', site.url).href.replace(/\/$/, '') || site.url;
+const fullTitle = path === '/' || path === '' ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
+const ogImage = new URL(image, site.url).href;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': ['Organization', 'ProfessionalService'],
+  '@id': `${site.url}/#organization`,
+  name: site.legalName,
+  alternateName: site.name,
+  url: site.url,
+  logo: `${site.url}/favicon.svg`,
+  email: site.email,
+  telephone: site.phoneLink,
+  sameAs: [site.linkedin],
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.town,
+    addressRegion: site.address.region,
+    ...(site.address.postcode ? { postalCode: site.address.postcode } : {}),
+    addressCountry: site.address.country,
+  },
+  areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  ...(site.companyNumber ? { identifier: { '@type': 'PropertyValue', name: 'Company number', value: site.companyNumber } } : {}),
+};
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="theme-color" content="#0a1628" />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(organization)} />
+    {jsonLd.map((d) => <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', ...d })} />)}
+
+    {site.analyticsSnippet && <Fragment set:html={site.analyticsSnippet} />}
+  </head>
+  <body class="flex min-h-screen flex-col">
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-white">Skip to content</a>
+    <Header />
+    <main id="main" class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+    <MobileBar />
+  </body>
+</html>
