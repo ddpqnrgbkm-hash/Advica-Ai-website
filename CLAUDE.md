@@ -20,9 +20,8 @@ The owner is not a developer. Explain anything they must do themselves in plain,
 - Tax: never promise tax benefits; say "consult your accountant".
 - Don't promise response times, call lengths, code ownership or guarantees unless the owner confirms them.
 
-## Design (approved direction: dark & cinematic)
-- Near-black backgrounds (`void`, `ink`, `ink-2`), logo blue/cyan accents only (`sky` #3cc8ff, `brand` #2f7bff). No other accent colours.
-- Fonts: Geist (headings/body) and Geist Mono (small uppercase labels via `.eyebrow`).
-- Building blocks in `src/styles/global.css`: `glass`, `glow-card`, `btn-primary`, `btn-secondary`, `text-shine`, `grid-bg`, `reveal` (transform-only, keeps contrast).
-- Hero visual: animated canvas sphere (`src/scripts/sphere.ts`), deferred until idle. Product mock-ups in `src/components/ProductShowcase.astro` are labelled "Illustrative example".
-- No star ratings, badges or labels that imply unproven claims.
+## Design (owner's direction: plain, professional, not AI-looking)
+- Use the current advicaaisolutions.co.uk house style: Inter only, heavy capital headings (`heading-xl`, `heading-lg`), white background, near-black text (`ink` #0c0f19), one blue (`blue` #006ad6). Logo mark `public/logo-mark.png` + "ADVICA AI" in heavy capitals.
+- Avoid common AI-design tells: gradient text, glows/blurred blobs, glass panels, decorative swirls or dots, fake dashboards with made-up numbers, icon-in-coloured-square card grids, pill buttons, small capital labels above every heading, floating cards, marquees/sliders, centred everything, emoji.
+- Prefer: left-aligned text-led layouts, thin rules instead of cards, square-edged buttons (`rounded-md`), real specific facts (prices, location, phone).
+- Copy: everyday English people actually say. No slogans like "Serious engineering, without the jargon". No long dashes.
