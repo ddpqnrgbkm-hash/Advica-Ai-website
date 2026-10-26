@@ -14,7 +14,7 @@ const glow = { sky: 'bg-brand/50', lime: 'bg-lime/25', lilac: 'bg-lilac/35' }[ac
   <div aria-hidden="true" class:list={['pointer-events-none absolute -right-40 -top-40 size-[36rem] rounded-full blur-[130px]', glow]}></div>
   <div class="container-x relative pb-16 pt-12 sm:pb-24 sm:pt-16">
     {crumbs.length > 0 && (
-      <nav aria-label="Breadcrumb" class="mb-10 text-sm text-mist">
+      <nav aria-label="Breadcrumb" class="mb-10 text-sm text-white/85">
         <ol class="flex flex-wrap items-center gap-2">
           <li><a href="/" class="hover:text-white">Home</a></li>
           {crumbs.map((c) => (

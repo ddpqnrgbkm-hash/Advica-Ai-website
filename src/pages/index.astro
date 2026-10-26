@@ -95,10 +95,10 @@ const faqLd = {
       <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {reasons.map((r, i) => (
           <li class:list={['flex min-h-64 flex-col justify-between rounded-3xl p-7', r.cls]}>
-            <span class="font-display text-5xl font-bold opacity-30">0{i + 1}</span>
+            <span aria-hidden="true" class="font-display text-5xl font-bold opacity-70">0{i + 1}</span>
             <span>
               <span class="block font-display text-2xl font-bold leading-tight">{r.title}</span>
-              <span class="mt-3 block opacity-80">{r.text}</span>
+              <span class="mt-3 block">{r.text}</span>
             </span>
           </li>
         ))}
@@ -236,10 +236,10 @@ const faqLd = {
       <h2 id="tools-h" class="sr-only">Free tools</h2>
       <div class="grid gap-4 md:grid-cols-2">
         <a href="/estimate" class="group flex min-h-72 flex-col justify-between rounded-3xl bg-brand p-8 text-white sm:p-10">
-          <span class="text-sm font-semibold uppercase tracking-[0.14em] text-white/75">Free · 2 minutes</span>
+          <span class="text-sm font-semibold uppercase tracking-[0.14em] text-white">Free · 2 minutes</span>
           <span>
             <span class="block font-display text-3xl font-bold sm:text-4xl">What might my project cost?</span>
-            <span class="mt-3 block max-w-md text-white/80">Answer five quick questions and get an indicative price range.</span>
+            <span class="mt-3 block max-w-md text-white">Answer five quick questions and get an indicative price range.</span>
             <span class="mt-6 inline-flex items-center gap-2 font-semibold">Start the estimator <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
           </span>
         </a>

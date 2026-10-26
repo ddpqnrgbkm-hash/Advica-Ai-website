@@ -16,7 +16,7 @@ interface Props {
 const { title, description, image = '/og-default.png', type = 'website', noindex = false, jsonLd = [] } = Astro.props;
 
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1');
-const canonical = new URL(path || '/', site.url).href.replace(/\/$/, '') || site.url;
+const canonical = path && path !== '/' ? `${site.url}${path}` : `${site.url}/`;
 const fullTitle = path === '/' || path === '' ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
 const ogImage = new URL(image, site.url).href;
 

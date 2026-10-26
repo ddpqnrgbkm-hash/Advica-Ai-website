@@ -31,7 +31,7 @@ const title = (id: string) => services.find((s) => s.id === id)?.data.title;
       {services.map((s, i) => (
         <article class="grid overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-[1fr_1.3fr]">
           <div class:list={['flex flex-col p-8 sm:p-12', bg[s.data.accent]]}>
-            <span class="font-display text-6xl font-bold opacity-25">0{i + 1}</span>
+            <span aria-hidden="true" class="font-display text-6xl font-bold opacity-70">0{i + 1}</span>
             <h2 class="mt-4 text-3xl font-bold sm:text-4xl">{s.data.title}</h2>
             <p class="mt-4 text-lg text-ink/80">{s.data.summary}</p>
             <div class="mt-auto pt-10">
