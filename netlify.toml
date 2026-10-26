@@ -48,6 +48,21 @@
   to = "/terms"
   status = 301
 
+[[redirects]]
+  from = "/services/ai-and-data"
+  to = "/services/ai-engineering"
+  status = 301
+
+[[redirects]]
+  from = "/services/software-and-cloud"
+  to = "/services/digital-products"
+  status = 301
+
+[[redirects]]
+  from = "/services/extra-engineers"
+  to = "/services/engineering-teams"
+  status = 301
+
 # ---------- Security & speed headers ----------
 [[headers]]
   for = "/*"

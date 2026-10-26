@@ -1,171 +1,168 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import BookButton from '../components/BookButton.astro';
-import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { site, stats, testimonials, pricing } from '../config/site';
-import { steps } from '../data/steps';
+import { stats, testimonials, pricing } from '../config/site';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
-const caseStudies = (await getCollection('caseStudies', (c) => !c.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
-const shownTestimonials = testimonials.filter((t) => t.show);
-const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
+const [first, second, ...rest] = services;
+const posts = (await getCollection('insights', (p) => !p.data.draft)).sort((a, b) => +b.data.date - +a.data.date).slice(0, 3);
+const shownTestimonials = testimonials.filter((t) => t.show).reverse();
+const fmt = (d: Date) => d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
 
-// What each stage costs, shown beside the four steps
-const stepCost = ['Free', `From ${gbp(pricing.sprintZeroPrice)}`, 'Fixed price from Sprint 0', 'Monthly, or handover'];
+// Panel colours for the four smaller service panels: alternate light and dark
+const gridTone = ['light', 'dark', 'dark', 'light'];
 
-const faqs = [
-  { q: 'What kind of businesses do you work with?', a: 'Small and medium-sized UK businesses, usually ones that have outgrown spreadsheets and off-the-shelf software, or want to start using AI but need someone technical to do it properly.' },
-  { q: 'We’re not technical. Is that a problem?', a: 'No. Tell us what the problem is and we’ll handle the technical side. We’ll explain your options in everyday language, and you’ll always know what you’re paying for.' },
-  { q: 'How much does a project cost?', a: `It depends on the project. Sprint 0, the planning stage, starts at ${gbp(pricing.sprintZeroPrice)} and ends with a fixed price for the build. For a rough idea before then, try the cost estimator.` },
-  { q: 'Can we spread the cost?', a: `Yes. You can pay in stages as the work is delivered, or eligible businesses can spread the cost monthly over ${pricing.financeYears} years through our finance partners, subject to their approval.` },
+const stages = [
+  { name: 'Discover', text: 'We get to know your organisation, your systems and the outcome you need, and agree whether we are the right partner.' },
+  { name: 'Plan', text: 'A short, paid discovery phase called Sprint 0 sets out the architecture, scope, timeline and a fixed cost for the build.' },
+  { name: 'Build', text: 'We deliver in short cycles with regular demonstrations, so your team can see progress and steer the work.' },
+  { name: 'Run', text: 'Once live, we support and improve what we built, or hand it over to your team with full documentation.' },
 ];
-const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
+
+const models = [
+  { name: 'Project delivery', text: 'A defined outcome, scope and cost, delivered by a team we lead and manage.' },
+  { name: 'Dedicated teams', text: 'Engineers and specialists who join your organisation and work to your priorities.' },
+  { name: 'Managed services', text: 'Ongoing support, monitoring and improvement of the systems you rely on.' },
+];
 ---
 <BaseLayout
-  title="Bespoke AI and software engineering for UK businesses"
-  description="Advica AI Solutions builds custom AI tools, apps and data systems for UK small and medium-sized businesses. Fixed-price planning from £4,250. Based in Leyland, Lancashire."
-  jsonLd={[faqLd]}
+  title="AI, data, cloud and software engineering"
+  description="Advica AI Solutions designs, builds and runs AI, data, cloud and software systems for organisations in the UK, from first plan to full scale."
 >
-  <!-- ================= INTRO ================= -->
-  <section class="border-b border-line">
-    <div class="container-x pb-14 pt-14 sm:pb-20 sm:pt-20">
-      <div class="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-16">
-        <h1 class="heading-xl">Custom AI and software for <span class="text-blue">UK businesses</span></h1>
-        <div>
-          <p class="text-lg sm:text-xl">We plan, build and support AI tools, apps and data systems for small and medium-sized businesses. Every project starts with a fixed-price plan, so you know the cost before we build anything.</p>
-          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-            <BookButton class="btn-primary" label="Book a free call" />
-            <a href="/estimate" class="btn-secondary">Estimate your project cost</a>
-          </div>
-        </div>
+  <!-- ================= HERO ================= -->
+  <section class="pb-20 pt-20 text-center sm:pb-28 sm:pt-28">
+    <div class="container-wide">
+      <h1 class="display mx-auto max-w-[1100px] lg:!text-[4.6rem]">AI and software engineering,<br class="hidden lg:block" /> <span class="text-muted">from first plan to full scale.</span></h1>
+      <p class="subtitle mx-auto mt-7 max-w-2xl">We design, build and run AI, data, cloud and software systems for organisations across the UK.</p>
+      <div class="mt-10 flex flex-col items-center justify-center gap-5 sm:flex-row sm:gap-8">
+        <a href="/contact" class="btn-primary">Talk to us</a>
+        <a href="/services" class="more">Explore our services ›</a>
       </div>
-
-      <dl class="mt-16 grid border-t border-line sm:grid-cols-3">
-        <div class="border-b border-line py-6 sm:border-b-0 sm:border-r sm:pr-8">
-          <dt class="text-sm text-muted">Planning stage</dt>
-          <dd class="mt-1 text-xl font-bold text-ink">Sprint 0 from {gbp(pricing.sprintZeroPrice)}</dd>
-          <dd class="mt-1 text-sm text-muted">Ends with a fixed price for the build</dd>
-        </div>
-        <div class="border-b border-line py-6 sm:border-b-0 sm:border-r sm:px-8">
-          <dt class="text-sm text-muted">Paying for the build</dt>
-          <dd class="mt-1 text-xl font-bold text-ink">In stages, or monthly</dd>
-          <dd class="mt-1 text-sm text-muted">Spread over {pricing.financeYears} years, subject to approval</dd>
-        </div>
-        <div class="py-6 sm:pl-8">
-          <dt class="text-sm text-muted">Where we are</dt>
-          <dd class="mt-1 text-xl font-bold text-ink">{site.address.town}, Lancashire</dd>
-          <dd class="mt-1 text-sm text-muted">Working with businesses across the UK</dd>
-        </div>
-      </dl>
     </div>
   </section>
 
   {stats.length > 0 && (
-    <section class="border-b border-line py-12">
-      <dl class="container-x grid gap-8 sm:grid-cols-3">
-        {stats.map((s) => (
-          <div><dt class="text-sm text-muted">{s.label}</dt><dd class="text-5xl font-black text-ink">{s.value}</dd></div>
-        ))}
+    <section class="pb-16">
+      <dl class="container-x grid gap-8 text-center sm:grid-cols-3">
+        {stats.map((s) => <div><dd class="text-5xl font-semibold tracking-tight">{s.value}</dd><dt class="mt-2 text-muted">{s.label}</dt></div>)}
       </dl>
     </section>
   )}
 
-  <!-- ================= SERVICES ================= -->
-  <section class="py-16 sm:py-24" aria-labelledby="services-h">
-    <div class="container-x">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <h2 id="services-h" class="heading-lg">What we do</h2>
-        <a href="/services" class="link">All services</a>
-      </div>
-      <ul class="mt-10 border-t-2 border-ink">
-        {services.map((s) => (
-          <li class="border-b border-line">
-            <a href={`/services/${s.id}`} class="group grid gap-4 py-8 sm:py-10 lg:grid-cols-[18rem_1fr_auto] lg:gap-12">
-              <h3 class="text-2xl font-bold group-hover:text-blue">{s.data.title}</h3>
-              <div>
-                <p class="text-lg text-ink">{s.data.summary}</p>
-                <p class="mt-3 text-[0.95rem] text-muted">{s.data.capabilities.map((c) => c.name).join(', ')}.</p>
-              </div>
-              <span class="self-start whitespace-nowrap font-semibold text-blue group-hover:underline">Read more <span aria-hidden="true">→</span></span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
+  <!-- ================= SERVICES: two full-width panels ================= -->
+  <div class="space-y-3 px-3">
+    {[first, second].map((s, i) => (
+      <section class:list={['rounded-[1.75rem] py-20 text-center sm:py-28', i === 0 ? 'bg-grey' : 'on-dark bg-night']}>
+        <div class="container-x rise">
+          <p class:list={['text-lg font-semibold sm:text-xl', i === 0 ? 'text-muted' : 'text-dim']}>{s.data.title}</p>
+          <h2 class="title mx-auto mt-3 max-w-3xl">{s.data.headline}</h2>
+          <p class:list={['mx-auto mt-5 max-w-2xl text-lg sm:text-xl', i === 0 ? 'text-muted' : 'text-dim']}>{s.data.summary}</p>
+          <div class="mt-8 flex items-center justify-center gap-8">
+            <a href={`/services/${s.id}`} class="more">Learn more ›</a>
+            <a href="/contact" class="more">Talk to us ›</a>
+          </div>
+          <ul class:list={['mx-auto mt-14 flex max-w-3xl flex-wrap justify-center gap-x-8 gap-y-3 text-[0.95rem]', i === 0 ? 'text-ink/80' : 'text-[#d2d2d7]']}>
+            {s.data.capabilities.map((c) => <li>{c.name}</li>)}
+          </ul>
+        </div>
+      </section>
+    ))}
 
-  <!-- ================= HOW A PROJECT WORKS ================= -->
-  <section class="bg-soft py-16 sm:py-24" aria-labelledby="how-h">
+    <!-- ================= SERVICES: two-by-two grid ================= -->
+    <div class="grid gap-3 lg:grid-cols-2">
+      {rest.map((s, i) => (
+        <section class:list={['flex flex-col rounded-[1.75rem] px-6 py-16 text-center sm:py-20', gridTone[i] === 'dark' ? 'on-dark bg-night' : 'bg-grey']}>
+          <div class="rise">
+            <p class:list={['text-lg font-semibold', gridTone[i] === 'dark' ? 'text-dim' : 'text-muted']}>{s.data.title}</p>
+            <h2 class="mx-auto mt-3 max-w-md text-[1.75rem] font-semibold leading-tight tracking-tight sm:text-[2.5rem]">{s.data.headline}</h2>
+            <p class:list={['mx-auto mt-4 max-w-md text-lg', gridTone[i] === 'dark' ? 'text-dim' : 'text-muted']}>{s.data.menuText}.</p>
+            <div class="mt-7 flex items-center justify-center gap-8">
+              <a href={`/services/${s.id}`} class="more">Learn more ›</a>
+              <a href="/contact" class="more">Talk to us ›</a>
+            </div>
+          </div>
+        </section>
+      ))}
+    </div>
+  </div>
+
+  <!-- ================= HOW WE WORK ================= -->
+  <section class="py-24 sm:py-32" aria-labelledby="how-h">
     <div class="container-x">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <h2 id="how-h" class="heading-lg">How a project works</h2>
-        <a href="/how-it-works" class="link">More detail</a>
+      <div class="rise text-center">
+        <h2 id="how-h" class="title">How we work with you.</h2>
+        <p class="subtitle mx-auto mt-5 max-w-2xl">Every engagement starts with a clear plan. You’ll know the scope, timeline and cost before the build begins.</p>
       </div>
-      <ol class="mt-10 border-t-2 border-ink">
-        {steps.map((s, i) => (
-          <li class="grid gap-2 border-b border-line py-7 sm:grid-cols-[3rem_14rem_1fr] lg:grid-cols-[3rem_14rem_1fr_auto] lg:gap-10">
-            <span class="text-lg font-black text-blue">{i + 1}</span>
-            <h3 class="text-lg font-bold">{s.name}</h3>
-            <p class="sm:col-start-3 lg:col-start-auto">{s.text}</p>
-            <p class="font-semibold text-ink sm:col-start-3 lg:col-start-auto lg:whitespace-nowrap lg:text-right">{stepCost[i]}</p>
+      <ol class="mt-16 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+        {stages.map((s, i) => (
+          <li class="rise border-t border-ink pt-5">
+            <p class="text-sm text-muted">Step {i + 1}</p>
+            <h3 class="mt-1 text-2xl">{s.name}</h3>
+            <p class="mt-3 text-muted">{s.text}</p>
           </li>
         ))}
       </ol>
-      <p class="mt-6 text-sm text-muted">If you go ahead with the build, {pricing.sprintZeroCredit} of what you paid for Sprint 0 comes off your build invoice.</p>
+      <p class="mt-14 text-center"><a href="/how-it-works" class="more">More about our approach ›</a></p>
+    </div>
+  </section>
+
+  <!-- ================= ENGAGEMENT MODELS ================= -->
+  <section class="px-3" aria-labelledby="models-h">
+    <div class="on-dark rounded-[1.75rem] bg-night py-24 sm:py-32">
+      <div class="container-x">
+        <div class="rise text-center">
+          <h2 id="models-h" class="title">Ways to work with us.</h2>
+          <p class="mx-auto mt-5 max-w-2xl text-xl text-dim sm:text-2xl">Choose the arrangement that fits the work, or combine them as your needs change.</p>
+        </div>
+        <ul class="mt-16 grid gap-3 md:grid-cols-3">
+          {models.map((m) => (
+            <li class="rise rounded-2xl bg-night-2 p-8">
+              <h3 class="text-2xl">{m.name}</h3>
+              <p class="mt-3 text-dim">{m.text}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="mt-10 text-center text-dim">Flexible payment options are available, including financing over {pricing.financeYears} years for qualifying projects.</p>
+      </div>
     </div>
   </section>
 
   <!-- ================= CLIENT FEEDBACK ================= -->
-  <section class="py-16 sm:py-24" aria-labelledby="proof-h">
-    <div class="container-x">
-      <h2 id="proof-h" class="heading-lg">What clients say</h2>
-      <div class="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
-        {shownTestimonials.map((t) => (
-          <figure class="border-l-2 border-blue pl-6">
-            <blockquote class="text-xl leading-relaxed text-ink">“{t.quote}”</blockquote>
-            <figcaption class="mt-4 text-sm text-muted">
-              {t.name ? <><span class="font-semibold text-ink">{t.name}</span>{t.role && <>, {t.role}</>}</> : 'Advica client'}
-            </figcaption>
-          </figure>
+  {shownTestimonials.length > 0 && (
+    <section class="py-24 sm:py-32" aria-labelledby="proof-h">
+      <div class="container-x">
+        <h2 id="proof-h" class="title rise text-center">What clients say.</h2>
+        <div class="mt-14 grid gap-12 md:grid-cols-2">
+          {shownTestimonials.map((t) => (
+            <figure class="rise">
+              <blockquote class="text-xl leading-relaxed sm:text-2xl">“{t.quote}”</blockquote>
+              <figcaption class="mt-5 text-muted">{t.name ? <>{t.name}{t.role && <>, {t.role}</>}</> : 'Advica client'}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ================= INSIGHTS ================= -->
+  <section class="border-t border-line py-24 sm:py-28" aria-labelledby="insights-h">
+    <div class="container-wide">
+      <div class="flex items-end justify-between gap-6 px-3">
+        <h2 id="insights-h" class="title">Insights.</h2>
+        <a href="/insights" class="more">See all ›</a>
+      </div>
+      <ul class="mt-10 grid gap-3 md:grid-cols-3">
+        {posts.map((p) => (
+          <li>
+            <a href={`/insights/${p.id}`} class="group flex h-full flex-col rounded-[1.25rem] bg-grey p-8 transition-colors hover:bg-[#ebebef]">
+              <span class="text-sm text-muted">{p.data.category}</span>
+              <span class="mt-3 text-xl font-semibold leading-snug group-hover:text-blue">{p.data.title}</span>
+              <span class="mt-auto pt-8 text-sm text-muted"><time datetime={p.data.date.toISOString()}>{fmt(p.data.date)}</time></span>
+            </a>
+          </li>
         ))}
-      </div>
-      <p class="mt-12 border-t border-line pt-6 text-muted">
-        {caseStudies.length > 0
-          ? <>Read about our recent work in our <a class="link" href="/case-studies">case studies</a>.</>
-          : <>We’re writing up case studies with our clients’ permission. If you’d like to hear about similar projects to yours, <a class="link" href="/contact">ask us</a>.</>}
-      </p>
-    </div>
-  </section>
-
-  <!-- ================= FREE TOOLS ================= -->
-  <section class="border-t border-line py-16 sm:py-20" aria-labelledby="tools-h">
-    <div class="container-x">
-      <h2 id="tools-h" class="heading-lg">Not ready to talk yet?</h2>
-      <div class="mt-10 grid gap-px overflow-hidden rounded-md border border-line bg-line md:grid-cols-2">
-        <a href="/estimate" class="group bg-white p-8 hover:bg-soft">
-          <h3 class="text-xl font-bold group-hover:text-blue">Project cost estimator</h3>
-          <p class="mt-2">Five questions about your project. You’ll get an idea of its size and the best next step. Takes about two minutes.</p>
-          <span class="mt-5 inline-block font-semibold text-blue group-hover:underline">Start the estimator →</span>
-        </a>
-        <a href="/ai-readiness" class="group bg-white p-8 hover:bg-soft">
-          <h3 class="text-xl font-bold group-hover:text-blue">AI readiness quiz</h3>
-          <p class="mt-2">Eight questions about your business. You’ll get a score and practical suggestions. Takes about three minutes.</p>
-          <span class="mt-5 inline-block font-semibold text-blue group-hover:underline">Take the quiz →</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================= FAQ ================= -->
-  <section class="border-t border-line py-16 sm:py-24" aria-labelledby="faq-h">
-    <div class="container-x grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
-      <div>
-        <h2 id="faq-h" class="heading-lg">Common questions</h2>
-        <p class="mt-5 text-muted">There’s more on the <a class="link" href="/how-it-works">How it works</a> and <a class="link" href="/pricing">Pricing</a> pages.</p>
-      </div>
-      <FAQ items={faqs} />
+      </ul>
     </div>
   </section>
 

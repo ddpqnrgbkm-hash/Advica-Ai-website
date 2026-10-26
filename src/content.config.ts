@@ -48,7 +48,7 @@ const caseStudies = defineCollection({
     title: z.string(),
     client: z.string(),
     industry: z.string(),
-    service: z.enum(['ai-and-data', 'software-and-cloud', 'extra-engineers']),
+    service: z.enum(['ai-engineering', 'data-and-analytics', 'cloud-and-infrastructure', 'digital-products', 'blockchain', 'engineering-teams']),
     summary: z.string(),
     results: z.array(z.string()).default([]),
     quote: z.object({ text: z.string(), name: z.string(), role: z.string() }).optional(),

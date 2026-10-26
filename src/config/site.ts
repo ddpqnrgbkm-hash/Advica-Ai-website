@@ -10,7 +10,7 @@ export const site = {
   // ---------- Company ----------
   name: 'Advica AI Solutions',
   legalName: 'Advica AI Solutions Ltd',
-  tagline: 'Bespoke AI and software engineering for UK businesses',
+  tagline: 'AI, data, cloud and software engineering',
   url: 'https://advicaaisolutions.co.uk',
   companyNumber: '17076839', // shown in the footer
   registeredIn: 'England and Wales',
@@ -75,48 +75,31 @@ export const bookingIsExternal = Boolean(site.bookingUrl);
 type NavLink = { label: string; href: string; text?: string };
 export const nav: (NavLink & { dropdown?: 'services'; children?: NavLink[] })[] = [
   { label: 'Services', href: '/services', dropdown: 'services' },
-  { label: 'How It Works', href: '/how-it-works' },
-  { label: 'Pricing', href: '/pricing' },
-  {
-    label: 'Insights',
-    href: '/insights',
-    children: [
-      { label: 'Articles', href: '/insights', text: 'Plain-English guides on AI and software' },
-      { label: 'Case studies', href: '/case-studies', text: 'Projects we’ve delivered' },
-      { label: 'Project cost estimator', href: '/estimate', text: 'An indicative price in 2 minutes' },
-      { label: 'AI readiness quiz', href: '/ai-readiness', text: 'Score your business in 3 minutes' },
-    ],
-  },
-  {
-    label: 'About',
-    href: '/about',
-    children: [
-      { label: 'About us', href: '/about', text: 'Our mission and how we work' },
-      { label: 'Partnerships', href: '/about#partnerships', text: 'Work with us as a partner' },
-      { label: 'Contact', href: '/contact', text: 'Talk to a real person' },
-    ],
-  },
+  { label: 'Approach', href: '/how-it-works' },
+  { label: 'Insights', href: '/insights' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 // ---------- Footer links ----------
 export const footerLinks = {
   services: [
-    { label: 'AI & Data', href: '/services/ai-and-data' },
-    { label: 'Software & Cloud', href: '/services/software-and-cloud' },
-    { label: 'Extra Engineers', href: '/services/extra-engineers' },
-    { label: 'Case Studies', href: '/case-studies' },
+    { label: 'AI Engineering', href: '/services/ai-engineering' },
+    { label: 'Data & Analytics', href: '/services/data-and-analytics' },
+    { label: 'Cloud & Infrastructure', href: '/services/cloud-and-infrastructure' },
+    { label: 'Digital Products', href: '/services/digital-products' },
+    { label: 'Blockchain & Digital Assets', href: '/services/blockchain' },
+    { label: 'Engineering Teams', href: '/services/engineering-teams' },
   ],
   company: [
     { label: 'About', href: '/about' },
+    { label: 'Approach', href: '/how-it-works' },
     { label: 'Partnerships', href: '/about#partnerships' },
-    { label: 'How It Works', href: '/how-it-works' },
-    { label: 'Pricing', href: '/pricing' },
     { label: 'Insights', href: '/insights' },
     { label: 'Contact', href: '/contact' },
   ],
   tools: [
-    { label: 'Project cost estimator', href: '/estimate' },
-    { label: 'AI readiness quiz', href: '/ai-readiness' },
+    { label: 'AI readiness assessment', href: '/ai-readiness' },
   ],
   legal: [
     { label: 'Privacy', href: '/privacy' },

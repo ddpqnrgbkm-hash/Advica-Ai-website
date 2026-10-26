@@ -3,22 +3,24 @@
 @import '@fontsource-variable/inter';
 
 /* ============================================================
-   Advica house style, taken from the current advicaaisolutions.co.uk:
-   Inter throughout, heavy capital headings, white background,
-   near-black text and one blue. Square-ish corners, thin rules,
-   no gradients, glows or shadows-as-decoration.
+   Advica: calm, premium style in the spirit of apple.com.
+   Inter throughout (the current site's typeface), large clean
+   headlines, generous space, white / light grey / black sections,
+   one blue for links and buttons. No gradients or glows.
    ============================================================ */
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  --color-ink: #0c0f19;     /* main text (current site foreground) */
-  --color-body: #2b303b;    /* paragraph text */
-  --color-muted: #5c6370;   /* secondary text (AA on white and soft) */
-  --color-line: #e1e4ea;    /* rules and borders */
-  --color-soft: #f3f4f6;    /* alternate section background */
-  --color-blue: #006ad6;    /* Advica blue, darkened slightly from #0080ff so white text passes AA */
-  --color-blue-dark: #0052a6;
-  --color-cyan: #00b8e6;    /* current site accent: small details only */
+  --color-ink: #1d1d1f;       /* main text */
+  --color-muted: #6e6e73;     /* secondary text (AA on white) */
+  --color-grey: #f5f5f7;      /* light section background */
+  --color-line: #d2d2d7;      /* hairlines */
+  --color-blue: #0066cc;      /* links and buttons (AA with white) */
+  --color-blue-dark: #0055b0;
+  --color-sky: #2997ff;       /* links on black sections (AA on black) */
+  --color-night: #000000;     /* dark sections */
+  --color-night-2: #161617;   /* cards on dark */
+  --color-dim: #a1a1a6;       /* secondary text on black (AA) */
 }
 
 @layer base {
@@ -27,52 +29,66 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-  body { @apply bg-white font-sans text-[1.0625rem] leading-relaxed text-body antialiased; }
-  h1, h2, h3, h4 { @apply text-ink; }
-  :focus-visible { outline: 3px solid var(--color-blue); outline-offset: 2px; }
-  [id] { scroll-margin-top: 6rem; }
+  body { @apply bg-white font-sans text-[1.0625rem] leading-relaxed text-ink antialiased; }
+  h1, h2, h3, h4 { @apply font-semibold tracking-tight text-balance; }
+  :focus-visible { outline: 3px solid var(--color-blue); outline-offset: 3px; border-radius: 4px; }
+  [id] { scroll-margin-top: 5rem; }
 }
 
 @utility container-x {
-  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  @apply mx-auto w-full max-w-[980px] px-5 sm:px-6;
 }
-/* Big heavy capital headings, as on the current site */
-@utility heading-xl {
-  @apply text-[2.4rem] font-black uppercase leading-[0.98] tracking-tight sm:text-6xl lg:text-[4.5rem];
+@utility container-wide {
+  @apply mx-auto w-full max-w-[1260px] px-3 sm:px-4;
 }
-@utility heading-lg {
-  @apply text-3xl font-black uppercase leading-none tracking-tight sm:text-[2.75rem];
+@utility display {
+  @apply text-[2.6rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-6xl lg:text-[5rem];
 }
-@utility label {
-  @apply text-sm font-semibold text-blue;
+@utility title {
+  @apply text-[2rem] font-semibold leading-[1.08] tracking-[-0.025em] sm:text-5xl lg:text-[3.5rem];
+}
+@utility subtitle {
+  @apply text-xl leading-snug text-muted sm:text-2xl;
 }
 @utility btn {
-  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 text-base font-semibold transition-colors;
+  @apply inline-flex min-h-11 items-center justify-center rounded-full px-6 text-[1.0625rem] font-normal transition-colors;
 }
 @utility btn-primary {
   @apply btn bg-blue text-white hover:bg-blue-dark;
 }
 @utility btn-secondary {
-  @apply btn border border-ink/25 bg-white text-ink hover:border-ink;
+  @apply btn border border-blue text-blue hover:bg-blue hover:text-white;
 }
 @utility btn-light {
-  @apply btn bg-white text-ink hover:bg-soft;
+  @apply btn bg-white text-ink hover:bg-grey;
+}
+/* Apple-style "Learn more ›" text link */
+@utility more {
+  @apply inline-flex items-center gap-1 text-[1.0625rem] text-blue hover:underline;
 }
 @utility link {
-  @apply font-semibold text-blue underline underline-offset-4 hover:text-blue-dark;
+  @apply text-blue hover:underline;
 }
 
-.on-dark .btn-secondary { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.5); }
-.on-dark .btn-secondary:hover { border-color: #fff; }
+/* Dark sections */
+.on-dark { color: #f5f5f7; }
+.on-dark .more, .on-dark .link { color: var(--color-sky); }
+.on-dark .btn-secondary { border-color: var(--color-sky); color: var(--color-sky); }
+.on-dark .btn-secondary:hover { background: var(--color-sky); color: #000; }
+
+/* Gentle fade-up as sections enter (transform only, so text keeps full contrast) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise linear both; animation-timeline: view(); animation-range: entry 0% entry 35%; }
+    @keyframes rise { from { transform: translateY(40px); } to { transform: none; } }
+  }
+}
 
 @layer components {
-  /* FAQ list built on <details>, so answers are always in the HTML */
   .faq details { @apply border-b border-line; }
-  .faq summary {
-    @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-lg font-semibold text-ink;
-  }
+  .faq summary { @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-lg font-semibold; }
   .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after { content: '+'; @apply text-2xl font-normal leading-none text-blue; }
+  .faq summary::after { content: '+'; @apply text-2xl font-light leading-none text-blue; }
   .faq details[open] summary::after { content: '\2212'; }
-  .faq .answer { @apply max-w-2xl pb-6 text-body; }
+  .faq .answer { @apply max-w-2xl pb-6 text-muted; }
 }

@@ -1,26 +1,18 @@
 ---
-import BookButton from './BookButton.astro';
 import { site } from '../config/site';
 interface Props { title?: string; text?: string }
 const {
-  title = 'Talk to us about your project',
-  text = 'Book a free call, ring us or send a message. We’ll tell you whether we can help and what it’s likely to involve.',
+  title = 'Let’s talk about your project.',
+  text = 'Tell us what you’re planning and we’ll arrange a call with the right people.',
 } = Astro.props;
 ---
-<section class="border-t border-line bg-soft py-16 sm:py-24">
-  <div class="container-x grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
-    <div>
-      <h2 class="heading-lg">{title}</h2>
-      <p class="mt-5 max-w-xl text-lg">{text}</p>
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <BookButton class="btn-primary" label="Book a free call" />
-        <a href="/contact" class="btn-secondary">Send a message</a>
-      </div>
+<section class="bg-grey py-24 text-center sm:py-32">
+  <div class="container-x rise">
+    <h2 class="title">{title}</h2>
+    <p class="subtitle mx-auto mt-5 max-w-2xl">{text}</p>
+    <div class="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+      <a href="/contact" class="btn-primary">Contact us</a>
+      <a href={`tel:${site.phoneLink}`} class="more">Call {site.phone} ›</a>
     </div>
-    <dl class="grid gap-5 border-l-2 border-blue pl-6">
-      <div><dt class="text-sm text-muted">Phone</dt><dd><a href={`tel:${site.phoneLink}`} class="text-2xl font-bold text-ink hover:text-blue">{site.phone}</a></dd></div>
-      <div><dt class="text-sm text-muted">Email</dt><dd><a href={`mailto:${site.email}`} class="break-all font-semibold text-ink hover:text-blue">{site.email}</a></dd></div>
-      <div><dt class="text-sm text-muted">Office</dt><dd class="text-ink">{site.address.street}, {site.address.town} {site.address.postcode}</dd></div>
-    </dl>
   </div>
 </section>
