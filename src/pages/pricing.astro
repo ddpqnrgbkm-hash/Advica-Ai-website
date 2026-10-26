@@ -29,65 +29,71 @@ const faqs = [
   />
 
   <!-- Sprint 0 -->
-  <section class="py-20 sm:py-24" aria-labelledby="s0-h">
-    <div class="container-x grid overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-[1fr_1.2fr]">
-      <div class="flex flex-col bg-sky p-8 sm:p-12">
-        <p class="text-sm font-semibold uppercase tracking-[0.14em] text-ink/70">Step 1 · Discovery phase</p>
-        <h2 id="s0-h" class="mt-3 text-4xl font-bold">Sprint 0</h2>
-        <p class="mt-8 font-display text-6xl font-bold">{gbp(pricing.sprintZeroPrice)}</p>
-        <p class="mt-3 text-lg font-semibold">{gbp(pricing.sprintZeroCredit)} credited back when you build with us</p>
-        {pricing.vatNote && <p class="mt-2 text-sm text-ink/70">{pricing.vatNote}</p>}
-        <div class="mt-auto pt-10"><BookButton class="btn bg-ink text-white hover:bg-ink-2" label="Discuss Sprint 0" /></div>
-      </div>
-      <div class="p-8 sm:p-12">
-        <p class="text-lg text-muted">Before any build begins, we work with you to design, scope and plan your whole project, so it’s based on real business needs and you know exactly what you’re paying for.</p>
-        <h3 class="mt-8 text-sm font-semibold uppercase tracking-[0.14em] text-muted">You get</h3>
-        <ul class="mt-4 space-y-5">
-          {[
-            ['Technical design and data plan', 'A full map of how the system works, the data it needs and where it runs.'],
-            ['Wireframes and workflow maps', 'Visual guides to every screen and process, so there are no surprises.'],
-            ['A fixed roadmap and price', 'Milestones, timeline and a fixed price for the build.'],
-          ].map(([t, x]) => (
-            <li class="flex gap-4">
-              <svg class="mt-1 size-6 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              <span><span class="block font-semibold">{t}</span><span class="text-muted">{x}</span></span>
-            </li>
-          ))}
-        </ul>
-        <p class="mt-8 rounded-2xl bg-paper p-5 text-sm text-muted">Not sure you need Sprint 0? The <a class="link" href="/how-it-works">free discovery call</a> comes first, and we’ll tell you honestly.</p>
+  <section class="py-20 sm:py-28" aria-labelledby="s0-h">
+    <div class="container-x">
+      <div class="reveal relative grid overflow-hidden rounded-3xl border border-sky/25 lg:grid-cols-[1fr_1.2fr]">
+        <div class="relative flex flex-col overflow-hidden bg-gradient-to-br from-deep via-ink-2 to-ink-2 p-8 sm:p-12">
+          <div aria-hidden="true" class="absolute -left-16 -top-16 size-72 rounded-full bg-sky/25 blur-3xl"></div>
+          <p class="relative eyebrow">Step 1 · Discovery phase</p>
+          <h2 id="s0-h" class="relative mt-4 text-4xl font-semibold text-white">Sprint 0</h2>
+          <p class="text-shine relative mt-10 text-6xl font-semibold tracking-tight sm:text-7xl">{gbp(pricing.sprintZeroPrice)}</p>
+          <p class="relative mt-4 text-lg font-medium text-white"><span class="text-sky">{gbp(pricing.sprintZeroCredit)}</span> credited back when you build with us</p>
+          {pricing.vatNote && <p class="relative mt-2 text-sm text-mist">{pricing.vatNote}</p>}
+          <div class="relative mt-auto pt-10"><BookButton class="btn-primary" label="Discuss Sprint 0" /></div>
+        </div>
+        <div class="bg-ink-2/60 p-8 sm:p-12">
+          <p class="text-lg leading-relaxed text-mist">Before any build begins, we work with you to design, scope and plan your whole project, so it’s based on real business needs and you know exactly what you’re paying for.</p>
+          <h3 class="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-mist">You get</h3>
+          <ul class="mt-5 space-y-5">
+            {[
+              ['Technical design and data plan', 'A full map of how the system works, the data it needs and where it runs.'],
+              ['Wireframes and workflow maps', 'Visual guides to every screen and process, so there are no surprises.'],
+              ['A fixed roadmap and price', 'Milestones, timeline and a fixed price for the build.'],
+            ].map(([t, x]) => (
+              <li class="flex gap-4">
+                <span class="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-sky/15 text-sky">
+                  <svg class="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </span>
+                <span><span class="block font-medium text-white">{t}</span><span class="text-mist">{x}</span></span>
+              </li>
+            ))}
+          </ul>
+          <p class="mt-8 rounded-2xl border border-white/[0.07] bg-white/[0.02] p-5 text-sm text-mist">Not sure you need Sprint 0? The <a class="link" href="/how-it-works">free discovery call</a> comes first, and we’ll tell you honestly.</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Ways to pay -->
-  <section class="border-y border-line bg-white py-20 sm:py-24" aria-labelledby="pay-h">
+  <section class="border-y border-white/[0.06] bg-ink py-20 sm:py-28" aria-labelledby="pay-h">
     <div class="container-x">
-      <p class="eyebrow">Step 2 · Paying for the build</p>
-      <h2 id="pay-h" class="mt-4 text-4xl font-bold sm:text-5xl">Two ways to pay</h2>
-      <div class="mt-12 grid gap-4 lg:grid-cols-2">
-        <article class="flex flex-col rounded-3xl border border-line p-8 sm:p-10">
-          <h3 class="text-3xl font-bold">Milestone billing</h3>
-          <p class="mt-3 text-lg text-muted">Pay in stages as agreed milestones are delivered.</p>
+      <div class="reveal">
+        <p class="eyebrow">Step 2 · Paying for the build</p>
+        <h2 id="pay-h" class="mt-5 text-4xl font-semibold text-white sm:text-5xl">Two ways to pay</h2>
+      </div>
+      <div class="mt-12 grid gap-5 lg:grid-cols-2">
+        <article class="reveal glass flex flex-col p-8 sm:p-10">
+          <h3 class="text-3xl font-semibold text-white">Milestone billing</h3>
+          <p class="mt-3 text-lg text-mist">Pay in stages as agreed milestones are delivered.</p>
           <ul class="mt-8 space-y-3">
             {['A deposit to start, then payments tied to delivery', 'Simple and predictable', 'You only pay for what’s been delivered'].map((t) => (
-              <li class="flex gap-3"><span class="text-brand" aria-hidden="true">●</span>{t}</li>
+              <li class="flex gap-3 text-white/90"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-sky shadow-[0_0_8px_2px_rgba(60,200,255,0.6)]" aria-hidden="true"></span>{t}</li>
             ))}
           </ul>
-          <p class="mt-8 text-sm text-muted">Best for: businesses with budget set aside for the project.</p>
+          <p class="mt-auto pt-8 font-mono text-xs uppercase tracking-[0.14em] text-mist">Best for: budget set aside for the project</p>
         </article>
-        <article class="on-dark flex flex-col rounded-3xl bg-ink p-8 text-white sm:p-10">
-          <h3 class="text-3xl font-bold">Monthly financing</h3>
-          <p class="mt-3 text-lg text-white/75">Spread the cost over {pricing.financeYears} years through independent finance partners.</p>
+        <article class="reveal relative flex flex-col overflow-hidden rounded-3xl border border-sky/30 bg-gradient-to-br from-brand/20 via-ink-2 to-ink-2 p-8 shadow-[0_30px_100px_-40px_rgba(60,200,255,0.6)] sm:p-10">
+          <span class="absolute right-6 top-6 rounded-full bg-sky px-3 py-1 font-mono text-[0.65rem] uppercase tracking-[0.12em] text-void">Spread the cost</span>
+          <h3 class="text-3xl font-semibold text-white">Monthly financing</h3>
+          <p class="mt-3 text-lg text-mist">Spread the cost over {pricing.financeYears} years through independent finance partners.</p>
           <ul class="mt-8 space-y-3">
             {['Keep cash free for hiring, stock and growth', 'Start now rather than waiting for next year’s budget', 'Predictable monthly payments'].map((t) => (
-              <li class="flex gap-3"><span class="text-sky" aria-hidden="true">●</span>{t}</li>
+              <li class="flex gap-3 text-white/90"><span class="mt-2 size-1.5 shrink-0 rounded-full bg-sky shadow-[0_0_8px_2px_rgba(60,200,255,0.6)]" aria-hidden="true"></span>{t}</li>
             ))}
           </ul>
-          <div class="mt-8 rounded-2xl bg-white/5 p-5 text-sm text-mist">
-            <p class="font-semibold text-white">Eligibility</p>
-            <p class="mt-1">Subject to the finance provider’s approval and checks. Typically your business needs at least 3 years’ trading history and to have completed Sprint 0.</p>
-            <p class="mt-3 font-semibold text-white">Tax</p>
-            <p class="mt-1">Financing may offer tax advantages for some businesses. Please consult your accountant — we can’t give tax advice.</p>
+          <div class="mt-8 grid gap-4 rounded-2xl border border-white/[0.08] bg-void/40 p-5 text-sm text-mist sm:grid-cols-2">
+            <p><span class="block font-medium text-white">Eligibility</span>Subject to the finance provider’s approval and checks. Typically at least 3 years’ trading and Sprint 0 completed.</p>
+            <p><span class="block font-medium text-white">Tax</span>Financing may offer tax advantages for some businesses. Please consult your accountant — we can’t give tax advice.</p>
           </div>
         </article>
       </div>
@@ -97,21 +103,21 @@ const faqs = [
   <!-- Estimator CTA -->
   <section class="py-20 sm:py-24">
     <div class="container-x">
-      <a href="/estimate" class="group flex flex-col justify-between gap-6 rounded-3xl bg-brand p-8 text-white sm:flex-row sm:items-center sm:p-12">
+      <a href="/estimate" class="reveal glow-card group relative flex flex-col justify-between gap-6 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-brand/30 via-ink-2 to-ink-2 p-8 sm:flex-row sm:items-center sm:p-12">
         <span>
-          <span class="block font-display text-3xl font-bold">Want a rough idea first?</span>
-          <span class="mt-2 block text-white">Answer five quick questions for an indicative estimate.</span>
+          <span class="block text-3xl font-semibold text-white">Want a rough idea first?</span>
+          <span class="mt-2 block text-mist">Answer five quick questions for an indicative guide.</span>
         </span>
-        <span class="btn shrink-0 bg-white text-ink">Try the estimator <span aria-hidden="true">→</span></span>
+        <span class="btn-primary shrink-0">Try the estimator <span aria-hidden="true">→</span></span>
       </a>
     </div>
   </section>
 
-  <section class="border-t border-line bg-white py-20 sm:py-24" aria-labelledby="faq-h">
+  <section class="border-t border-white/[0.06] bg-ink py-20 sm:py-28" aria-labelledby="faq-h">
     <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr]">
-      <div>
+      <div class="reveal">
         <p class="eyebrow">FAQ</p>
-        <h2 id="faq-h" class="mt-4 text-3xl font-bold sm:text-4xl">Pricing questions</h2>
+        <h2 id="faq-h" class="mt-5 text-3xl font-semibold text-white sm:text-4xl">Pricing questions</h2>
       </div>
       <FAQ items={faqs} />
     </div>

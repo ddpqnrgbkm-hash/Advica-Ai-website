@@ -10,7 +10,9 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 const accentText: Record<string, string> = { sky: 'text-sky', lime: 'text-lime', lilac: 'text-lilac' };
 const chevron = 'M6 9l6 6 6-6';
 ---
-<header class="on-dark sticky top-0 z-40 border-b border-white/10 bg-ink text-white">
+<header class="on-dark sticky top-0 z-40 border-b border-white/[0.06] text-white">
+  <!-- blur lives on its own layer so the full-screen mobile menu isn't clipped -->
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-void/75 backdrop-blur-xl"></div>
   <div class="container-x relative flex h-[4.5rem] items-center justify-between gap-6">
     <a href="/" class="shrink-0" aria-label={`${site.name} — home`}><Logo dark /></a>
 
@@ -24,7 +26,7 @@ const chevron = 'M6 9l6 6 6-6';
               {hasMenu ? (
                 <button
                   type="button"
-                  class:list={['nav-trigger flex items-center gap-1.5 rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/85']}
+                  class:list={['nav-trigger flex items-center gap-1.5 rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/75 hover:text-white']}
                   aria-expanded="false"
                   aria-controls={`menu-${i}`}
                 >
@@ -34,7 +36,7 @@ const chevron = 'M6 9l6 6 6-6';
               ) : (
                 <a
                   href={item.href}
-                  class:list={['block rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/85']}
+                  class:list={['block rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/75 hover:text-white']}
                   aria-current={isActive(item.href) ? 'page' : undefined}
                 >{item.label}</a>
               )}
@@ -43,20 +45,20 @@ const chevron = 'M6 9l6 6 6-6';
                 <div id={`menu-${i}`} class="nav-panel inset-x-5 sm:inset-x-8">
                   <div class="grid grid-cols-3 gap-2 p-3">
                     {services.map((s) => (
-                      <div class="rounded-2xl p-5 hover:bg-paper">
+                      <div class="rounded-2xl p-5 hover:bg-white/[0.04]">
                         <a href={`/services/${s.id}`} class="group block">
-                          <span class="font-display text-lg font-semibold text-ink group-hover:text-brand">{s.data.title} <span aria-hidden="true">→</span></span>
-                          <span class="mt-1 block text-sm text-muted">{s.data.menuText}</span>
+                          <span class="text-lg font-semibold text-white group-hover:text-sky">{s.data.title} <span aria-hidden="true">→</span></span>
+                          <span class="mt-1 block text-sm text-mist">{s.data.menuText}</span>
                         </a>
-                        <ul class="mt-4 space-y-1.5 border-t border-line pt-4">
+                        <ul class="mt-4 space-y-1.5 border-t border-white/10 pt-4">
                           {s.data.capabilities.map((c) => (
-                            <li><a href={`/services/${s.id}#${c.id}`} class="text-[0.92rem] text-ink/80 hover:text-brand hover:underline">{c.name}</a></li>
+                            <li><a href={`/services/${s.id}#${c.id}`} class="text-[0.92rem] text-white/75 hover:text-sky">{c.name}</a></li>
                           ))}
                         </ul>
                       </div>
                     ))}
                   </div>
-                  <div class="flex items-center justify-between gap-4 rounded-b-3xl bg-ink px-8 py-4 text-sm text-white">
+                  <div class="flex items-center justify-between gap-4 rounded-b-3xl border-t border-white/10 bg-sky/[0.06] px-8 py-4 text-sm text-mist">
                     <span>Not sure which you need? Get an indicative price in two minutes.</span>
                     <span class="flex gap-6">
                       <a href="/services" class="font-semibold text-white hover:text-sky">All services</a>
@@ -71,9 +73,9 @@ const chevron = 'M6 9l6 6 6-6';
                   <ul class="p-3">
                     {item.children.map((c) => (
                       <li>
-                        <a href={c.href} class="group block rounded-xl px-4 py-3 hover:bg-paper">
-                          <span class="block font-semibold text-ink group-hover:text-brand">{c.label}</span>
-                          {c.text && <span class="block text-sm text-muted">{c.text}</span>}
+                        <a href={c.href} class="group block rounded-xl px-4 py-3 hover:bg-white/[0.05]">
+                          <span class="block font-medium text-white group-hover:text-sky">{c.label}</span>
+                          {c.text && <span class="block text-sm text-mist">{c.text}</span>}
                         </a>
                       </li>
                     ))}
@@ -88,7 +90,7 @@ const chevron = 'M6 9l6 6 6-6';
 
     <div class="hidden items-center gap-5 lg:flex">
       <a href={`tel:${site.phoneLink}`} class="text-sm font-medium text-white/75 hover:text-white">{site.phone}</a>
-      <BookButton class="btn !min-h-11 bg-sky !px-5 text-ink hover:bg-white" />
+      <BookButton class="btn-primary !min-h-10 !px-5 !text-sm" />
     </div>
 
     <!-- ===== Mobile menu (works without JavaScript) ===== -->
@@ -98,13 +100,13 @@ const chevron = 'M6 9l6 6 6-6';
         <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
         <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
       </summary>
-      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-ink px-5 pb-32 pt-2">
+      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-void px-5 pb-32 pt-2">
         <ul class="divide-y divide-white/10">
           {nav.map((item) => (
             <li>
               {item.dropdown === 'services' ? (
                 <details class="group/sub">
-                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-semibold [&::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-2xl font-medium [&::-webkit-details-marker]:hidden">
                     {item.label}
                     <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
                   </summary>
@@ -117,7 +119,7 @@ const chevron = 'M6 9l6 6 6-6';
                 </details>
               ) : item.children ? (
                 <details class="group/sub">
-                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-semibold [&::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-2xl font-medium [&::-webkit-details-marker]:hidden">
                     {item.label}
                     <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
                   </summary>
@@ -126,13 +128,13 @@ const chevron = 'M6 9l6 6 6-6';
                   </ul>
                 </details>
               ) : (
-                <a href={item.href} class="block py-4 font-display text-2xl font-semibold">{item.label}</a>
+                <a href={item.href} class="block py-4 text-2xl font-medium">{item.label}</a>
               )}
             </li>
           ))}
         </ul>
         <div class="mt-6 grid gap-3">
-          <BookButton class="btn w-full bg-sky text-ink" />
+          <BookButton class="btn-primary w-full" />
           <a href={`tel:${site.phoneLink}`} class="btn-secondary w-full">Call {site.phone}</a>
         </div>
       </nav>
@@ -148,9 +150,10 @@ const chevron = 'M6 9l6 6 6-6';
     top: calc(100% + 0.6rem);
     display: none;
     border-radius: 1.5rem;
-    background: #fff;
-    color: var(--color-ink);
-    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.45);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(9 14 28 / 0.97);
+    color: var(--color-text);
+    box-shadow: 0 40px 100px -20px rgb(0 0 0 / 0.8), 0 0 60px -30px rgb(60 200 255 / 0.5);
   }
   /* invisible bridge so the panel doesn't close while moving the mouse down */
   .nav-panel::before { content: ''; position: absolute; inset: -0.8rem 0 auto 0; height: 0.8rem; }
@@ -162,7 +165,6 @@ const chevron = 'M6 9l6 6 6-6';
   .has-menu[data-open] .chev { transform: rotate(180deg); }
   .mega { position: static; }
   .mega > .nav-panel { top: calc(100% - 0.4rem); }
-  .nav-panel :focus-visible { outline-color: var(--color-brand); }
 </style>
 
 <script>

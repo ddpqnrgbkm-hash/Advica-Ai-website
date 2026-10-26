@@ -1,24 +1,23 @@
 ---
 /**
- * Placeholder logo: an "A" mark drawn in code, based on the blue "A" from the old site.
- * Replace with your official logo file when you have one (see README → Images).
+ * Placeholder logo: the glowing "A" from the old site, drawn in code.
+ * Replace with your official logo file when you have one (see README → Replace the logo).
  */
 interface Props { dark?: boolean }
-const { dark = false } = Astro.props;
 ---
-<span class="inline-flex items-center gap-2.5">
-  <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true">
+<span class="inline-flex items-center gap-3">
+  <svg width="36" height="36" viewBox="0 0 64 64" aria-hidden="true" class="drop-shadow-[0_0_12px_rgba(60,200,255,0.55)]">
     <defs>
       <linearGradient id="lg-a" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#3cc8ff" />
-        <stop offset="1" stop-color="#0b63ce" />
+        <stop offset="0" stop-color="#7fe0ff" />
+        <stop offset="0.5" stop-color="#3cc8ff" />
+        <stop offset="1" stop-color="#2f7bff" />
       </linearGradient>
     </defs>
-    <rect width="64" height="64" rx="16" fill={dark ? '#12223a' : '#0a1628'} />
-    <path d="M18 50 L30 15 a2.5 2.5 0 0 1 4.6 0 L46 50" fill="none" stroke="url(#lg-a)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
-    <path d="M23.5 40 Q32 33 40.5 40" fill="none" stroke="#3cc8ff" stroke-width="5" stroke-linecap="round" />
+    <path d="M14 54 L29 12 a3 3 0 0 1 5.6 0 L50 54" fill="none" stroke="url(#lg-a)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M21 41 Q32 32 43 41" fill="none" stroke="#3cc8ff" stroke-width="6" stroke-linecap="round" />
   </svg>
-  <span class:list={['font-display text-[1.15rem] font-bold leading-none tracking-tight', dark ? 'text-white' : 'text-ink']}>
-    Advica<span class="text-sky">.</span><span class:list={['ml-1 font-medium', dark ? 'text-white/70' : 'text-muted']}>AI</span>
+  <span class="text-[1.12rem] font-semibold leading-none tracking-tight text-white">
+    Advica <span class="font-normal text-mist">AI Solutions</span>
   </span>
 </span>

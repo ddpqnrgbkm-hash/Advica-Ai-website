@@ -4,264 +4,250 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BookButton from '../components/BookButton.astro';
 import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
-import { stats, testimonials } from '../config/site';
+import HeroSphere from '../components/HeroSphere.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
+import { stats, testimonials, pricing } from '../config/site';
 import { steps } from '../data/steps';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const caseStudies = (await getCollection('caseStudies', (c) => !c.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
 const shownTestimonials = testimonials.filter((t) => t.show);
 const marquee = services.flatMap((s) => s.data.capabilities.map((c) => c.name.split(' — ')[0]));
-
-const accentBg: Record<string, string> = { sky: 'bg-sky', lime: 'bg-lime', lilac: 'bg-lilac' };
+const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 
 const reasons = [
-  { title: 'Plan before you pay for the build', text: 'Sprint 0 gives you a clear design, scope and fixed price before development starts.', cls: 'bg-sky text-ink' },
-  { title: 'Plain English, always', text: 'No jargon and no black boxes. You’ll understand what we’re building and why.', cls: 'bg-lime text-ink' },
-  { title: 'Pay the way that suits you', text: 'Milestone billing, or spread the cost monthly over 3–5 years with our finance partners.', cls: 'bg-lilac text-ink' },
-  { title: 'Your choice after launch', text: 'We hand everything over to your team, or keep supporting and improving it for you.', cls: 'bg-brand text-white' },
+  { title: 'Plan before you pay for the build', text: 'Sprint 0 gives you a clear design, scope and fixed price before development starts.', icon: 'M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
+  { title: 'Plain English, always', text: 'No jargon and no black boxes. You’ll understand what we’re building and why.', icon: 'M8 10h8M8 14h5m-9 6l2.5-3H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3' },
+  { title: 'Pay the way that suits you', text: `Milestone billing, or spread the cost monthly over ${pricing.financeYears} years with our finance partners.`, icon: 'M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z' },
+  { title: 'Your choice after launch', text: 'We hand everything over to your team, or keep supporting and improving it for you.', icon: 'M4 12h16m-6-6l6 6-6 6' },
 ];
 
 const faqs = [
-  {
-    q: 'What kind of businesses do you work with?',
-    a: 'UK small and mid-sized businesses — typically firms that have outgrown spreadsheets and off-the-shelf tools, or want to use AI properly but need a technical partner to do it.',
-  },
-  {
-    q: 'We’re not technical. Is that a problem?',
-    a: 'Not at all. Bring the business problem and we’ll handle the technical side. We explain options in plain English, and you’ll always know what you’re paying for and why.',
-  },
-  {
-    q: 'How much does a project cost?',
-    a: 'It depends on what you need. Try our project cost estimator for an indicative range. After Sprint 0 you get a fixed plan and price before the main build starts.',
-  },
-  {
-    q: 'Can we spread the cost?',
-    a: 'Yes. As well as paying by milestone, eligible businesses can spread the cost monthly over 3 to 5 years through our finance partners, subject to their approval.',
-  },
+  { q: 'What kind of businesses do you work with?', a: 'UK small and mid-sized businesses — typically firms that have outgrown spreadsheets and off-the-shelf tools, or want to use AI properly but need a technical partner to do it.' },
+  { q: 'We’re not technical. Is that a problem?', a: 'Not at all. Bring the business problem and we’ll handle the technical side. We explain options in plain English, and you’ll always know what you’re paying for and why.' },
+  { q: 'How much does a project cost?', a: 'It depends on what you need. Try our project cost estimator for an indicative guide. After Sprint 0 you get a fixed plan and price before the main build starts.' },
+  { q: 'Can we spread the cost?', a: `Yes. As well as paying by milestone, eligible businesses can spread the cost monthly over ${pricing.financeYears} years through our finance partners, subject to their approval.` },
 ];
-const faqLd = {
-  '@type': 'FAQPage',
-  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
-};
+const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <BaseLayout
   title="Bespoke AI and software engineering for UK businesses"
   description="Advica AI Solutions designs, builds and supports custom AI tools, apps and data platforms for UK SMEs and mid-market businesses. Clear plan first, then build."
   jsonLd={[faqLd]}
 >
-  <!-- ============ HERO ============ -->
-  <section class="on-dark relative overflow-hidden bg-ink text-white">
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 opacity-[0.06] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_80%_20%,#000,transparent_65%)]"></div>
-    <div aria-hidden="true" class="pointer-events-none absolute -right-40 -top-20 size-[42rem] rounded-full bg-brand/50 blur-[140px]"></div>
+  <!-- ================= HERO ================= -->
+  <section class="on-dark relative isolate overflow-hidden">
+    <div aria-hidden="true" class="grid-bg absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_70%_60%_at_65%_40%,#000,transparent)]"></div>
+    <div aria-hidden="true" class="absolute -top-40 left-1/2 -z-10 h-[40rem] w-[70rem] -translate-x-1/2 rounded-full bg-deep/50 blur-[140px]"></div>
 
-    <div class="container-x relative pb-16 pt-20 sm:pb-24 sm:pt-28 lg:pt-36">
-      <p class="eyebrow">Bespoke AI &amp; software engineering · UK</p>
-      <h1 class="mt-6 max-w-5xl text-[2.9rem] font-bold leading-[0.98] sm:text-7xl lg:text-[6.2rem]">
-        AI and software, built around how <span class="text-sky">your&nbsp;business</span> works.
-      </h1>
-      <div class="mt-10 grid gap-10 lg:grid-cols-[1fr_auto] lg:items-end">
-        <p class="max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
+    <div class="container-x grid items-center gap-6 pb-16 pt-14 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:pb-28 lg:pt-24">
+      <div class="relative z-10">
+        <p class="eyebrow"><span class="size-1.5 rounded-full bg-sky shadow-[0_0_12px_3px_rgba(60,200,255,0.7)]"></span> AI &amp; software engineering · UK</p>
+        <h1 class="mt-7 text-[2.75rem] font-semibold leading-[1.02] tracking-[-0.035em] text-white sm:text-6xl lg:text-[4.6rem]">
+          AI and software, built around <span class="text-shine">how your business works.</span>
+        </h1>
+        <p class="mt-7 max-w-xl text-lg leading-relaxed text-mist sm:text-xl">
           We design, build and support custom AI tools, apps and data platforms for UK small and mid-sized businesses — with a clear, fixed plan before the build begins.
         </p>
-        <div class="flex flex-col gap-3 sm:flex-row">
-          <BookButton class="btn bg-sky text-ink hover:bg-white" label="Book a free call" />
-          <a href="/estimate" class="btn-secondary">Estimate your project cost</a>
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <BookButton class="btn-primary" label="Book a free call" />
+          <a href="/estimate" class="btn-secondary">Estimate your project cost <span aria-hidden="true">→</span></a>
+        </div>
+        <ul class="mt-10 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[0.72rem] uppercase tracking-[0.14em] text-mist">
+          <li>Fixed plan first</li><li aria-hidden="true" class="text-sky">/</li><li>Plain English</li><li aria-hidden="true" class="text-sky">/</li><li>Monthly finance available</li>
+        </ul>
+      </div>
+
+      <!-- 3D sphere with floating status chips (decorative) -->
+      <div class="relative -mx-5 h-[22rem] sm:mx-0 sm:h-[30rem] lg:h-[38rem]">
+        <HeroSphere class="absolute inset-0" />
+        <div aria-hidden="true" class="pointer-events-none absolute inset-0 hidden sm:block">
+          <div class="float glass absolute left-[2%] top-[18%] flex items-center gap-3 !rounded-2xl px-4 py-3 backdrop-blur-md">
+            <span class="grid size-8 place-items-center rounded-lg bg-sky/15 text-sky">⌁</span>
+            <span><span class="block text-xs font-medium text-white">Document processed</span><span class="block font-mono text-[0.65rem] text-mist">12 line items · 4.2s</span></span>
+          </div>
+          <div class="float glass absolute bottom-[16%] left-[8%] flex items-center gap-3 !rounded-2xl px-4 py-3 backdrop-blur-md [animation-delay:-2s]">
+            <span class="grid size-8 place-items-center rounded-lg bg-brand/25 text-[#9cc0ff]">↗</span>
+            <span><span class="block text-xs font-medium text-white">Forecast updated</span><span class="block font-mono text-[0.65rem] text-mist">Next 90 days</span></span>
+          </div>
+          <div class="float glass absolute right-[2%] top-[56%] flex items-center gap-3 !rounded-2xl px-4 py-3 backdrop-blur-md [animation-delay:-4s]">
+            <span class="size-2 rounded-full bg-sky shadow-[0_0_10px_3px_rgba(60,200,255,0.7)]"></span>
+            <span class="font-mono text-[0.68rem] text-white/85">Deployed to production</span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- Moving strip of capabilities (pauses for users who prefer reduced motion) -->
-    <div class="relative border-y border-white/10 bg-white/[0.03] py-5" aria-hidden="true">
-      <div class="marquee flex w-max gap-10 whitespace-nowrap font-display text-2xl font-semibold text-white/80 sm:text-3xl">
-        {[0, 1].map(() => marquee.map((m) => <span class="flex items-center gap-10">{m}<span class="text-sky">/</span></span>))}
+    <!-- Capability strip -->
+    <div class="relative border-y border-white/[0.06] bg-white/[0.015] py-5" aria-hidden="true">
+      <div class="marquee flex w-max gap-10 whitespace-nowrap font-mono text-sm uppercase tracking-[0.14em] text-mist">
+        {[0, 1].map(() => marquee.map((m) => <span class="flex items-center gap-10">{m}<span class="text-sky">✦</span></span>))}
       </div>
     </div>
   </section>
 
   {stats.length > 0 && (
-    <section class="bg-white py-12">
+    <section class="py-14">
       <dl class="container-x grid gap-8 sm:grid-cols-3">
         {stats.map((s) => (
-          <div><dt class="text-sm text-muted">{s.label}</dt><dd class="font-display text-5xl font-semibold">{s.value}</dd></div>
+          <div class="glass p-6"><dt class="text-sm text-mist">{s.label}</dt><dd class="text-shine mt-2 text-5xl font-semibold">{s.value}</dd></div>
         ))}
       </dl>
     </section>
   )}
 
-  <!-- ============ WHY ADVICA — colour tiles ============ -->
-  <section class="py-20 sm:py-24" aria-labelledby="why-h">
+  <!-- ================= WHAT WE BUILD ================= -->
+  <section class="relative py-24 sm:py-32" aria-labelledby="build-h">
     <div class="container-x">
-      <h2 id="why-h" class="max-w-3xl text-4xl font-bold leading-tight sm:text-5xl">Serious engineering, without the jargon or the surprises.</h2>
-      <ul class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {reasons.map((r, i) => (
-          <li class:list={['flex min-h-64 flex-col justify-between rounded-3xl p-7', r.cls]}>
-            <span aria-hidden="true" class="font-display text-5xl font-bold opacity-70">0{i + 1}</span>
-            <span>
-              <span class="block font-display text-2xl font-bold leading-tight">{r.title}</span>
-              <span class="mt-3 block">{r.text}</span>
+      <div class="reveal mx-auto max-w-3xl text-center">
+        <p class="eyebrow justify-center">What we build</p>
+        <h2 id="build-h" class="mt-5 text-4xl font-semibold text-white sm:text-6xl">Three ways we help</h2>
+        <p class="mt-5 text-lg text-mist">From a single AI tool to a full product build, or skilled engineers for your own team.</p>
+      </div>
+      <div class="mt-14"><ProductShowcase /></div>
+    </div>
+  </section>
+
+  <!-- ================= WHY ADVICA ================= -->
+  <section class="relative border-t border-white/[0.06] bg-ink py-24 sm:py-32" aria-labelledby="why-h">
+    <div class="container-x">
+      <div class="reveal grid gap-6 lg:grid-cols-2 lg:items-end">
+        <div>
+          <p class="eyebrow">Why Advica</p>
+          <h2 id="why-h" class="mt-5 text-4xl font-semibold leading-tight text-white sm:text-5xl">Serious engineering, without the jargon or the surprises.</h2>
+        </div>
+        <p class="text-lg text-mist lg:pb-2">We sit on your side of the table: we plan properly, explain everything in plain English and make sure what’s delivered matches what was agreed.</p>
+      </div>
+      <ul class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {reasons.map((r) => (
+          <li class="reveal glow-card glass p-7">
+            <span class="grid size-12 place-items-center rounded-2xl border border-sky/25 bg-sky/10 text-sky shadow-[0_0_30px_-8px_rgba(60,200,255,0.7)]">
+              <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={r.icon} /></svg>
             </span>
+            <h3 class="mt-8 text-xl font-semibold text-white">{r.title}</h3>
+            <p class="mt-3 leading-relaxed text-mist">{r.text}</p>
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <!-- ============ SERVICES — tabs ============ -->
-  <section class="bg-white py-20 sm:py-28" aria-labelledby="services-h">
+  <!-- ================= HOW IT WORKS ================= -->
+  <section class="relative overflow-hidden py-24 sm:py-32" aria-labelledby="how-h">
+    <div aria-hidden="true" class="absolute right-0 top-1/3 -z-10 h-96 w-96 rounded-full bg-brand/20 blur-[120px]"></div>
     <div class="container-x">
-      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-        <div class="max-w-2xl">
-          <p class="eyebrow">What we do</p>
-          <h2 id="services-h" class="mt-4 text-4xl font-bold sm:text-5xl">Three ways we help</h2>
-        </div>
-        <a href="/services" class="link">Compare all services</a>
-      </div>
-
-      <div data-tabs class="mt-12">
-        <div role="tablist" aria-label="Our services" hidden class="flex gap-2 overflow-x-auto rounded-full bg-paper p-1.5 sm:inline-flex">
-          {services.map((s) => (
-            <button
-              type="button" role="tab" id={`tab-${s.id}`} aria-controls={`panel-${s.id}`} aria-selected="false"
-              class="shrink-0 rounded-full px-5 py-3 text-sm font-semibold text-ink/70 transition-colors hover:text-ink aria-selected:bg-ink aria-selected:text-white sm:px-7 sm:text-base"
-            >{s.data.title}</button>
-          ))}
-        </div>
-
-        {services.map((s) => (
-          <div role="tabpanel" id={`panel-${s.id}`} aria-labelledby={`tab-${s.id}`} tabindex="0" class="mt-8 grid overflow-hidden rounded-3xl border border-line lg:grid-cols-[1fr_1.25fr]">
-            <div class:list={['flex flex-col p-8 sm:p-12', accentBg[s.data.accent]]}>
-              <h3 class="font-display text-3xl font-bold leading-tight sm:text-4xl">{s.data.headline}</h3>
-              <p class="mt-5 text-lg text-ink/80">{s.data.summary}</p>
-              <div class="mt-auto pt-10">
-                <a href={`/services/${s.id}`} class="btn bg-ink text-white hover:bg-ink-2">Explore {s.data.title} <span aria-hidden="true">→</span></a>
-              </div>
-            </div>
-            <ul class="grid content-start gap-px bg-line sm:grid-cols-2">
-              {s.data.capabilities.map((c) => (
-                <li class="bg-white">
-                  <a href={`/services/${s.id}#${c.id}`} class="group block h-full p-6 hover:bg-paper">
-                    <span class="flex items-start justify-between gap-3 font-semibold">{c.name}<span aria-hidden="true" class="text-brand transition-transform group-hover:translate-x-1">→</span></span>
-                    <span class="mt-2 block text-sm text-muted">{c.tags.slice(0, 3).join(' · ')}</span>
-                  </a>
-                </li>
-              ))}
-              {s.data.capabilities.length % 2 === 1 && (
-                <li class="hidden bg-paper sm:block">
-                  <a href="/contact" class="group block h-full p-6">
-                    <span class="font-semibold">Something else in mind?</span>
-                    <span class="mt-2 block text-sm text-brand group-hover:underline">Ask us →</span>
-                  </a>
-                </li>
-              )}
-            </ul>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ HOW IT WORKS ============ -->
-  <section class="on-dark bg-ink py-20 text-white sm:py-28" aria-labelledby="how-h">
-    <div class="container-x">
-      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+      <div class="reveal flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
         <div>
           <p class="eyebrow">How it works</p>
-          <h2 id="how-h" class="mt-4 text-4xl font-bold sm:text-5xl">Four steps. No surprises.</h2>
+          <h2 id="how-h" class="mt-5 text-4xl font-semibold text-white sm:text-5xl">Four steps. No surprises.</h2>
         </div>
-        <a href="/how-it-works" class="btn-secondary self-start lg:self-auto">See the full process</a>
+        <a href="/how-it-works" class="btn-secondary self-start lg:self-auto">See the full process <span aria-hidden="true">→</span></a>
       </div>
-      <ol class="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <ol class="relative mt-16 grid gap-10 lg:grid-cols-4 lg:gap-6">
+        <div aria-hidden="true" class="absolute left-6 right-6 top-6 hidden h-px bg-gradient-to-r from-sky via-brand to-transparent lg:block"></div>
         {steps.map((s, i) => (
-          <li class="rounded-3xl border border-white/10 bg-ink-2 p-7">
-            <span class="grid size-12 place-items-center rounded-full bg-sky font-display text-lg font-bold text-ink">{i + 1}</span>
-            <h3 class="mt-6 text-xl font-semibold">{s.name}</h3>
+          <li class="reveal relative">
+            <span class="relative grid size-12 place-items-center rounded-full border border-sky/40 bg-void font-mono text-sm text-sky shadow-[0_0_30px_-4px_rgba(60,200,255,0.6)]">0{i + 1}</span>
+            <h3 class="mt-6 text-xl font-semibold text-white">{s.name}</h3>
+            <p class="mt-1 font-mono text-[0.7rem] uppercase tracking-[0.14em] text-sky">{s.short}</p>
             <p class="mt-3 leading-relaxed text-mist">{s.text}</p>
           </li>
         ))}
       </ol>
+      <p class="reveal mt-14 text-mist">Sprint 0 is {gbp(pricing.sprintZeroPrice)}, with {gbp(pricing.sprintZeroCredit)} credited back if you build with us. <a href="/pricing" class="link">See pricing</a></p>
     </div>
   </section>
 
-  <!-- ============ PROOF — testimonial slider ============ -->
-  <section class="py-20 sm:py-28" aria-labelledby="proof-h">
-    <div class="container-x">
-      <div data-slider>
-        <div class="flex items-end justify-between gap-6">
-          <div>
-            <p class="eyebrow">Client feedback</p>
-            <h2 id="proof-h" class="mt-4 text-4xl font-bold sm:text-5xl">What clients say</h2>
-          </div>
-          <div data-controls hidden class="flex gap-2">
-            <button type="button" data-prev class="grid size-12 place-items-center rounded-full border border-ink/20 bg-white hover:border-ink disabled:opacity-30" aria-label="Previous"><span aria-hidden="true">←</span></button>
-            <button type="button" data-next class="grid size-12 place-items-center rounded-full border border-ink/20 bg-white hover:border-ink disabled:opacity-30" aria-label="Next"><span aria-hidden="true">→</span></button>
-          </div>
+  <!-- ================= TESTIMONIALS ================= -->
+  <section class="border-y border-white/[0.06] bg-ink py-24 sm:py-32" aria-labelledby="proof-h">
+    <div class="container-x" data-slider>
+      <div class="reveal flex items-end justify-between gap-6">
+        <div>
+          <p class="eyebrow">Client feedback</p>
+          <h2 id="proof-h" class="mt-5 text-4xl font-semibold text-white sm:text-5xl">What clients say</h2>
         </div>
-
-        <ul data-track class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none]">
-          {shownTestimonials.map((t) => (
-            <li class="w-[85%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
-              <figure class="flex h-full flex-col rounded-3xl bg-white p-8 sm:p-10">
-                <svg class="size-9 text-brand" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M13 8H7a4 4 0 0 0-4 4v6h6v6l4-6V8zm16 0h-6a4 4 0 0 0-4 4v6h6v6l4-6V8z"/></svg>
-                <blockquote class="mt-6 flex-1 text-lg leading-relaxed sm:text-xl">“{t.quote}”</blockquote>
-                <figcaption class="mt-8 text-sm text-muted">
-                  {t.name ? <><span class="font-semibold text-ink">{t.name}</span>{t.role && <>, {t.role}</>}</> : 'Client'}
-                </figcaption>
-              </figure>
-            </li>
-          ))}
-          <li class="w-[85%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
-            <div class="on-dark flex h-full flex-col justify-between rounded-3xl bg-ink p-8 text-white sm:p-10">
-              {caseStudies.length > 0 ? (
-                <>
-                  <p class="font-display text-2xl font-bold">See the projects behind the feedback.</p>
-                  <a href="/case-studies" class="btn mt-8 self-start bg-sky text-ink">Read case studies</a>
-                </>
-              ) : (
-                <>
-                  <p class="font-display text-2xl font-bold leading-snug">Case studies are on their way.</p>
-                  <p class="mt-3 text-mist">We’re writing up recent projects with our clients’ permission. Ask us for relevant examples on a call.</p>
-                  <BookButton class="btn mt-8 self-start bg-sky text-ink" label="Ask about our work" />
-                </>
-              )}
-            </div>
+        <div data-controls hidden class="flex gap-2">
+          <button type="button" data-prev class="grid size-12 place-items-center rounded-full border border-white/15 text-white hover:border-sky hover:text-sky disabled:opacity-30" aria-label="Previous"><span aria-hidden="true">←</span></button>
+          <button type="button" data-next class="grid size-12 place-items-center rounded-full border border-white/15 text-white hover:border-sky hover:text-sky disabled:opacity-30" aria-label="Next"><span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+      <ul data-track class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 [scrollbar-width:none]">
+        {shownTestimonials.map((t) => (
+          <li class="w-[88%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
+            <figure class="glass flex h-full flex-col p-8 sm:p-10">
+              <svg class="size-9 text-sky drop-shadow-[0_0_14px_rgba(60,200,255,0.6)]" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M13 8H7a4 4 0 0 0-4 4v6h6v6l4-6V8zm16 0h-6a4 4 0 0 0-4 4v6h6v6l4-6V8z"/></svg>
+              <blockquote class="mt-6 flex-1 text-lg leading-relaxed text-white/90 sm:text-xl">“{t.quote}”</blockquote>
+              <figcaption class="mt-8 font-mono text-xs uppercase tracking-[0.14em] text-mist">
+                {t.name ? <><span class="text-white">{t.name}</span>{t.role && <> · {t.role}</>}</> : 'Client'}
+              </figcaption>
+            </figure>
           </li>
-        </ul>
-      </div>
+        ))}
+        <li class="w-[88%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
+          <div class="relative flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-sky/25 bg-gradient-to-br from-brand/25 via-ink-2 to-ink-2 p-8 sm:p-10">
+            {caseStudies.length > 0 ? (
+              <>
+                <p class="text-2xl font-semibold text-white">See the projects behind the feedback.</p>
+                <a href="/case-studies" class="btn-primary mt-8 self-start">Read case studies</a>
+              </>
+            ) : (
+              <>
+                <div>
+                  <p class="text-2xl font-semibold leading-snug text-white">Case studies are on their way.</p>
+                  <p class="mt-3 text-mist">We’re writing up recent projects with our clients’ permission. Ask us for relevant examples on a call.</p>
+                </div>
+                <BookButton class="btn-primary mt-8 self-start" label="Ask about our work" />
+              </>
+            )}
+          </div>
+        </li>
+      </ul>
     </div>
   </section>
 
-  <!-- ============ FREE TOOLS ============ -->
-  <section class="pb-20 sm:pb-28" aria-labelledby="tools-h">
+  <!-- ================= FREE TOOLS ================= -->
+  <section class="py-24 sm:py-32" aria-labelledby="tools-h">
     <div class="container-x">
-      <h2 id="tools-h" class="sr-only">Free tools</h2>
-      <div class="grid gap-4 md:grid-cols-2">
-        <a href="/estimate" class="group flex min-h-72 flex-col justify-between rounded-3xl bg-brand p-8 text-white sm:p-10">
-          <span class="text-sm font-semibold uppercase tracking-[0.14em] text-white">Free · 2 minutes</span>
-          <span>
-            <span class="block font-display text-3xl font-bold sm:text-4xl">What might my project cost?</span>
-            <span class="mt-3 block max-w-md text-white">Answer five quick questions and get an indicative price range.</span>
-            <span class="mt-6 inline-flex items-center gap-2 font-semibold">Start the estimator <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
+      <div class="reveal mx-auto max-w-2xl text-center">
+        <p class="eyebrow justify-center">Free tools</p>
+        <h2 id="tools-h" class="mt-5 text-4xl font-semibold text-white sm:text-5xl">Not ready to talk yet?</h2>
+      </div>
+      <div class="mt-14 grid gap-5 md:grid-cols-2">
+        <a href="/estimate" class="reveal glow-card glass group relative flex min-h-80 flex-col justify-between overflow-hidden p-8 sm:p-10">
+          <div aria-hidden="true" class="absolute -right-10 -top-10 size-64 rounded-full bg-brand/30 blur-3xl transition-opacity group-hover:opacity-100"></div>
+          <div aria-hidden="true" class="relative flex h-24 items-end gap-2">
+            {[30, 48, 40, 66, 58, 82, 74, 100].map((v, i) => <span class="w-full rounded-t-md bg-gradient-to-t from-brand/40 to-sky/80" style={`height:${v}%;opacity:${0.4 + i * 0.08}`}></span>)}
+          </div>
+          <span class="relative">
+            <span class="font-mono text-xs uppercase tracking-[0.16em] text-sky">2 minutes</span>
+            <span class="mt-3 block text-3xl font-semibold text-white">What might my project cost?</span>
+            <span class="mt-3 block max-w-md text-mist">Answer five quick questions for an indicative guide and the best next step.</span>
+            <span class="mt-6 inline-flex items-center gap-2 font-medium text-sky">Start the estimator <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
           </span>
         </a>
-        <a href="/ai-readiness" class="group flex min-h-72 flex-col justify-between rounded-3xl bg-lime p-8 text-ink sm:p-10">
-          <span class="text-sm font-semibold uppercase tracking-[0.14em] text-ink/70">Free · 3 minutes</span>
-          <span>
-            <span class="block font-display text-3xl font-bold sm:text-4xl">How ready is your business for AI?</span>
-            <span class="mt-3 block max-w-md text-ink/75">Eight questions, an instant score and practical next steps.</span>
-            <span class="mt-6 inline-flex items-center gap-2 font-semibold">Take the quiz <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
+        <a href="/ai-readiness" class="reveal glow-card glass group relative flex min-h-80 flex-col justify-between overflow-hidden p-8 sm:p-10">
+          <div aria-hidden="true" class="absolute -right-10 -top-10 size-64 rounded-full bg-sky/20 blur-3xl"></div>
+          <div aria-hidden="true" class="relative grid size-24 place-items-center rounded-full" style="background:conic-gradient(var(--color-sky) 0 252deg, rgb(255 255 255 / 0.08) 0)">
+            <span class="grid size-[4.75rem] place-items-center rounded-full bg-ink-2 font-mono text-lg text-white">70%</span>
+          </div>
+          <span class="relative">
+            <span class="font-mono text-xs uppercase tracking-[0.16em] text-sky">3 minutes</span>
+            <span class="mt-3 block text-3xl font-semibold text-white">How ready is your business for AI?</span>
+            <span class="mt-3 block max-w-md text-mist">Eight questions, an instant score and practical next steps.</span>
+            <span class="mt-6 inline-flex items-center gap-2 font-medium text-sky">Take the quiz <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
           </span>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="border-t border-line bg-white py-20 sm:py-28" aria-labelledby="faq-h">
+  <!-- ================= FAQ ================= -->
+  <section class="border-t border-white/[0.06] bg-ink py-24 sm:py-32" aria-labelledby="faq-h">
     <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr]">
-      <div>
+      <div class="reveal">
         <p class="eyebrow">FAQ</p>
-        <h2 id="faq-h" class="mt-4 text-4xl font-bold sm:text-5xl">Quick answers</h2>
-        <p class="mt-5 text-muted">More detail on <a class="link" href="/how-it-works">how it works</a> and <a class="link" href="/pricing">pricing</a>.</p>
+        <h2 id="faq-h" class="mt-5 text-4xl font-semibold text-white sm:text-5xl">Quick answers</h2>
+        <p class="mt-5 text-mist">More on <a class="link" href="/how-it-works">how it works</a> and <a class="link" href="/pricing">pricing</a>.</p>
       </div>
       <FAQ items={faqs} />
     </div>
@@ -271,6 +257,8 @@ const faqLd = {
 </BaseLayout>
 
 <style>
-  .marquee { animation: marquee 60s linear infinite; }
+  .marquee { animation: marquee 70s linear infinite; }
   @keyframes marquee { to { transform: translateX(-50%); } }
+  .float { animation: float 6s ease-in-out infinite; }
+  @keyframes float { 50% { transform: translateY(-10px); } }
 </style>

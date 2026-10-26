@@ -50,7 +50,9 @@ If a change breaks the build, Netlify keeps the previous version live, so the si
 | About + Partnerships | `src/pages/about.astro` |
 | Contact page and form | `src/pages/contact.astro` |
 | Privacy policy / Terms | `src/pages/privacy.astro` / `src/pages/terms.astro` |
-| Colours and fonts | `src/styles/global.css` (top of file) |
+| Colours, fonts and visual style | `src/styles/global.css` (top of file) |
+| Animated 3D sphere on the homepage | `src/scripts/sphere.ts` |
+| Product mock-up screens on the homepage | `src/components/ProductShowcase.astro` |
 | Logo | `src/components/Logo.astro` and `public/favicon.svg` |
 | Social-share image | `public/og-default.png` (1200 × 630 pixels) |
 | Redirects from old web addresses | `netlify.toml` |

@@ -10,17 +10,17 @@ interface Props {
 const { name, question, help, path, options } = Astro.props;
 ---
 <fieldset data-step data-path={path} class="space-y-3">
-  <legend class="mb-2 font-display text-2xl font-bold leading-snug outline-none sm:text-3xl">{question}</legend>
-  {help && <p class="pb-2 text-muted">{help}</p>}
+  <legend class="mb-3 text-2xl font-semibold leading-snug text-white outline-none sm:text-3xl">{question}</legend>
+  {help && <p class="pb-2 text-mist">{help}</p>}
   {options.map((o) => (
-    <label class="flex cursor-pointer items-center gap-4 rounded-2xl border border-ink/15 bg-white p-4 transition-colors hover:border-ink/40 has-[:checked]:border-brand has-[:checked]:bg-brand/[0.06] has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-brand sm:p-5">
+    <label class="group flex cursor-pointer items-center gap-4 rounded-2xl border border-white/10 bg-white/[0.02] p-4 text-white/90 transition hover:border-white/25 hover:bg-white/[0.04] has-[:checked]:border-sky/60 has-[:checked]:bg-sky/[0.08] has-[:checked]:shadow-[0_0_40px_-12px_rgba(60,200,255,0.6)] has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-sky sm:p-5">
       <input
         type="radio"
         name={name}
         value={o.value ?? o.label}
         data-points={o.points ?? 0}
         data-choose-path={o.choosePath}
-        class="size-5 shrink-0 accent-brand"
+        class="size-5 shrink-0 accent-sky"
       />
       <span class="font-medium">{o.label}</span>
     </label>

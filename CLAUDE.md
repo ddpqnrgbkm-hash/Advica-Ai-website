@@ -18,3 +18,10 @@ The owner is not a developer. Explain anything they must do themselves in plain,
 - Confirmed facts: company no. 17076839; registered office Towngate House, 116-118 Towngate, Leyland PR25 2LQ; ICO registered; Sprint 0 is £4,250 with £2,125 credited if the client proceeds to build; financing over 3–5 years via third-party lenders. The two testimonials are from real clients.
 - Tax: never promise tax benefits — say "consult your accountant".
 - Don't promise response times, call lengths, code ownership or guarantees unless the owner confirms them.
+
+## Design (approved direction: dark & cinematic)
+- Near-black backgrounds (`void`, `ink`, `ink-2`), logo blue/cyan accents only (`sky` #3cc8ff, `brand` #2f7bff). No other accent colours.
+- Fonts: Geist (headings/body) and Geist Mono (small uppercase labels via `.eyebrow`).
+- Building blocks in `src/styles/global.css`: `glass`, `glow-card`, `btn-primary`, `btn-secondary`, `text-shine`, `grid-bg`, `reveal` (transform-only, keeps contrast).
+- Hero visual: animated canvas sphere (`src/scripts/sphere.ts`), deferred until idle. Product mock-ups in `src/components/ProductShowcase.astro` are labelled "Illustrative example".
+- No star ratings, badges or labels that imply unproven claims.

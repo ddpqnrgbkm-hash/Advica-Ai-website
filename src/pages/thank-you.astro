@@ -3,13 +3,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BookButton from '../components/BookButton.astro';
 ---
 <BaseLayout title="Thank you" description="Thanks for getting in touch with Advica AI Solutions." noindex>
-  <section class="on-dark bg-ink py-24 text-white sm:py-32">
+  <section class="on-dark relative isolate overflow-hidden py-28 sm:py-40">
+    <div aria-hidden="true" class="grid-bg absolute inset-0 -z-10 [mask-image:radial-gradient(ellipse_at_center,#000,transparent_70%)]"></div>
+    <div aria-hidden="true" class="absolute left-1/2 top-1/2 -z-10 h-[28rem] w-[50rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand/30 blur-[130px]"></div>
     <div class="container-x max-w-3xl text-center">
-      <span class="mx-auto grid size-16 place-items-center rounded-full bg-lime text-3xl text-ink" aria-hidden="true">✓</span>
-      <h1 class="mt-8 text-4xl font-bold sm:text-6xl">Thanks — we’ve got your message.</h1>
-      <p class="mx-auto mt-6 max-w-xl text-lg text-white/75">One of the team will be in touch soon. If it’s urgent, give us a call. Want to skip the wait? Book a call now.</p>
+      <span class="mx-auto grid size-20 place-items-center rounded-full border border-sky/40 bg-sky/10 text-3xl text-sky shadow-[0_0_60px_-10px_rgba(60,200,255,0.9)]" aria-hidden="true">✓</span>
+      <h1 class="mt-10 text-4xl font-semibold tracking-tight text-white sm:text-6xl">Thanks — we’ve got your message.</h1>
+      <p class="mx-auto mt-6 max-w-xl text-lg text-mist">One of the team will be in touch soon. If it’s urgent, give us a call. Want to skip the wait? Book a call now.</p>
       <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-        <BookButton class="btn bg-sky text-ink hover:bg-white" />
+        <BookButton class="btn-primary" />
         <a href="/insights" class="btn-secondary">Read our insights</a>
       </div>
     </div>

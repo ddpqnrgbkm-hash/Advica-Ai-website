@@ -7,7 +7,7 @@ const { title, description, updated } = Astro.props;
 <BaseLayout title={title} description={description}>
   <PageHero eyebrow="Legal" title={title} intro={`Last updated: ${updated}`} crumbs={[{ label: title }]} />
   <section class="py-16 sm:py-20">
-    <div class="container-x max-w-4xl prose prose-lg prose-headings:font-display prose-a:text-brand">
+    <div class="container-x max-w-4xl prose prose-lg prose-invert prose-headings:tracking-tight prose-headings:text-white prose-p:text-mist prose-li:text-mist prose-strong:text-white prose-a:text-sky">
       <slot />
     </div>
   </section>

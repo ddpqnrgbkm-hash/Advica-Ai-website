@@ -1,94 +1,130 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import '@fontsource-variable/inter';
-@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 
-/* ---------- Brand colours & fonts ---------- */
+/* ============================================================
+   Brand: dark & cinematic, built on the logo's blue/cyan.
+   ============================================================ */
 @theme {
-  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
+  --font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', monospace;
 
-  --color-ink: #07101f;       /* near-black navy — main dark */
-  --color-ink-2: #101d33;     /* cards on dark */
-  --color-paper: #f4f2ec;     /* warm off-white background */
-  --color-line: #dedad0;      /* hairlines on light */
-  --color-muted: #4b5566;     /* secondary text (AA on paper) */
-  --color-mist: #a3adbb;      /* secondary text on dark (AA on ink) */
+  --color-void: #03050b;      /* page background */
+  --color-ink: #070b16;       /* alternate section background */
+  --color-ink-2: #0b1222;     /* panels */
+  --color-ink-3: #111b31;     /* raised panels / hover */
+  --color-edge: #1b2740;      /* hairline borders */
+  --color-text: #e9eef8;      /* main text */
+  --color-mist: #95a3ba;      /* secondary text (AA on void/ink) */
+  --color-sky: #3cc8ff;       /* logo cyan — primary accent */
+  --color-brand: #2f7bff;     /* logo blue — gradients, highlights */
+  --color-deep: #0a3a8c;      /* deep blue glow */
 
-  --color-brand: #2357ff;     /* electric blue — buttons, links (white text AA) */
-  --color-brand-dark: #1638c9;
-  --color-sky: #3cc8ff;       /* logo cyan — accent blocks, dark text on top */
-  --color-lime: #d4f25a;      /* accent blocks, dark text on top */
-  --color-lilac: #b9a6ff;     /* accent blocks, dark text on top */
+  /* legacy names still used by inner pages (restyled after homepage approval) */
+  --color-paper: #03050b;
+  --color-line: #1b2740;
+  --color-muted: #95a3ba;
+  --color-brand-dark: #1d5fd6;
+  --color-lime: #3cc8ff;
+  --color-lilac: #7fb2ff;
 }
 
 @layer base {
-  html {
-    scroll-behavior: smooth;
-    -webkit-text-size-adjust: 100%;
-  }
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; color-scheme: dark; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-  body {
-    @apply bg-paper text-ink font-sans antialiased;
-  }
-  h1, h2, h3, h4 {
-    @apply font-display tracking-tight text-balance;
-  }
-  :focus-visible {
-    outline: 3px solid var(--color-brand);
-    outline-offset: 3px;
-    border-radius: 4px;
-  }
-  .on-dark :focus-visible {
-    outline-color: var(--color-sky);
-  }
+  body { @apply bg-void font-sans text-text antialiased; }
+  h1, h2, h3, h4 { @apply font-display tracking-tight text-balance; }
+  ::selection { background: var(--color-sky); color: var(--color-void); }
+  :focus-visible { outline: 2px solid var(--color-sky); outline-offset: 3px; border-radius: 6px; }
   [id] { scroll-margin-top: 6rem; }
 }
 
 @utility container-x {
-  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
+  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
 }
+/* Small mono label above headings */
 @utility eyebrow {
-  @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-brand;
+  @apply inline-flex items-center gap-2.5 font-mono text-[0.72rem] font-medium uppercase tracking-[0.18em] text-sky;
 }
 @utility btn {
-  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[0.95rem] font-semibold transition-colors duration-150;
+  @apply relative inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[0.95rem] font-medium transition duration-200;
 }
 @utility btn-primary {
-  @apply btn bg-brand text-white hover:bg-brand-dark;
+  @apply btn bg-sky text-void hover:bg-white;
+  box-shadow: 0 0 0 1px rgb(60 200 255 / 0.4), 0 10px 40px -10px rgb(60 200 255 / 0.6);
 }
 @utility btn-secondary {
-  @apply btn border border-ink/20 bg-white text-ink hover:border-ink/40;
+  @apply btn border border-white/15 bg-white/[0.03] text-text backdrop-blur hover:border-white/40 hover:bg-white/[0.07];
 }
 @utility btn-light {
-  @apply btn bg-white text-ink hover:bg-paper;
+  @apply btn bg-white text-void hover:bg-sky;
+}
+/* Glass panel with a soft gradient edge */
+@utility glass {
+  @apply rounded-3xl border border-white/[0.08];
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.015));
+  box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.06);
 }
 @utility card {
-  @apply rounded-2xl border border-line bg-white p-6 sm:p-8;
+  @apply glass p-6 sm:p-8;
 }
 @utility link {
-  @apply font-semibold text-brand underline decoration-brand/30 underline-offset-4 hover:decoration-brand;
+  @apply font-medium text-sky underline decoration-sky/30 underline-offset-4 hover:decoration-sky;
+}
+/* White-to-cyan gradient headline text */
+@utility text-shine {
+  background: linear-gradient(100deg, #ffffff 10%, #bfe9ff 45%, var(--color-sky) 75%, var(--color-brand) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
-/* Unlayered so they override the utilities above when on a dark background */
+/* Gentle reveal as sections scroll in (modern browsers only; content is always visible otherwise) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal {
+      animation: reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+    @keyframes reveal {
+      from { transform: translateY(32px); }
+      to { transform: none; }
+    }
+  }
+}
+
+/* Unlayered overrides for dark sections */
 .on-dark .eyebrow { color: var(--color-sky); }
-.on-dark .btn-secondary { border-color: rgb(255 255 255 / 0.3); background: transparent; color: #fff; }
-.on-dark .btn-secondary:hover { border-color: rgb(255 255 255 / 0.7); }
+
+/* Cards light up at the edge on hover */
+.glow-card { transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s; }
+.glow-card:hover { border-color: rgb(60 200 255 / 0.35); box-shadow: 0 0 0 1px rgb(60 200 255 / 0.15), 0 30px 80px -30px rgb(60 200 255 / 0.45); transform: translateY(-3px); }
 
 @layer components {
   /* FAQ accordions built on <details>, so answers are always in the HTML */
-  .faq details { @apply border-b border-line; }
+  .faq details { @apply border-b border-white/10; }
   .faq summary {
-    @apply flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-display text-lg font-semibold;
+    @apply flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left text-lg font-medium text-text;
   }
   .faq summary::-webkit-details-marker { display: none; }
   .faq summary::after {
     content: '+';
-    @apply grid size-8 shrink-0 place-items-center rounded-full border border-line text-xl font-normal text-brand transition-transform;
+    @apply grid size-9 shrink-0 place-items-center rounded-full border border-white/15 text-xl font-light text-sky transition-transform;
   }
   .faq details[open] summary::after { transform: rotate(45deg); }
-  .faq .answer { @apply pb-6 pr-12 leading-relaxed text-muted; }
+  .faq .answer { @apply pb-6 pr-12 leading-relaxed text-mist; }
+
+  /* Faint grid used behind hero and feature sections */
+  .grid-bg {
+    background-image:
+      linear-gradient(rgb(255 255 255 / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+    background-size: 72px 72px;
+  }
 }
