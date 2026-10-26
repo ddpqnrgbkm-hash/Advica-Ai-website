@@ -1,27 +1,26 @@
 ---
 import BookButton from './BookButton.astro';
+import { site } from '../config/site';
 interface Props { title?: string; text?: string }
 const {
-  title = 'Have a project in mind? Let’s talk.',
-  text = 'Book a free call or send us a message, and we’ll get back to you.',
+  title = 'Talk to us about your project',
+  text = 'Book a free call, ring us or send a message. We’ll tell you whether we can help and what it’s likely to involve.',
 } = Astro.props;
 ---
-<section class="py-20 sm:py-28">
-  <div class="container-x">
-    <div class="on-dark bg-brand-gradient relative overflow-hidden rounded-[2rem] px-6 py-14 text-center sm:px-16 sm:py-20">
-      <svg aria-hidden="true" class="absolute inset-0 size-full opacity-30" viewBox="0 0 1200 400" preserveAspectRatio="none" fill="none">
-        <path d="M0 300 C 300 200, 500 380, 800 250 S 1100 150, 1200 200" stroke="#8fe3ec" stroke-width="1.2" />
-        <path d="M0 340 C 350 260, 550 400, 850 290 S 1100 210, 1200 250" stroke="#8fe3ec" stroke-width="0.8" />
-        <path d="M0 120 C 250 60, 600 180, 900 80 S 1150 40, 1200 70" stroke="#ffffff" stroke-width="0.8" />
-      </svg>
-      <div class="relative">
-        <h2 class="mx-auto max-w-3xl text-3xl font-bold leading-tight text-white sm:text-5xl">{title}</h2>
-        <p class="mx-auto mt-6 max-w-2xl text-lg text-white/85">{text}</p>
-        <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
-          <BookButton class="btn-light" label="Book a free call" />
-          <a href="/contact" class="btn-secondary">Send an enquiry</a>
-        </div>
+<section class="border-t border-line bg-soft py-16 sm:py-24">
+  <div class="container-x grid gap-10 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+    <div>
+      <h2 class="heading-lg">{title}</h2>
+      <p class="mt-5 max-w-xl text-lg">{text}</p>
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <BookButton class="btn-primary" label="Book a free call" />
+        <a href="/contact" class="btn-secondary">Send a message</a>
       </div>
     </div>
+    <dl class="grid gap-5 border-l-2 border-blue pl-6">
+      <div><dt class="text-sm text-muted">Phone</dt><dd><a href={`tel:${site.phoneLink}`} class="text-2xl font-bold text-ink hover:text-blue">{site.phone}</a></dd></div>
+      <div><dt class="text-sm text-muted">Email</dt><dd><a href={`mailto:${site.email}`} class="break-all font-semibold text-ink hover:text-blue">{site.email}</a></dd></div>
+      <div><dt class="text-sm text-muted">Office</dt><dd class="text-ink">{site.address.street}, {site.address.town} {site.address.postcode}</dd></div>
+    </dl>
   </div>
 </section>

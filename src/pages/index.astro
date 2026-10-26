@@ -4,10 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import BookButton from '../components/BookButton.astro';
 import FAQ from '../components/FAQ.astro';
 import CtaBand from '../components/CtaBand.astro';
-import HeroVisual from '../components/HeroVisual.astro';
-import FlowLines from '../components/FlowLines.astro';
-import ProductShowcase from '../components/ProductShowcase.astro';
-import { stats, testimonials, pricing } from '../config/site';
+import { site, stats, testimonials, pricing } from '../config/site';
 import { steps } from '../data/steps';
 
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
@@ -15,213 +12,158 @@ const caseStudies = (await getCollection('caseStudies', (c) => !c.data.draft)).s
 const shownTestimonials = testimonials.filter((t) => t.show);
 const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 
-const reasons = [
-  { title: 'A plan before you commit', text: 'Sprint 0 gives you a full plan and a fixed price for the build before any development starts.', icon: 'M9 12l2 2 4-4M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
-  { title: 'No jargon', text: 'We explain things clearly, so you always know what we’re building and why.', icon: 'M8 10h8M8 14h5m-9 6l2.5-3H18a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H6a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3' },
-  { title: 'Flexible payment', text: `Pay in stages as the work is delivered, or spread the cost monthly over ${pricing.financeYears} years.`, icon: 'M3 10h18M7 15h2m4 0h4M5 6h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z' },
-  { title: 'Support when you need it', text: 'Once it’s finished, we can hand it over to your team or look after it for you.', icon: 'M4 12h16m-6-6l6 6-6 6' },
-];
+// What each stage costs, shown beside the four steps
+const stepCost = ['Free', `From ${gbp(pricing.sprintZeroPrice)}`, 'Fixed price from Sprint 0', 'Monthly, or handover'];
 
 const faqs = [
-  { q: 'What kind of businesses do you work with?', a: 'UK small and mid-sized businesses, typically firms that have outgrown spreadsheets and off-the-shelf tools, or want to use AI properly but need a technical partner to do it.' },
-  { q: 'We’re not technical. Is that a problem?', a: 'Not at all. Bring the business problem and we’ll handle the technical side. We explain options in plain English, and you’ll always know what you’re paying for and why.' },
-  { q: 'How much does a project cost?', a: 'It depends on what you need. Try our project cost estimator for an indicative guide. After Sprint 0 you get a fixed plan and price before the main build starts.' },
-  { q: 'Can we spread the cost?', a: `Yes. As well as paying by milestone, eligible businesses can spread the cost monthly over ${pricing.financeYears} years through our finance partners, subject to their approval.` },
+  { q: 'What kind of businesses do you work with?', a: 'Small and medium-sized UK businesses, usually ones that have outgrown spreadsheets and off-the-shelf software, or want to start using AI but need someone technical to do it properly.' },
+  { q: 'We’re not technical. Is that a problem?', a: 'No. Tell us what the problem is and we’ll handle the technical side. We’ll explain your options in everyday language, and you’ll always know what you’re paying for.' },
+  { q: 'How much does a project cost?', a: `It depends on the project. Sprint 0, the planning stage, starts at ${gbp(pricing.sprintZeroPrice)} and ends with a fixed price for the build. For a rough idea before then, try the cost estimator.` },
+  { q: 'Can we spread the cost?', a: `Yes. You can pay in stages as the work is delivered, or eligible businesses can spread the cost monthly over ${pricing.financeYears} years through our finance partners, subject to their approval.` },
 ];
 const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) };
 ---
 <BaseLayout
   title="Bespoke AI and software engineering for UK businesses"
-  description="Advica AI Solutions designs, builds and supports custom AI tools, apps and data platforms for UK SMEs and mid-market businesses. Clear plan first, then build."
+  description="Advica AI Solutions builds custom AI tools, apps and data systems for UK small and medium-sized businesses. Fixed-price planning from £4,250. Based in Leyland, Lancashire."
   jsonLd={[faqLd]}
 >
-  <!-- ================= HERO ================= -->
-  <section class="relative isolate overflow-hidden bg-[radial-gradient(ellipse_at_50%_0%,#ffffff_0%,#eef2f5_55%,#e1e7ec_100%)]">
-    <FlowLines class="absolute inset-0 -z-10 size-full" />
-    <div class="container-x grid items-center gap-20 pb-28 pt-16 sm:pt-20 lg:grid-cols-[1.05fr_1fr] lg:gap-12 lg:pb-32 lg:pt-24">
-      <div>
-        <p class="eyebrow">AI and software for UK businesses</p>
-        <h1 class="mt-6 text-[2.6rem] font-bold leading-[1.08] tracking-tight sm:text-6xl lg:text-[4.1rem]">
-          We build AI tools and software <span class="text-brand">for UK businesses.</span>
-        </h1>
-        <p class="mt-7 max-w-xl text-lg leading-relaxed text-body sm:text-xl">
-          We help small and medium-sized businesses save time and money with custom AI tools, apps and data systems. You get a clear plan and a fixed price before any work starts.
-        </p>
-        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-          <BookButton class="btn-primary" label="Book a free call" />
-          <a href="/estimate" class="btn-secondary">Estimate your project cost <span aria-hidden="true">→</span></a>
+  <!-- ================= INTRO ================= -->
+  <section class="border-b border-line">
+    <div class="container-x pb-14 pt-14 sm:pb-20 sm:pt-20">
+      <div class="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:items-end lg:gap-16">
+        <h1 class="heading-xl">Custom AI and software for <span class="text-blue">UK businesses</span></h1>
+        <div>
+          <p class="text-lg sm:text-xl">We plan, build and support AI tools, apps and data systems for small and medium-sized businesses. Every project starts with a fixed-price plan, so you know the cost before we build anything.</p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <BookButton class="btn-primary" label="Book a free call" />
+            <a href="/estimate" class="btn-secondary">Estimate your project cost</a>
+          </div>
         </div>
-        <ul class="mt-10 grid gap-3 text-sm font-medium text-navy sm:flex sm:flex-wrap sm:gap-x-7">
-          {['Fixed price agreed up front', 'No technical jargon', 'Option to pay monthly'].map((t) => (
-            <li class="flex items-center gap-2">
-              <svg class="size-4 shrink-0 text-teal-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg>{t}
-            </li>
-          ))}
-        </ul>
       </div>
-      <div class="px-4 sm:px-10 lg:px-0">
-        <HeroVisual />
-        <p class="mt-16 text-center text-xs font-medium uppercase tracking-widest text-muted">Illustrative example</p>
-      </div>
+
+      <dl class="mt-16 grid border-t border-line sm:grid-cols-3">
+        <div class="border-b border-line py-6 sm:border-b-0 sm:border-r sm:pr-8">
+          <dt class="text-sm text-muted">Planning stage</dt>
+          <dd class="mt-1 text-xl font-bold text-ink">Sprint 0 from {gbp(pricing.sprintZeroPrice)}</dd>
+          <dd class="mt-1 text-sm text-muted">Ends with a fixed price for the build</dd>
+        </div>
+        <div class="border-b border-line py-6 sm:border-b-0 sm:border-r sm:px-8">
+          <dt class="text-sm text-muted">Paying for the build</dt>
+          <dd class="mt-1 text-xl font-bold text-ink">In stages, or monthly</dd>
+          <dd class="mt-1 text-sm text-muted">Spread over {pricing.financeYears} years, subject to approval</dd>
+        </div>
+        <div class="py-6 sm:pl-8">
+          <dt class="text-sm text-muted">Where we are</dt>
+          <dd class="mt-1 text-xl font-bold text-ink">{site.address.town}, Lancashire</dd>
+          <dd class="mt-1 text-sm text-muted">Working with businesses across the UK</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
   {stats.length > 0 && (
-    <section class="border-y border-line bg-white py-12">
+    <section class="border-b border-line py-12">
       <dl class="container-x grid gap-8 sm:grid-cols-3">
         {stats.map((s) => (
-          <div><dt class="text-sm text-muted">{s.label}</dt><dd class="text-brand mt-1 font-display text-5xl font-bold">{s.value}</dd></div>
+          <div><dt class="text-sm text-muted">{s.label}</dt><dd class="text-5xl font-black text-ink">{s.value}</dd></div>
         ))}
       </dl>
     </section>
   )}
 
-  <!-- ================= WHAT WE BUILD ================= -->
-  <section class="overflow-x-clip bg-white py-24 sm:py-32" aria-labelledby="build-h">
+  <!-- ================= SERVICES ================= -->
+  <section class="py-16 sm:py-24" aria-labelledby="services-h">
     <div class="container-x">
-      <div class="mx-auto max-w-3xl text-center">
-        <p class="eyebrow">What we do</p>
-        <h2 id="build-h" class="mt-5 text-4xl font-bold sm:text-5xl">How we can help</h2>
-        <p class="mt-5 text-lg text-muted">We can build you an AI tool, an app or a full system, or give you extra engineers to work with your team.</p>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <h2 id="services-h" class="heading-lg">What we do</h2>
+        <a href="/services" class="link">All services</a>
       </div>
-      <div class="mt-14"><ProductShowcase /></div>
-    </div>
-  </section>
-
-  <!-- ================= WHY ADVICA ================= -->
-  <section class="py-24 sm:py-32" aria-labelledby="why-h">
-    <div class="container-x">
-      <div class="grid gap-6 lg:grid-cols-2 lg:items-end">
-        <div>
-          <p class="eyebrow">Why work with us</p>
-          <h2 id="why-h" class="mt-5 text-4xl font-bold leading-tight sm:text-5xl">Simple to work with, and clear about cost.</h2>
-        </div>
-        <p class="text-lg text-muted lg:pb-2">We plan everything properly before we start, explain things in everyday language and make sure you get what we agreed.</p>
-      </div>
-      <ul class="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        {reasons.map((r) => (
-          <li class="card lift">
-            <span class="bg-brand-gradient grid size-12 place-items-center rounded-2xl text-white">
-              <svg class="size-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={r.icon} /></svg>
-            </span>
-            <h3 class="mt-7 text-xl font-bold">{r.title}</h3>
-            <p class="mt-3 leading-relaxed text-muted">{r.text}</p>
+      <ul class="mt-10 border-t-2 border-ink">
+        {services.map((s) => (
+          <li class="border-b border-line">
+            <a href={`/services/${s.id}`} class="group grid gap-4 py-8 sm:py-10 lg:grid-cols-[18rem_1fr_auto] lg:gap-12">
+              <h3 class="text-2xl font-bold group-hover:text-blue">{s.data.title}</h3>
+              <div>
+                <p class="text-lg text-ink">{s.data.summary}</p>
+                <p class="mt-3 text-[0.95rem] text-muted">{s.data.capabilities.map((c) => c.name).join(', ')}.</p>
+              </div>
+              <span class="self-start whitespace-nowrap font-semibold text-blue group-hover:underline">Read more <span aria-hidden="true">→</span></span>
+            </a>
           </li>
         ))}
       </ul>
     </div>
   </section>
 
-  <!-- ================= HOW IT WORKS ================= -->
-  <section class="border-y border-line bg-white py-24 sm:py-32" aria-labelledby="how-h">
+  <!-- ================= HOW A PROJECT WORKS ================= -->
+  <section class="bg-soft py-16 sm:py-24" aria-labelledby="how-h">
     <div class="container-x">
-      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-        <div>
-          <p class="eyebrow">How it works</p>
-          <h2 id="how-h" class="mt-5 text-4xl font-bold sm:text-5xl">How a project works</h2>
-        </div>
-        <a href="/how-it-works" class="btn-secondary self-start lg:self-auto">See the full process <span aria-hidden="true">→</span></a>
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <h2 id="how-h" class="heading-lg">How a project works</h2>
+        <a href="/how-it-works" class="link">More detail</a>
       </div>
-      <ol class="relative mt-16 grid gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-        <div aria-hidden="true" class="absolute left-7 right-7 top-7 hidden h-0.5 bg-gradient-to-r from-navy via-mid to-teal lg:block"></div>
+      <ol class="mt-10 border-t-2 border-ink">
         {steps.map((s, i) => (
-          <li class="relative">
-            <span class="relative grid size-14 place-items-center rounded-full border-4 border-white bg-navy font-display text-lg font-bold text-white shadow-[0_10px_25px_-10px_rgba(31,53,109,0.7)]">{i + 1}</span>
-            <h3 class="mt-6 text-xl font-bold">{s.name}</h3>
-            <p class="mt-1 text-sm font-semibold text-teal-ink">{s.short}</p>
-            <p class="mt-3 leading-relaxed text-muted">{s.text}</p>
+          <li class="grid gap-2 border-b border-line py-7 sm:grid-cols-[3rem_14rem_1fr] lg:grid-cols-[3rem_14rem_1fr_auto] lg:gap-10">
+            <span class="text-lg font-black text-blue">{i + 1}</span>
+            <h3 class="text-lg font-bold">{s.name}</h3>
+            <p class="sm:col-start-3 lg:col-start-auto">{s.text}</p>
+            <p class="font-semibold text-ink sm:col-start-3 lg:col-start-auto lg:whitespace-nowrap lg:text-right">{stepCost[i]}</p>
           </li>
         ))}
       </ol>
-      <p class="mt-14 rounded-2xl bg-page p-5 text-body">Sprint 0 starts at <strong class="text-navy">{gbp(pricing.sprintZeroPrice)}</strong>. If you go ahead with the build, <strong class="text-navy">{pricing.sprintZeroCredit}</strong> of what you paid comes off your build invoice. <a href="/pricing" class="link">See pricing</a></p>
+      <p class="mt-6 text-sm text-muted">If you go ahead with the build, {pricing.sprintZeroCredit} of what you paid for Sprint 0 comes off your build invoice.</p>
     </div>
   </section>
 
-  <!-- ================= TESTIMONIALS ================= -->
-  <section class="py-24 sm:py-32" aria-labelledby="proof-h">
-    <div class="container-x" data-slider>
-      <div class="flex items-end justify-between gap-6">
-        <div>
-          <p class="eyebrow">Client feedback</p>
-          <h2 id="proof-h" class="mt-5 text-4xl font-bold sm:text-5xl">What clients say</h2>
-        </div>
-        <div data-controls hidden class="flex gap-2">
-          <button type="button" data-prev class="grid size-12 place-items-center rounded-full border border-line bg-white text-navy hover:border-navy disabled:opacity-30" aria-label="Previous"><span aria-hidden="true">←</span></button>
-          <button type="button" data-next class="grid size-12 place-items-center rounded-full border border-line bg-white text-navy hover:border-navy disabled:opacity-30" aria-label="Next"><span aria-hidden="true">→</span></button>
-        </div>
-      </div>
-      <ul data-track class="mt-12 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-6 [scrollbar-width:none]">
+  <!-- ================= CLIENT FEEDBACK ================= -->
+  <section class="py-16 sm:py-24" aria-labelledby="proof-h">
+    <div class="container-x">
+      <h2 id="proof-h" class="heading-lg">What clients say</h2>
+      <div class="mt-10 grid gap-10 lg:grid-cols-2 lg:gap-16">
         {shownTestimonials.map((t) => (
-          <li class="w-[88%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
-            <figure class="card flex h-full flex-col sm:p-10">
-              <svg class="size-10 text-teal" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M13 8H7a4 4 0 0 0-4 4v6h6v6l4-6V8zm16 0h-6a4 4 0 0 0-4 4v6h6v6l4-6V8z"/></svg>
-              <blockquote class="mt-6 flex-1 text-lg leading-relaxed text-navy sm:text-xl">“{t.quote}”</blockquote>
-              <figcaption class="mt-8 text-sm font-semibold uppercase tracking-wider text-muted">
-                {t.name ? <><span class="text-navy">{t.name}</span>{t.role && <> · {t.role}</>}</> : 'Client'}
-              </figcaption>
-            </figure>
-          </li>
+          <figure class="border-l-2 border-blue pl-6">
+            <blockquote class="text-xl leading-relaxed text-ink">“{t.quote}”</blockquote>
+            <figcaption class="mt-4 text-sm text-muted">
+              {t.name ? <><span class="font-semibold text-ink">{t.name}</span>{t.role && <>, {t.role}</>}</> : 'Advica client'}
+            </figcaption>
+          </figure>
         ))}
-        <li class="w-[88%] shrink-0 snap-start sm:w-[calc(50%-12px)]">
-          <div class="on-dark bg-brand-gradient flex h-full flex-col justify-between rounded-3xl p-8 text-white sm:p-10">
-            {caseStudies.length > 0 ? (
-              <>
-                <p class="font-display text-2xl font-bold">See the projects behind the feedback.</p>
-                <a href="/case-studies" class="btn-light mt-8 self-start">Read case studies</a>
-              </>
-            ) : (
-              <>
-                <div>
-                  <p class="font-display text-2xl font-bold leading-snug">Case studies are on their way.</p>
-                  <p class="mt-3 text-white/85">We’re writing up recent projects with our clients’ permission. Ask us for relevant examples on a call.</p>
-                </div>
-                <BookButton class="btn-light mt-8 self-start" label="Ask about our work" />
-              </>
-            )}
-          </div>
-        </li>
-      </ul>
+      </div>
+      <p class="mt-12 border-t border-line pt-6 text-muted">
+        {caseStudies.length > 0
+          ? <>Read about our recent work in our <a class="link" href="/case-studies">case studies</a>.</>
+          : <>We’re writing up case studies with our clients’ permission. If you’d like to hear about similar projects to yours, <a class="link" href="/contact">ask us</a>.</>}
+      </p>
     </div>
   </section>
 
   <!-- ================= FREE TOOLS ================= -->
-  <section class="pb-8" aria-labelledby="tools-h">
+  <section class="border-t border-line py-16 sm:py-20" aria-labelledby="tools-h">
     <div class="container-x">
-      <h2 id="tools-h" class="sr-only">Free tools</h2>
-      <div class="grid gap-5 md:grid-cols-2">
-        <a href="/estimate" class="card lift group flex min-h-72 flex-col justify-between sm:p-10">
-          <div aria-hidden="true" class="flex h-20 items-end gap-2">
-            {[30, 48, 40, 66, 58, 82, 74, 100].map((v) => <span class="w-full rounded-t-md bg-gradient-to-t from-navy to-mid" style={`height:${v}%`}></span>)}
-          </div>
-          <span>
-            <span class="text-sm font-semibold uppercase tracking-wider text-teal-ink">Free · 2 minutes</span>
-            <span class="mt-3 block font-display text-3xl font-bold text-navy">What might my project cost?</span>
-            <span class="mt-3 block max-w-md text-muted">Answer five quick questions for an indicative guide and the best next step.</span>
-            <span class="mt-6 inline-flex items-center gap-2 font-semibold text-navy">Start the estimator <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
-          </span>
+      <h2 id="tools-h" class="heading-lg">Not ready to talk yet?</h2>
+      <div class="mt-10 grid gap-px overflow-hidden rounded-md border border-line bg-line md:grid-cols-2">
+        <a href="/estimate" class="group bg-white p-8 hover:bg-soft">
+          <h3 class="text-xl font-bold group-hover:text-blue">Project cost estimator</h3>
+          <p class="mt-2">Five questions about your project. You’ll get an idea of its size and the best next step. Takes about two minutes.</p>
+          <span class="mt-5 inline-block font-semibold text-blue group-hover:underline">Start the estimator →</span>
         </a>
-        <a href="/ai-readiness" class="card lift group flex min-h-72 flex-col justify-between sm:p-10">
-          <div aria-hidden="true" class="grid size-20 place-items-center rounded-full" style="background:conic-gradient(var(--color-mid) 0 252deg, var(--color-line) 0)">
-            <span class="grid size-16 place-items-center rounded-full bg-white font-display text-base font-bold text-navy">70%</span>
-          </div>
-          <span>
-            <span class="text-sm font-semibold uppercase tracking-wider text-teal-ink">Free · 3 minutes</span>
-            <span class="mt-3 block font-display text-3xl font-bold text-navy">How ready is your business for AI?</span>
-            <span class="mt-3 block max-w-md text-muted">Eight questions, an instant score and practical next steps.</span>
-            <span class="mt-6 inline-flex items-center gap-2 font-semibold text-navy">Take the quiz <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
-          </span>
+        <a href="/ai-readiness" class="group bg-white p-8 hover:bg-soft">
+          <h3 class="text-xl font-bold group-hover:text-blue">AI readiness quiz</h3>
+          <p class="mt-2">Eight questions about your business. You’ll get a score and practical suggestions. Takes about three minutes.</p>
+          <span class="mt-5 inline-block font-semibold text-blue group-hover:underline">Take the quiz →</span>
         </a>
       </div>
     </div>
   </section>
 
   <!-- ================= FAQ ================= -->
-  <section class="py-24 sm:py-28" aria-labelledby="faq-h">
-    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr]">
+  <section class="border-t border-line py-16 sm:py-24" aria-labelledby="faq-h">
+    <div class="container-x grid gap-10 lg:grid-cols-[1fr_1.7fr] lg:gap-16">
       <div>
-        <p class="eyebrow">FAQ</p>
-        <h2 id="faq-h" class="mt-5 text-4xl font-bold sm:text-5xl">Common questions</h2>
-        <p class="mt-5 text-muted">More on <a class="link" href="/how-it-works">how it works</a> and <a class="link" href="/pricing">pricing</a>.</p>
+        <h2 id="faq-h" class="heading-lg">Common questions</h2>
+        <p class="mt-5 text-muted">There’s more on the <a class="link" href="/how-it-works">How it works</a> and <a class="link" href="/pricing">Pricing</a> pages.</p>
       </div>
       <FAQ items={faqs} />
     </div>

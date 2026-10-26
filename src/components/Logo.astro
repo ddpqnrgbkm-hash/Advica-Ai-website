@@ -1,16 +1,14 @@
 ---
 /**
- * Logo: the sky-blue "A" mark from the Advica LinkedIn page, plus the wordmark
- * set in Montserrat with the logo's navy-to-teal gradient.
+ * Logo: the sky-blue "A" mark plus "ADVICA AI" in heavy capitals, as on the current website.
  * Replace public/logo-mark.png with a high-resolution file when you have one.
  */
 interface Props { dark?: boolean }
 const { dark = false } = Astro.props;
 ---
 <span class="inline-flex items-center gap-2.5">
-  <img src="/logo-mark.png" alt="" width="34" height="38" class="h-[38px] w-auto" />
-  <span class="flex flex-col leading-none">
-    <span class:list={['font-display text-[1.15rem] font-bold tracking-[0.04em]', dark ? 'text-white' : 'text-brand']}>ADVICA</span>
-    <span class:list={['mt-0.5 font-display text-[0.78rem] font-medium tracking-[0.02em]', dark ? 'text-white/75' : 'text-mid']}>AI Solutions</span>
+  <img src="/logo-mark.png" alt="" width="30" height="34" class="h-[34px] w-auto" />
+  <span class:list={['text-lg font-black uppercase leading-none tracking-tight', dark ? 'text-white' : 'text-ink']}>
+    Advica <span class={dark ? 'text-cyan' : 'text-blue'}>AI</span>
   </span>
 </span>

@@ -10,7 +10,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
 const chevron = 'M6 9l6 6 6-6';
 ---
 <header class="sticky top-0 z-40 border-b border-line bg-white">
-  <div class="container-x relative flex h-[4.75rem] items-center justify-between gap-6">
+  <div class="container-x relative flex h-[4.5rem] items-center justify-between gap-6">
     <a href="/" class="shrink-0" aria-label={`${site.name} home`}><Logo /></a>
 
     <!-- ===== Desktop navigation with dropdowns ===== -->
@@ -18,7 +18,7 @@ const chevron = 'M6 9l6 6 6-6';
       <ul class="flex items-center gap-1">
         {nav.map((item, i) => {
           const hasMenu = item.dropdown || item.children;
-          const cls = ['flex items-center gap-1.5 rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:bg-page', isActive(item.href) ? 'text-mid' : 'text-navy'];
+          const cls = ['flex items-center gap-1.5 px-3 py-2 text-[0.95rem] font-medium transition-colors hover:text-blue', isActive(item.href) ? 'text-blue' : 'text-ink'];
           return (
             <li class:list={['nav-item', hasMenu && 'has-menu', item.dropdown && 'mega']}>
               {hasMenu ? (
@@ -32,26 +32,26 @@ const chevron = 'M6 9l6 6 6-6';
 
               {item.dropdown === 'services' && (
                 <div id={`menu-${i}`} class="nav-panel inset-x-5 sm:inset-x-8">
-                  <div class="grid grid-cols-3 gap-2 p-3">
+                  <div class="grid grid-cols-3 divide-x divide-line">
                     {services.map((s) => (
-                      <div class="rounded-2xl p-5 hover:bg-page">
+                      <div class="p-6">
                         <a href={`/services/${s.id}`} class="group block">
-                          <span class="font-display text-lg font-bold text-navy group-hover:text-mid">{s.data.title} <span aria-hidden="true">→</span></span>
+                          <span class="text-base font-bold text-ink group-hover:text-blue">{s.data.title} <span aria-hidden="true">→</span></span>
                           <span class="mt-1 block text-sm text-muted">{s.data.menuText}</span>
                         </a>
                         <ul class="mt-4 space-y-1.5 border-t border-line pt-4">
                           {s.data.capabilities.map((c) => (
-                            <li><a href={`/services/${s.id}#${c.id}`} class="text-[0.92rem] text-body hover:text-mid hover:underline">{c.name}</a></li>
+                            <li><a href={`/services/${s.id}#${c.id}`} class="text-[0.92rem] text-body hover:text-blue hover:underline">{c.name}</a></li>
                           ))}
                         </ul>
                       </div>
                     ))}
                   </div>
-                  <div class="flex items-center justify-between gap-4 rounded-b-3xl bg-brand-gradient px-8 py-4 text-sm text-white">
+                  <div class="flex items-center justify-between gap-4 border-t border-line bg-soft px-6 py-3.5 text-sm text-body">
                     <span>Not sure which you need? Get an indicative guide in two minutes.</span>
                     <span class="flex gap-6">
-                      <a href="/services" class="font-semibold hover:underline">All services</a>
-                      <a href="/estimate" class="font-semibold hover:underline">Cost estimator →</a>
+                      <a href="/services" class="font-semibold text-ink hover:underline">All services</a>
+                      <a href="/estimate" class="font-semibold text-blue hover:underline">Cost estimator →</a>
                     </span>
                   </div>
                 </div>
@@ -59,11 +59,11 @@ const chevron = 'M6 9l6 6 6-6';
 
               {item.children && (
                 <div id={`menu-${i}`} class="nav-panel left-0 w-80">
-                  <ul class="p-3">
+                  <ul class="py-2">
                     {item.children.map((c) => (
                       <li>
-                        <a href={c.href} class="group block rounded-xl px-4 py-3 hover:bg-page">
-                          <span class="block font-semibold text-navy group-hover:text-mid">{c.label}</span>
+                        <a href={c.href} class="group block px-4 py-3 hover:bg-soft">
+                          <span class="block font-semibold text-ink group-hover:text-blue">{c.label}</span>
                           {c.text && <span class="block text-sm text-muted">{c.text}</span>}
                         </a>
                       </li>
@@ -78,37 +78,37 @@ const chevron = 'M6 9l6 6 6-6';
     </nav>
 
     <div class="hidden items-center gap-5 lg:flex">
-      <a href={`tel:${site.phoneLink}`} class="text-sm font-semibold text-navy hover:text-mid">{site.phone}</a>
-      <BookButton class="btn-primary !min-h-11 !px-5" />
+      <a href={`tel:${site.phoneLink}`} class="text-sm font-semibold text-ink hover:text-blue">{site.phone}</a>
+      <BookButton class="btn-primary !min-h-11 !px-5 !text-[0.95rem]" />
     </div>
 
     <!-- ===== Mobile menu (works without JavaScript) ===== -->
     <details class="mobile-menu group lg:hidden">
-      <summary class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full border border-line text-navy [&::-webkit-details-marker]:hidden">
+      <summary class="flex size-11 cursor-pointer list-none items-center justify-center rounded-md border border-line text-ink [&::-webkit-details-marker]:hidden">
         <span class="sr-only">Menu</span>
         <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
         <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
       </summary>
-      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-[4.75rem] overflow-y-auto bg-white px-5 pb-32 pt-2">
+      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-white px-5 pb-32 pt-2">
         <ul class="divide-y divide-line">
           {nav.map((item) => (
             <li>
               {item.dropdown === 'services' ? (
                 <details class="group/sub">
-                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-bold text-navy [&::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-xl font-bold text-ink [&::-webkit-details-marker]:hidden">
                     {item.label}
                     <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
                   </summary>
                   <ul class="space-y-1 pb-4">
                     <li><a href="/services" class="block py-2 text-body">All services</a></li>
                     {services.map((s) => (
-                      <li><a href={`/services/${s.id}`} class="block py-2"><span class="font-semibold text-mid">{s.data.title}</span><span class="block text-sm text-muted">{s.data.menuText}</span></a></li>
+                      <li><a href={`/services/${s.id}`} class="block py-2"><span class="font-semibold text-ink">{s.data.title}</span><span class="block text-sm text-muted">{s.data.menuText}</span></a></li>
                     ))}
                   </ul>
                 </details>
               ) : item.children ? (
                 <details class="group/sub">
-                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-bold text-navy [&::-webkit-details-marker]:hidden">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 text-xl font-bold text-ink [&::-webkit-details-marker]:hidden">
                     {item.label}
                     <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
                   </summary>
@@ -117,7 +117,7 @@ const chevron = 'M6 9l6 6 6-6';
                   </ul>
                 </details>
               ) : (
-                <a href={item.href} class="block py-4 font-display text-2xl font-bold text-navy">{item.label}</a>
+                <a href={item.href} class="block py-4 text-xl font-bold text-ink">{item.label}</a>
               )}
             </li>
           ))}
@@ -138,10 +138,10 @@ const chevron = 'M6 9l6 6 6-6';
     position: absolute;
     top: calc(100% + 0.6rem);
     display: none;
-    border-radius: 1.5rem;
+    border-radius: 0.375rem;
     border: 1px solid var(--color-line);
     background: #fff;
-    box-shadow: 0 40px 80px -30px rgb(20 36 73 / 0.35);
+    box-shadow: 0 12px 32px -12px rgb(12 15 25 / 0.18);
   }
   .nav-panel::before { content: ''; position: absolute; inset: -0.8rem 0 auto 0; height: 0.8rem; }
   @media (hover: hover) {

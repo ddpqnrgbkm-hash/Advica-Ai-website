@@ -1,28 +1,24 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
-@import '@fontsource-variable/montserrat';
 @import '@fontsource-variable/inter';
 
 /* ============================================================
-   Brand: light and clean, matching the Advica LinkedIn page.
-   Silver-white backgrounds, navy text, navy-to-teal logo gradient.
+   Advica house style, taken from the current advicaaisolutions.co.uk:
+   Inter throughout, heavy capital headings, white background,
+   near-black text and one blue. Square-ish corners, thin rules,
+   no gradients, glows or shadows-as-decoration.
    ============================================================ */
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Montserrat Variable', 'Inter Variable', ui-sans-serif, sans-serif;
 
-  --color-page: #f5f7f9;      /* page background (silver-white) */
-  --color-silver: #e6ebf0;    /* alternate section background */
-  --color-surface: #ffffff;   /* cards */
-  --color-line: #dce3ea;      /* hairlines */
-  --color-navy: #1f356d;      /* logo navy: headings, primary buttons */
-  --color-navy-deep: #142449; /* footer, dark bands */
-  --color-body: #3f4c66;      /* body text */
-  --color-muted: #5d6a80;     /* secondary text (AA on white and silver) */
-  --color-teal: #2fc6d6;      /* logo teal: decoration only */
-  --color-teal-ink: #0b7686;  /* teal for text (AA on white) */
-  --color-sky: #2dafF7;       /* logo "A" blue: decoration */
-  --color-mid: #2b5c97;       /* middle of the logo gradient */
+  --color-ink: #0c0f19;     /* main text (current site foreground) */
+  --color-body: #2b303b;    /* paragraph text */
+  --color-muted: #5c6370;   /* secondary text (AA on white and soft) */
+  --color-line: #e1e4ea;    /* rules and borders */
+  --color-soft: #f3f4f6;    /* alternate section background */
+  --color-blue: #006ad6;    /* Advica blue, darkened slightly from #0080ff so white text passes AA */
+  --color-blue-dark: #0052a6;
+  --color-cyan: #00b8e6;    /* current site accent: small details only */
 }
 
 @layer base {
@@ -31,73 +27,52 @@
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
   }
-  body { @apply bg-page font-sans text-body antialiased; }
-  h1, h2, h3, h4 { @apply font-display text-navy text-balance; }
-  ::selection { background: var(--color-teal); color: var(--color-navy-deep); }
-  :focus-visible { outline: 3px solid var(--color-mid); outline-offset: 3px; border-radius: 6px; }
+  body { @apply bg-white font-sans text-[1.0625rem] leading-relaxed text-body antialiased; }
+  h1, h2, h3, h4 { @apply text-ink; }
+  :focus-visible { outline: 3px solid var(--color-blue); outline-offset: 2px; }
   [id] { scroll-margin-top: 6rem; }
 }
 
 @utility container-x {
-  @apply mx-auto w-full max-w-7xl px-5 sm:px-8;
+  @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
 }
-/* Small label above headings */
-@utility eyebrow {
-  @apply inline-flex items-center gap-2 font-display text-xs font-semibold uppercase tracking-[0.16em] text-teal-ink;
+/* Big heavy capital headings, as on the current site */
+@utility heading-xl {
+  @apply text-[2.4rem] font-black uppercase leading-[0.98] tracking-tight sm:text-6xl lg:text-[4.5rem];
+}
+@utility heading-lg {
+  @apply text-3xl font-black uppercase leading-none tracking-tight sm:text-[2.75rem];
+}
+@utility label {
+  @apply text-sm font-semibold text-blue;
 }
 @utility btn {
-  @apply relative inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 text-[0.95rem] font-semibold transition duration-200;
+  @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-6 text-base font-semibold transition-colors;
 }
 @utility btn-primary {
-  @apply btn text-white;
-  background: linear-gradient(100deg, var(--color-navy) 0%, var(--color-mid) 100%);
-  box-shadow: 0 10px 30px -12px rgb(31 53 109 / 0.6);
-  &:hover { background: linear-gradient(100deg, var(--color-navy-deep) 0%, var(--color-navy) 100%); }
+  @apply btn bg-blue text-white hover:bg-blue-dark;
 }
 @utility btn-secondary {
-  @apply btn border border-navy/20 bg-white text-navy hover:border-navy/50;
+  @apply btn border border-ink/25 bg-white text-ink hover:border-ink;
 }
 @utility btn-light {
-  @apply btn bg-white text-navy hover:bg-silver;
-}
-@utility card {
-  @apply rounded-3xl border border-line bg-white p-6 sm:p-8;
-  box-shadow: 0 1px 2px rgb(20 36 73 / 0.04), 0 20px 50px -30px rgb(20 36 73 / 0.25);
+  @apply btn bg-white text-ink hover:bg-soft;
 }
 @utility link {
-  @apply font-semibold text-navy underline decoration-teal decoration-2 underline-offset-4 hover:text-mid;
-}
-/* The logo's navy-to-teal gradient, for key words in headlines */
-@utility text-brand {
-  background: linear-gradient(95deg, var(--color-navy) 0%, var(--color-mid) 45%, #1f9fb3 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-@utility bg-brand-gradient {
-  background: linear-gradient(110deg, var(--color-navy-deep) 0%, var(--color-navy) 35%, var(--color-mid) 70%, #1b8fa3 100%);
+  @apply font-semibold text-blue underline underline-offset-4 hover:text-blue-dark;
 }
 
-/* Cards lift slightly on hover */
-.lift { transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s; }
-.lift:hover { transform: translateY(-3px); border-color: rgb(43 92 151 / 0.35); box-shadow: 0 30px 60px -30px rgb(20 36 73 / 0.35); }
-
-/* Unlayered overrides for dark bands */
-.on-dark .eyebrow { color: #8fe3ec; }
-.on-dark .btn-secondary { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.4); }
+.on-dark .btn-secondary { background: transparent; color: #fff; border-color: rgb(255 255 255 / 0.5); }
 .on-dark .btn-secondary:hover { border-color: #fff; }
 
 @layer components {
-  /* FAQ accordions built on <details>, so answers are always in the HTML */
+  /* FAQ list built on <details>, so answers are always in the HTML */
   .faq details { @apply border-b border-line; }
   .faq summary {
-    @apply flex cursor-pointer list-none items-center justify-between gap-6 py-6 text-left font-display text-lg font-semibold text-navy;
+    @apply flex cursor-pointer list-none items-start justify-between gap-6 py-5 text-left text-lg font-semibold text-ink;
   }
   .faq summary::-webkit-details-marker { display: none; }
-  .faq summary::after {
-    content: '+';
-    @apply grid size-9 shrink-0 place-items-center rounded-full border border-line bg-white text-xl font-normal text-navy transition-transform;
-  }
-  .faq details[open] summary::after { transform: rotate(45deg); }
-  .faq .answer { @apply pb-6 pr-12 leading-relaxed text-muted; }
+  .faq summary::after { content: '+'; @apply text-2xl font-normal leading-none text-blue; }
+  .faq details[open] summary::after { content: '\2212'; }
+  .faq .answer { @apply max-w-2xl pb-6 text-body; }
 }
