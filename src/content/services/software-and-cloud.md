@@ -31,7 +31,7 @@ capabilities:
     tags: [CI/CD pipelines, Infrastructure as code, Containers & serverless, Monitoring]
   - id: managed-cloud
     name: Managed cloud & cost control
-    text: Ongoing care of your cloud setup: monitoring, scaling, security updates and keeping the monthly bill in check.
+    text: "Ongoing care of your cloud setup: monitoring, scaling, security updates and keeping the monthly bill in check."
     tags: [Monitoring, Auto-scaling, Cost optimisation, Security]
   - id: blockchain
     name: Blockchain & digital assets

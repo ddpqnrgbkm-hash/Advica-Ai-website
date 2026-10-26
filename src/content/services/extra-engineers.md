@@ -2,7 +2,7 @@
 title: Extra Engineers
 shortTitle: Extra Engineers
 order: 3
-seoTitle: Staff Augmentation: Embedded Software & AI Engineers
+seoTitle: "Staff Augmentation: Embedded Software & AI Engineers"
 seoDescription: Add experienced software, data and AI engineers to your team for as long as you need them. Flexible staff augmentation for growing UK businesses.
 headline: Experienced engineers who join your team and get on with it.
 summary: Need more hands or a skill your team doesn't have? We provide software, data and AI engineers who work inside your team, with your tools and your way of working, for weeks, months or longer.
