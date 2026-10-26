@@ -8,16 +8,18 @@
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --font-display: 'Bricolage Grotesque Variable', 'Inter Variable', ui-sans-serif, sans-serif;
 
-  --color-ink: #0a1628;       /* deep navy — main dark */
-  --color-ink-2: #12223a;     /* lighter navy for cards on dark */
-  --color-paper: #f7f5f0;     /* warm off-white background */
-  --color-line: #e3dfd5;      /* hairlines on light */
-  --color-muted: #4f5b6b;     /* secondary text (AA on paper) */
+  --color-ink: #07101f;       /* near-black navy — main dark */
+  --color-ink-2: #101d33;     /* cards on dark */
+  --color-paper: #f4f2ec;     /* warm off-white background */
+  --color-line: #dedad0;      /* hairlines on light */
+  --color-muted: #4b5566;     /* secondary text (AA on paper) */
+  --color-mist: #a3adbb;      /* secondary text on dark (AA on ink) */
 
-  --color-brand: #0b63ce;     /* primary blue — buttons, links (AA on white) */
-  --color-brand-dark: #084b9c;
-  --color-sky: #3cc8ff;       /* logo cyan — accents on dark only */
-  --color-amber: #ffb547;     /* small highlights on dark */
+  --color-brand: #2357ff;     /* electric blue — buttons, links (white text AA) */
+  --color-brand-dark: #1638c9;
+  --color-sky: #3cc8ff;       /* logo cyan — accent blocks, dark text on top */
+  --color-lime: #d4f25a;      /* accent blocks, dark text on top */
+  --color-lilac: #b9a6ff;     /* accent blocks, dark text on top */
 }
 
 @layer base {

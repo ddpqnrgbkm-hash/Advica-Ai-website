@@ -6,15 +6,37 @@ seoTitle: Custom Web & Mobile Apps, Cloud and Blockchain Development
 seoDescription: Bespoke web and mobile apps, cloud infrastructure and blockchain builds for UK businesses. Designed around your workflow, built to scale, handed over cleanly.
 headline: Software built around your business, not the other way round.
 summary: When off-the-shelf software forces your team into awkward workarounds, we design and build web and mobile apps that fit how you actually work — on cloud infrastructure that's secure, reliable and easy to maintain.
-includes:
-  - name: Web applications
-    text: Customer portals, internal tools, booking and quoting systems, and full software products.
-  - name: Mobile apps
-    text: Cross-platform apps for iPhone and Android, for your customers or your teams in the field.
-  - name: Cloud infrastructure
-    text: Secure, automated hosting and deployment so releases are quick, safe and repeatable.
-  - name: Blockchain & digital assets
-    text: Smart contracts, tokenisation and decentralised applications, where they genuinely fit the problem.
+menuText: Web and mobile apps, cloud, DevOps and blockchain
+accent: lime
+capabilities:
+  - id: web-apps
+    name: Web applications
+    text: Customer portals, internal tools, booking and quoting systems and full software products that work beautifully on any screen.
+    tags: [Customer portals, Internal tools, Progressive web apps, SaaS products]
+  - id: mobile-apps
+    name: Mobile apps
+    text: Apps for iPhone and Android, for your customers or for your teams out in the field — including apps that work offline.
+    tags: [iOS & Android, Cross-platform, Offline-ready, Field apps]
+  - id: product-engineering
+    name: Product engineering & integrations
+    text: Robust back-ends and connections between the systems you already use, designed so your software is easy to grow and change.
+    tags: [APIs & integrations, Microservices, Headless, Modernising old systems]
+  - id: cloud
+    name: Cloud strategy & migration
+    text: Moving from old servers to the cloud — or getting more from the cloud you have — on AWS, Microsoft Azure or Google Cloud, with minimal disruption.
+    tags: [Cloud readiness review, Migration, Hybrid & multi-cloud, Architecture design]
+  - id: devops
+    name: DevOps & automation
+    text: Automated testing, deployment and monitoring so updates go out quickly and safely, and problems are spotted before customers notice.
+    tags: [CI/CD pipelines, Infrastructure as code, Containers & serverless, Monitoring]
+  - id: managed-cloud
+    name: Managed cloud & cost control
+    text: Ongoing care of your cloud setup — monitoring, scaling, security updates and keeping the monthly bill in check.
+    tags: [Monitoring, Auto-scaling, Cost optimisation, Security]
+  - id: blockchain
+    name: Blockchain & digital assets
+    text: Smart contracts, tokenisation and decentralised apps — with security reviews built in — where blockchain genuinely fits the problem.
+    tags: [Smart contracts, Asset tokenisation, DeFi platforms, NFT marketplaces, Layer 2]
 whoFor:
   - Your team relies on spreadsheets, WhatsApp and workarounds to run key processes.
   - You have a product idea and need a technical partner to design and build it.

@@ -45,12 +45,32 @@ export const bookingHref = site.bookingUrl || '/contact';
 export const bookingIsExternal = Boolean(site.bookingUrl);
 
 // ---------- Main navigation (max 5 items) ----------
-export const nav = [
-  { label: 'Services', href: '/services' },
+// "Services" builds its dropdown automatically from the service files in src/content/services.
+// The other dropdowns are listed here: { label, href, text } — text is the small grey line under each link.
+type NavLink = { label: string; href: string; text?: string };
+export const nav: (NavLink & { dropdown?: 'services'; children?: NavLink[] })[] = [
+  { label: 'Services', href: '/services', dropdown: 'services' },
   { label: 'How It Works', href: '/how-it-works' },
   { label: 'Pricing', href: '/pricing' },
-  { label: 'Insights', href: '/insights' },
-  { label: 'About', href: '/about' },
+  {
+    label: 'Insights',
+    href: '/insights',
+    children: [
+      { label: 'Articles', href: '/insights', text: 'Plain-English guides on AI and software' },
+      { label: 'Case studies', href: '/case-studies', text: 'Projects we’ve delivered' },
+      { label: 'Project cost estimator', href: '/estimate', text: 'An indicative price in 2 minutes' },
+      { label: 'AI readiness quiz', href: '/ai-readiness', text: 'Score your business in 3 minutes' },
+    ],
+  },
+  {
+    label: 'About',
+    href: '/about',
+    children: [
+      { label: 'About us', href: '/about', text: 'Our mission and how we work' },
+      { label: 'Partnerships', href: '/about#partnerships', text: 'Work with us as a partner' },
+      { label: 'Contact', href: '/contact', text: 'Talk to a real person' },
+    ],
+  },
 ];
 
 // ---------- Footer links ----------

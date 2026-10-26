@@ -6,15 +6,29 @@ seoTitle: Staff Augmentation — Embedded Software & AI Engineers
 seoDescription: Add experienced software, data and AI engineers to your team for as long as you need them. Flexible staff augmentation for growing UK businesses.
 headline: Experienced engineers who join your team and get on with it.
 summary: Need more hands or a skill your team doesn't have? We provide software, data and AI engineers who work inside your team, with your tools and your way of working — for weeks, months or longer.
-includes:
-  - name: Software engineers
-    text: Front-end, back-end, full-stack and mobile developers.
-  - name: Data & AI engineers
-    text: Specialists in data pipelines, analytics, machine learning and AI integration.
-  - name: Cloud & DevOps engineers
-    text: People who automate your infrastructure, deployments and monitoring.
-  - name: Technical leadership
-    text: Senior engineers who can guide architecture decisions and mentor your team.
+menuText: Skilled engineers who join your team, for as long as you need
+accent: lilac
+capabilities:
+  - id: developers
+    name: Software developers
+    text: Front-end, back-end, full-stack and mobile developers who slot into your team and your way of working.
+    tags: [Full-stack, Front-end, Back-end, Mobile]
+  - id: data-ai-engineers
+    name: Data & AI engineers
+    text: Specialists in data pipelines, analytics, machine learning and AI integration, to add skills your team doesn't have yet.
+    tags: [Data engineers, ML engineers, AI integration]
+  - id: devops-engineers
+    name: DevOps & cloud engineers
+    text: Engineers who automate your infrastructure, deployments and monitoring so your developers can ship faster.
+    tags: [DevOps, Cloud, Site reliability]
+  - id: architects
+    name: Architects & technical leads
+    text: Senior people who shape the technical direction, translate business needs into technical plans and mentor your team.
+    tags: [Solution architects, Business architects, Tech leads]
+  - id: embedded
+    name: Embedded, client-facing engineers
+    text: Engineers who work closely alongside your staff or customers to understand problems first-hand and build solutions on the spot.
+    tags: [On-site options, Client-facing, Rapid prototyping]
 whoFor:
   - Your roadmap is slipping because your team is stretched.
   - You need a specific skill for a project but not a permanent hire.

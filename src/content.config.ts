@@ -14,7 +14,11 @@ const services = defineCollection({
     seoDescription: z.string(),
     headline: z.string(),
     summary: z.string(),
-    includes: z.array(z.object({ name: z.string(), text: z.string() })),
+    menuText: z.string(), // one short line shown in the Services dropdown
+    accent: z.enum(['sky', 'lime', 'lilac']).default('sky'),
+    capabilities: z.array(
+      z.object({ id: z.string(), name: z.string(), text: z.string(), tags: z.array(z.string()).default([]) }),
+    ),
     whoFor: z.array(z.string()),
     outcomes: z.array(z.string()),
     process: z.array(z.object({ name: z.string(), text: z.string() })),

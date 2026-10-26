@@ -1,49 +1,202 @@
 ---
+import { getCollection } from 'astro:content';
 import Logo from './Logo.astro';
 import BookButton from './BookButton.astro';
 import { nav, site } from '../config/site';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const path = Astro.url.pathname.replace(/\.html$/, '');
 const isActive = (href: string) => path === href || path.startsWith(href + '/');
+const accentText: Record<string, string> = { sky: 'text-sky', lime: 'text-lime', lilac: 'text-lilac' };
+const chevron = 'M6 9l6 6 6-6';
 ---
-<header class="sticky top-0 z-40 border-b border-line/80 bg-paper/90 backdrop-blur supports-[backdrop-filter]:bg-paper/75">
-  <div class="container-x flex h-[4.5rem] items-center justify-between gap-6">
-    <a href="/" class="shrink-0" aria-label={`${site.name} — home`}><Logo /></a>
+<header class="on-dark sticky top-0 z-40 border-b border-white/10 bg-ink text-white">
+  <div class="container-x relative flex h-[4.5rem] items-center justify-between gap-6">
+    <a href="/" class="shrink-0" aria-label={`${site.name} — home`}><Logo dark /></a>
 
+    <!-- ===== Desktop navigation with dropdowns ===== -->
     <nav aria-label="Main" class="hidden lg:block">
       <ul class="flex items-center gap-1">
-        {nav.map((item) => (
-          <li>
-            <a
-              href={item.href}
-              class:list={['rounded-full px-4 py-2 text-[0.95rem] font-medium transition-colors hover:bg-ink/5',
-                isActive(item.href) ? 'text-brand' : 'text-ink/80']}
-              aria-current={isActive(item.href) ? 'page' : undefined}
-            >{item.label}</a>
-          </li>
-        ))}
+        {nav.map((item, i) => {
+          const hasMenu = item.dropdown || item.children;
+          return (
+            <li class:list={['nav-item', hasMenu && 'has-menu', item.dropdown && 'mega']}>
+              {hasMenu ? (
+                <button
+                  type="button"
+                  class:list={['nav-trigger flex items-center gap-1.5 rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/85']}
+                  aria-expanded="false"
+                  aria-controls={`menu-${i}`}
+                >
+                  {item.label}
+                  <svg class="chev size-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </button>
+              ) : (
+                <a
+                  href={item.href}
+                  class:list={['block rounded-full px-4 py-2 text-[0.95rem] font-medium hover:bg-white/10', isActive(item.href) ? 'text-sky' : 'text-white/85']}
+                  aria-current={isActive(item.href) ? 'page' : undefined}
+                >{item.label}</a>
+              )}
+
+              {item.dropdown === 'services' && (
+                <div id={`menu-${i}`} class="nav-panel inset-x-5 sm:inset-x-8">
+                  <div class="grid grid-cols-3 gap-2 p-3">
+                    {services.map((s) => (
+                      <div class="rounded-2xl p-5 hover:bg-paper">
+                        <a href={`/services/${s.id}`} class="group block">
+                          <span class="font-display text-lg font-semibold text-ink group-hover:text-brand">{s.data.title} <span aria-hidden="true">→</span></span>
+                          <span class="mt-1 block text-sm text-muted">{s.data.menuText}</span>
+                        </a>
+                        <ul class="mt-4 space-y-1.5 border-t border-line pt-4">
+                          {s.data.capabilities.map((c) => (
+                            <li><a href={`/services/${s.id}#${c.id}`} class="text-[0.92rem] text-ink/80 hover:text-brand hover:underline">{c.name}</a></li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="flex items-center justify-between gap-4 rounded-b-3xl bg-ink px-8 py-4 text-sm text-white">
+                    <span>Not sure which you need? Get an indicative price in two minutes.</span>
+                    <span class="flex gap-6">
+                      <a href="/services" class="font-semibold text-white hover:text-sky">All services</a>
+                      <a href="/estimate" class="font-semibold text-sky hover:text-white">Cost estimator →</a>
+                    </span>
+                  </div>
+                </div>
+              )}
+
+              {item.children && (
+                <div id={`menu-${i}`} class="nav-panel left-0 w-80">
+                  <ul class="p-3">
+                    {item.children.map((c) => (
+                      <li>
+                        <a href={c.href} class="group block rounded-xl px-4 py-3 hover:bg-paper">
+                          <span class="block font-semibold text-ink group-hover:text-brand">{c.label}</span>
+                          {c.text && <span class="block text-sm text-muted">{c.text}</span>}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </nav>
 
-    <div class="hidden items-center gap-4 lg:flex">
-      <a href={`tel:${site.phoneLink}`} class="text-sm font-medium text-ink/70 hover:text-ink">{site.phone}</a>
-      <BookButton class="btn-primary !min-h-11 !px-5" />
+    <div class="hidden items-center gap-5 lg:flex">
+      <a href={`tel:${site.phoneLink}`} class="text-sm font-medium text-white/75 hover:text-white">{site.phone}</a>
+      <BookButton class="btn !min-h-11 bg-sky !px-5 text-ink hover:bg-white" />
     </div>
 
-    <!-- Mobile menu: works without JavaScript -->
-    <details class="group relative lg:hidden">
-      <summary class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full border border-line bg-white [&::-webkit-details-marker]:hidden" aria-label="Menu">
-        <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
-        <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+    <!-- ===== Mobile menu (works without JavaScript) ===== -->
+    <details class="mobile-menu group lg:hidden">
+      <summary class="flex size-11 cursor-pointer list-none items-center justify-center rounded-full border border-white/20 [&::-webkit-details-marker]:hidden">
+        <span class="sr-only">Menu</span>
+        <svg class="size-5 group-open:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round" /></svg>
+        <svg class="hidden size-5 group-open:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round" /></svg>
       </summary>
-      <nav aria-label="Mobile" class="fixed inset-x-0 top-[4.5rem] border-b border-line bg-paper px-5 pb-8 pt-4 shadow-xl">
-        <ul class="divide-y divide-line">
+      <nav aria-label="Mobile" class="fixed inset-x-0 bottom-0 top-[4.5rem] overflow-y-auto bg-ink px-5 pb-32 pt-2">
+        <ul class="divide-y divide-white/10">
           {nav.map((item) => (
-            <li><a href={item.href} class="block py-4 font-display text-xl font-semibold">{item.label}</a></li>
+            <li>
+              {item.dropdown === 'services' ? (
+                <details class="group/sub">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-semibold [&::-webkit-details-marker]:hidden">
+                    {item.label}
+                    <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
+                  </summary>
+                  <ul class="space-y-1 pb-4">
+                    <li><a href="/services" class="block py-2 text-white/80">All services</a></li>
+                    {services.map((s) => (
+                      <li><a href={`/services/${s.id}`} class="block py-2"><span class:list={['font-semibold', accentText[s.data.accent]]}>{s.data.title}</span><span class="block text-sm text-mist">{s.data.menuText}</span></a></li>
+                    ))}
+                  </ul>
+                </details>
+              ) : item.children ? (
+                <details class="group/sub">
+                  <summary class="flex cursor-pointer list-none items-center justify-between py-4 font-display text-2xl font-semibold [&::-webkit-details-marker]:hidden">
+                    {item.label}
+                    <svg class="size-5 transition-transform group-open/sub:rotate-180" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d={chevron} /></svg>
+                  </summary>
+                  <ul class="space-y-1 pb-4">
+                    {item.children.map((c) => <li><a href={c.href} class="block py-2 text-white/85">{c.label}</a></li>)}
+                  </ul>
+                </details>
+              ) : (
+                <a href={item.href} class="block py-4 font-display text-2xl font-semibold">{item.label}</a>
+              )}
+            </li>
           ))}
-          <li><a href="/contact" class="block py-4 font-display text-xl font-semibold">Contact</a></li>
         </ul>
-        <BookButton class="btn-primary mt-6 w-full" />
+        <div class="mt-6 grid gap-3">
+          <BookButton class="btn w-full bg-sky text-ink" />
+          <a href={`tel:${site.phoneLink}`} class="btn-secondary w-full">Call {site.phone}</a>
+        </div>
       </nav>
     </details>
   </div>
 </header>
+
+<style>
+  /* Dropdown panels: open on hover / keyboard focus, or when the button is clicked (see script) */
+  .nav-item { position: relative; }
+  .nav-panel {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    display: none;
+    border-radius: 1.5rem;
+    background: #fff;
+    color: var(--color-ink);
+    box-shadow: 0 30px 80px -20px rgb(0 0 0 / 0.45);
+  }
+  /* invisible bridge so the panel doesn't close while moving the mouse down */
+  .nav-panel::before { content: ''; position: absolute; inset: -0.8rem 0 auto 0; height: 0.8rem; }
+  @media (hover: hover) {
+    .has-menu:not([data-suppress]):hover > .nav-panel { display: block; }
+    .has-menu:not([data-suppress]):hover .chev { transform: rotate(180deg); }
+  }
+  .has-menu[data-open] > .nav-panel { display: block; }
+  .has-menu[data-open] .chev { transform: rotate(180deg); }
+  .mega { position: static; }
+  .mega > .nav-panel { top: calc(100% - 0.4rem); }
+  .nav-panel :focus-visible { outline-color: var(--color-brand); }
+</style>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('.has-menu');
+  const close = (li: HTMLElement) => {
+    li.removeAttribute('data-open');
+    li.querySelector('.nav-trigger')?.setAttribute('aria-expanded', 'false');
+  };
+  items.forEach((li) => {
+    const btn = li.querySelector<HTMLButtonElement>('.nav-trigger')!;
+    btn.addEventListener('click', () => {
+      const open = li.hasAttribute('data-open');
+      items.forEach(close);
+      if (!open) {
+        li.setAttribute('data-open', '');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+    li.addEventListener('focusout', (e) => {
+      if (!li.contains(e.relatedTarget as Node)) close(li);
+    });
+    li.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        close(li);
+        li.setAttribute('data-suppress', '');
+        btn.focus();
+      }
+    });
+    li.addEventListener('mouseleave', () => {
+      li.removeAttribute('data-suppress');
+      close(li);
+    });
+  });
+  document.addEventListener('click', (e) => {
+    items.forEach((li) => { if (!li.contains(e.target as Node)) close(li); });
+  });
+</script>
