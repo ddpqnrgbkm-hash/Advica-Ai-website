@@ -1,0 +1,147 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import BookButton from '../../components/BookButton.astro';
+import FAQ from '../../components/FAQ.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import OtherServices from '../../components/OtherServices.astro';
+import { site } from '../../config/site';
+
+export async function getStaticPaths() {
+  const services = await getCollection('services');
+  return services.map((s) => ({ params: { slug: s.id }, props: { service: s } }));
+}
+const { service } = Astro.props as { service: CollectionEntry<'services'> };
+const d = service.data;
+const bg = { sky: 'bg-sky', lime: 'bg-lime', lilac: 'bg-lilac' }[d.accent];
+
+const jsonLd = [
+  {
+    '@type': 'Service',
+    name: d.title,
+    description: d.summary,
+    serviceType: d.capabilities.map((c) => c.name),
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: { '@type': 'Country', name: 'United Kingdom' },
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: d.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+  {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Services', item: `${site.url}/services` },
+      { '@type': 'ListItem', position: 2, name: d.title, item: `${site.url}/services/${service.id}` },
+    ],
+  },
+];
+---
+<BaseLayout title={d.seoTitle} description={d.seoDescription} jsonLd={jsonLd}>
+  <PageHero eyebrow={d.title} title={d.headline} intro={d.summary} accent={d.accent} crumbs={[{ label: 'Services', href: '/services' }, { label: d.title }]}>
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <BookButton class="btn bg-sky text-ink hover:bg-white" label="Book a free call" />
+      <a href="/estimate" class="btn-secondary">Estimate your project cost</a>
+    </div>
+  </PageHero>
+
+  <!-- What it is: capabilities with a sticky jump list -->
+  <section class="py-20 sm:py-24" aria-labelledby="what-h">
+    <div class="container-x grid gap-12 lg:grid-cols-[18rem_1fr]">
+      <div>
+        <div class="lg:sticky lg:top-28">
+          <p class="eyebrow">What’s included</p>
+          <h2 id="what-h" class="mt-4 text-3xl font-bold">What we can do for you</h2>
+          <nav aria-label="On this page" class="mt-8 hidden lg:block">
+            <ul class="space-y-1 border-l border-line">
+              {d.capabilities.map((c) => (
+                <li><a href={`#${c.id}`} class="-ml-px block border-l-2 border-transparent py-1.5 pl-4 text-sm text-muted hover:border-brand hover:text-ink">{c.name}</a></li>
+              ))}
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div class="grid gap-4 sm:grid-cols-2">
+        {d.capabilities.map((c, i) => (
+          <article id={c.id} class="card flex flex-col">
+            <span class:list={['grid size-11 place-items-center rounded-xl font-display font-bold text-ink', bg]}>{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-5 text-xl font-semibold">{c.name}</h3>
+            <p class="mt-3 leading-relaxed text-muted">{c.text}</p>
+            <ul class="mt-5 flex flex-wrap gap-2">
+              {c.tags.map((t) => <li class="rounded-full bg-paper px-3 py-1 text-xs font-medium">{t}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Who it's for + example outcomes -->
+  <section class="border-y border-line bg-white py-20 sm:py-24">
+    <div class="container-x grid gap-16 lg:grid-cols-2">
+      <div>
+        <p class="eyebrow">Who it’s for</p>
+        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">This is for you if…</h2>
+        <ul class="mt-8 space-y-4">
+          {d.whoFor.map((w) => (
+            <li class="flex gap-4 text-lg">
+              <svg class="mt-1 size-6 shrink-0 text-brand" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              {w}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="eyebrow">Example outcomes</p>
+        <h2 class="mt-4 text-3xl font-bold sm:text-4xl">What this could look like</h2>
+        <p class="mt-3 text-sm text-muted">Illustrative examples of the kind of thing we build — every project is scoped to your business.</p>
+        <ul class="mt-8 grid gap-3">
+          {d.outcomes.map((o) => <li class:list={['rounded-2xl p-5 font-medium text-ink', bg]}>{o}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="on-dark bg-ink py-20 text-white sm:py-24" aria-labelledby="proc-h">
+    <div class="container-x">
+      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
+        <div>
+          <p class="eyebrow">Process</p>
+          <h2 id="proc-h" class="mt-4 text-3xl font-bold sm:text-5xl">How we’ll work together</h2>
+        </div>
+        <a href="/how-it-works" class="btn-secondary self-start lg:self-auto">Full process &amp; Sprint 0</a>
+      </div>
+      <ol class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {d.process.map((p, i) => (
+          <li class="rounded-3xl border border-white/10 bg-ink-2 p-7">
+            <span class="grid size-11 place-items-center rounded-full bg-sky font-display font-bold text-ink">{i + 1}</span>
+            <h3 class="mt-5 text-lg font-semibold">{p.name}</h3>
+            <p class="mt-2 text-mist">{p.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-20 sm:py-24" aria-labelledby="faq-h">
+    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.6fr]">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 id="faq-h" class="mt-4 text-3xl font-bold sm:text-4xl">{d.title} questions</h2>
+      </div>
+      <FAQ items={d.faqs} />
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-white py-20" aria-labelledby="more-h">
+    <div class="container-x">
+      <h2 id="more-h" class="text-2xl font-bold">Other ways we help</h2>
+      <div class="mt-8"><OtherServices exclude={service.id} /></div>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

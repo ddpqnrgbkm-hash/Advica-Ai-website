@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page not found" description="Sorry, we couldn't find that page." noindex>
+  <section class="on-dark bg-ink py-24 text-white sm:py-32">
+    <div class="container-x max-w-3xl">
+      <p class="font-display text-8xl font-bold text-sky sm:text-9xl">404</p>
+      <h1 class="mt-6 text-4xl font-bold sm:text-5xl">We couldn’t find that page.</h1>
+      <p class="mt-5 text-lg text-white/75">It may have moved when we updated our website. Try one of these instead:</p>
+      <ul class="mt-10 grid gap-3 sm:grid-cols-2">
+        {[['Home', '/'], ['Services', '/services'], ['Pricing', '/pricing'], ['Contact', '/contact']].map(([l, h]) => (
+          <li><a href={h} class="flex justify-between rounded-2xl border border-white/15 p-5 font-semibold hover:border-white/50">{l} <span aria-hidden="true">→</span></a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

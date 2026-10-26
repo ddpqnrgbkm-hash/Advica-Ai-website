@@ -12,9 +12,10 @@ export const site = {
   legalName: 'Advica AI Solutions Ltd',
   tagline: 'Bespoke AI and software engineering for UK businesses',
   url: 'https://advicaaisolutions.co.uk',
-  companyNumber: '', // e.g. '12345678' — shown in the footer once filled in
+  companyNumber: '17076839', // shown in the footer
   registeredIn: 'England and Wales',
   vatNumber: '',
+  icoNumber: '', // your ICO registration number, e.g. 'ZB123456' — shown in the privacy policy
 
   // ---------- Contact ----------
   email: 'office@advicaaisolutions.co.uk',
@@ -24,7 +25,7 @@ export const site = {
     street: 'Towngate House, 116-118 Towngate',
     town: 'Leyland',
     region: 'Lancashire',
-    postcode: '', // e.g. 'PR25 2LQ'
+    postcode: 'PR25 2LQ',
     country: 'GB',
   },
   linkedin: 'https://www.linkedin.com/company/advica-ai-solutions/',
@@ -38,6 +39,14 @@ export const site = {
   // Privacy-friendly, cookie-free analytics only (e.g. Plausible, Fathom, Simple Analytics).
   // Paste the <script> tag they give you between the backticks. Leave empty for none.
   analyticsSnippet: ``,
+};
+
+// ---------- Pricing ----------
+export const pricing = {
+  sprintZeroPrice: 4250,   // £, Sprint 0 discovery phase
+  sprintZeroCredit: 2125,  // £ credited back against the build if the client continues with us
+  vatNote: '', // e.g. 'All prices exclude VAT.' — shown under prices when filled in
+  financeYears: '3–5',
 };
 
 /** Where "Book a Call" buttons point. */

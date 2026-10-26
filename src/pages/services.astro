@@ -1,0 +1,81 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookButton from '../components/BookButton.astro';
+import CtaBand from '../components/CtaBand.astro';
+
+const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
+const bg: Record<string, string> = { sky: 'bg-sky', lime: 'bg-lime', lilac: 'bg-lilac' };
+
+const guide = [
+  { need: 'You want to use AI, automate admin or make sense of your data', go: 'ai-and-data' },
+  { need: 'You need a new app, portal or system — or a better cloud setup', go: 'software-and-cloud' },
+  { need: 'You already have a tech team and need more skilled people', go: 'extra-engineers' },
+];
+const title = (id: string) => services.find((s) => s.id === id)?.data.title;
+---
+<BaseLayout
+  title="Services — AI, software, cloud and extra engineers"
+  description="Bespoke AI and data, custom software and cloud, and embedded engineers for UK SMEs and mid-market businesses. See what we do and find the right fit."
+>
+  <PageHero
+    eyebrow="Services"
+    title="Everything you need to build with AI and software."
+    intro="Three ways we help UK businesses — from a single AI tool to a full product build or extra engineers for your team."
+    crumbs={[{ label: 'Services' }]}
+  />
+
+  <section class="py-20 sm:py-24" aria-label="Our services">
+    <div class="container-x space-y-6">
+      {services.map((s, i) => (
+        <article class="grid overflow-hidden rounded-3xl border border-line bg-white lg:grid-cols-[1fr_1.3fr]">
+          <div class:list={['flex flex-col p-8 sm:p-12', bg[s.data.accent]]}>
+            <span class="font-display text-6xl font-bold opacity-25">0{i + 1}</span>
+            <h2 class="mt-4 text-3xl font-bold sm:text-4xl">{s.data.title}</h2>
+            <p class="mt-4 text-lg text-ink/80">{s.data.summary}</p>
+            <div class="mt-auto pt-10">
+              <a href={`/services/${s.id}`} class="btn bg-ink text-white hover:bg-ink-2">Explore {s.data.title} <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+          <ul class="divide-y divide-line">
+            {s.data.capabilities.map((c) => (
+              <li>
+                <a href={`/services/${s.id}#${c.id}`} class="group flex items-center justify-between gap-4 px-8 py-5 hover:bg-paper">
+                  <span>
+                    <span class="block font-semibold">{c.name}</span>
+                    <span class="block text-sm text-muted">{c.tags.join(' · ')}</span>
+                  </span>
+                  <span aria-hidden="true" class="text-brand transition-transform group-hover:translate-x-1">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-t border-line bg-white py-20 sm:py-24" aria-labelledby="guide-h">
+    <div class="container-x grid gap-12 lg:grid-cols-[1fr_1.5fr]">
+      <div>
+        <p class="eyebrow">Not sure?</p>
+        <h2 id="guide-h" class="mt-4 text-4xl font-bold">Which one is right for me?</h2>
+        <p class="mt-5 text-muted">Most businesses fit one of these. If yours doesn’t, that’s exactly what the discovery call is for.</p>
+        <BookButton class="btn-primary mt-8" label="Talk it through" />
+      </div>
+      <ul class="space-y-3">
+        {guide.map((g) => (
+          <li>
+            <a href={`/services/${g.go}`} class="group flex items-center justify-between gap-6 rounded-2xl border border-line p-6 hover:border-ink">
+              <span class="text-lg">{g.need}</span>
+              <span class="shrink-0 font-semibold text-brand">{title(g.go)} <span aria-hidden="true">→</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <CtaBand />
+</BaseLayout>

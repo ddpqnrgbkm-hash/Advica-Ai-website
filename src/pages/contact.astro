@@ -1,0 +1,114 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import BookButton from '../components/BookButton.astro';
+import { site } from '../config/site';
+import { projectTypes, budgetRanges, timelines } from '../data/form-options';
+
+const field = 'mt-2 block w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-base text-ink placeholder:text-ink/40 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30';
+const label = 'block text-sm font-semibold';
+---
+<BaseLayout
+  title="Contact us — book a call or send an enquiry"
+  description={`Talk to Advica AI Solutions about AI, software or extra engineers. Call ${site.phone}, email ${site.email} or send us a few details.`}
+>
+  <PageHero eyebrow="Contact" title="Let’s talk about what you need." intro="Tell us a little about your project and we’ll get back to you. Prefer to talk? Book a call or ring us." crumbs={[{ label: 'Contact' }]} />
+
+  <section class="py-16 sm:py-24">
+    <div class="container-x grid gap-12 lg:grid-cols-[1fr_22rem]">
+      <!-- Enquiry form (Netlify Forms) -->
+      <form
+        name="contact"
+        method="POST"
+        action="/thank-you"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="card grid gap-6 sm:grid-cols-2"
+      >
+        <input type="hidden" name="form-name" value="contact" />
+        <p class="hidden"><label>Don’t fill this out if you’re human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+        <h2 class="text-2xl font-bold sm:col-span-2">Send an enquiry</h2>
+
+        <div>
+          <label for="name" class={label}>Your name <span class="text-brand" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" required autocomplete="name" class={field} />
+        </div>
+        <div>
+          <label for="email" class={label}>Email <span class="text-brand" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" required autocomplete="email" class={field} />
+        </div>
+        <div>
+          <label for="company" class={label}>Company</label>
+          <input id="company" name="company" type="text" autocomplete="organization" class={field} />
+        </div>
+        <div>
+          <label for="phone" class={label}>Phone <span class="font-normal text-muted">(optional)</span></label>
+          <input id="phone" name="phone" type="tel" autocomplete="tel" class={field} />
+        </div>
+        <div>
+          <label for="project-type" class={label}>What do you need help with?</label>
+          <select id="project-type" name="project-type" class={field}>
+            <option value="">Choose one…</option>
+            {projectTypes.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div>
+          <label for="budget" class={label}>Rough budget</label>
+          <select id="budget" name="budget" class={field}>
+            <option value="">Choose one…</option>
+            {budgetRanges.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="timeline" class={label}>When would you like to start?</label>
+          <select id="timeline" name="timeline" class={field}>
+            <option value="">Choose one…</option>
+            {timelines.map((o) => <option>{o}</option>)}
+          </select>
+        </div>
+        <div class="sm:col-span-2">
+          <label for="message" class={label}>Tell us about your project <span class="text-brand" aria-hidden="true">*</span></label>
+          <textarea id="message" name="message" rows="6" required class={field} placeholder="What problem are you trying to solve? What systems do you use today?"></textarea>
+        </div>
+        <p class="text-sm text-muted sm:col-span-2">We’ll only use your details to reply to your enquiry. See our <a class="link" href="/privacy">privacy policy</a>.</p>
+        <div class="sm:col-span-2">
+          <button type="submit" class="btn-primary w-full sm:w-auto">Send enquiry</button>
+        </div>
+      </form>
+
+      <!-- Direct contact -->
+      <aside class="space-y-4">
+        <div class="on-dark rounded-3xl bg-ink p-8 text-white">
+          <h2 class="font-display text-2xl font-bold">Rather talk?</h2>
+          <p class="mt-2 text-mist">Book a free discovery call at a time that suits you.</p>
+          <BookButton class="btn mt-6 w-full bg-sky text-ink hover:bg-white" />
+        </div>
+        <div class="card space-y-5">
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Phone</h2>
+            <a href={`tel:${site.phoneLink}`} class="mt-1 block font-display text-2xl font-bold hover:text-brand">{site.phone}</a>
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Email</h2>
+            <a href={`mailto:${site.email}`} class="mt-1 block break-all font-semibold hover:text-brand">{site.email}</a>
+          </div>
+          <div>
+            <h2 class="text-sm font-semibold uppercase tracking-[0.14em] text-muted">Office</h2>
+            <p class="mt-1">{site.address.street}<br />{site.address.town}, {site.address.postcode}</p>
+          </div>
+          <div>
+            <a href={site.linkedin} target="_blank" rel="noopener" class="link">Follow us on LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  // Pre-select the enquiry type when arriving from e.g. /contact?type=partnership
+  const type = new URLSearchParams(location.search).get('type');
+  const select = document.getElementById('project-type') as HTMLSelectElement | null;
+  if (type === 'partnership' && select) select.value = 'Partnership';
+</script>

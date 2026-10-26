@@ -49,6 +49,8 @@ process:
   - name: Review and adjust
     text: Regular check-ins so you can scale up, down or hand over as needed.
 faqs:
+  - q: Are the engineers employed by Advica?
+    a: They come from our established engineering delivery partner. Advica stays your single point of contact — we agree the brief, the contract and the working arrangements with you, and stay involved throughout.
   - q: How quickly can engineers start?
     a: It depends on the skills you need. Tell us on a discovery call and we'll give you a realistic start date before you commit.
   - q: Do the engineers work in our time zone?

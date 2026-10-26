@@ -1,0 +1,18 @@
+---
+import { getCollection } from 'astro:content';
+interface Props { exclude?: string }
+const { exclude } = Astro.props;
+const services = (await getCollection('services')).filter((s) => s.id !== exclude).sort((a, b) => a.data.order - b.data.order);
+const bg: Record<string, string> = { sky: 'bg-sky', lime: 'bg-lime', lilac: 'bg-lilac' };
+---
+<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+  {services.map((s) => (
+    <a href={`/services/${s.id}`} class:list={['group flex min-h-56 flex-col justify-between rounded-3xl p-8 text-ink', bg[s.data.accent]]}>
+      <span class="font-display text-2xl font-bold">{s.data.title}</span>
+      <span>
+        <span class="block text-ink/75">{s.data.menuText}</span>
+        <span class="mt-5 inline-flex items-center gap-2 font-semibold">Explore <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span></span>
+      </span>
+    </a>
+  ))}
+</div>

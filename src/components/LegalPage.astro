@@ -1,0 +1,14 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from './PageHero.astro';
+interface Props { title: string; description: string; updated: string }
+const { title, description, updated } = Astro.props;
+---
+<BaseLayout title={title} description={description}>
+  <PageHero eyebrow="Legal" title={title} intro={`Last updated: ${updated}`} crumbs={[{ label: title }]} />
+  <section class="py-16 sm:py-20">
+    <div class="container-x max-w-4xl prose prose-lg prose-headings:font-display prose-a:text-brand">
+      <slot />
+    </div>
+  </section>
+</BaseLayout>

@@ -2,7 +2,7 @@
 export const steps = [
   {
     name: 'Discovery call',
-    short: 'Free, 30 minutes',
+    short: 'Free, no obligation',
     text: 'A free, no-obligation conversation about your goals, your current setup and whether we’re the right fit.',
   },
   {
