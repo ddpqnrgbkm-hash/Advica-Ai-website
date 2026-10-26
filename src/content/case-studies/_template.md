@@ -7,7 +7,7 @@
 title: "Automated estimating for a regional contractor"
 client: "Client name (or 'A UK construction firm' if anonymised)"
 industry: "Construction"
-service: ai-and-data # one of: ai-and-data, software-and-cloud, extra-engineers
+service: ai-and-automation # one of: ai-and-automation, websites-apps-and-software, hosting-security-and-support, extra-developers
 summary: "One or two sentences on the problem and what we built."
 results:
   - "A measurable result the client has agreed you can share"

@@ -6,45 +6,42 @@ import MobileBar from '../components/MobileBar.astro';
 import { site } from '../config/site';
 
 interface Props {
-  title: string;          // page title (site name is added automatically)
-  description: string;   // 120 to 160 characters works best for Google
-  image?: string;        // social share image, e.g. '/images/og/pricing.png'
+  title: string;          // page title (the company name is added automatically)
+  description: string;    // 120 to 160 characters works best for Google
+  image?: string;         // social share image, e.g. '/images/og/pricing.png'
   type?: 'website' | 'article';
   noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
+  theme?: 'a' | 'b';      // design direction (only used while choosing a design)
 }
-const { title, description, image = '/og-default.png', type = 'website', noindex = false, jsonLd = [] } = Astro.props;
+const { title, description, image = '/og-default.png', type = 'website', noindex = false, jsonLd = [], theme = 'a' } = Astro.props;
 
 const path = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1');
 const canonical = path && path !== '/' ? `${site.url}${path}` : `${site.url}/`;
-const fullTitle = path === '/' || path === '' ? `${site.name} | ${site.tagline}` : `${title} | ${site.name}`;
+const isHome = path === '/' || path === '';
+const fullTitle = isHome ? `${site.name} | ${title}` : `${title} | ${site.name}`;
 const ogImage = new URL(image, site.url).href;
 
+// Organisation details for Google (LocalBusiness covers the registered office)
 const organization = {
   '@context': 'https://schema.org',
-  '@type': ['Organization', 'ProfessionalService'],
+  '@type': ['Organization', 'LocalBusiness'],
   '@id': `${site.url}/#organization`,
   name: site.legalName,
   alternateName: site.name,
   url: site.url,
-  logo: `${site.url}/favicon.svg`,
+  logo: `${site.url}/logo.png`,
+  image: `${site.url}/logo.png`,
   email: site.email,
   telephone: site.phoneLink,
   sameAs: [site.linkedin],
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: site.address.street,
-    addressLocality: site.address.town,
-    addressRegion: site.address.region,
-    ...(site.address.postcode ? { postalCode: site.address.postcode } : {}),
-    addressCountry: site.address.country,
-  },
+  address: { '@type': 'PostalAddress', streetAddress: site.registeredOffice, addressCountry: 'GB' },
   areaServed: { '@type': 'Country', name: 'United Kingdom' },
   ...(site.companyNumber ? { identifier: { '@type': 'PropertyValue', name: 'Company number', value: site.companyNumber } } : {}),
 };
 ---
 <!doctype html>
-<html lang="en-GB">
+<html lang="en-GB" data-theme={theme}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -52,10 +49,9 @@ const organization = {
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
-    <meta name="theme-color" content="#0a1628" />
 
     <meta property="og:type" content={type} />
     <meta property="og:site_name" content={site.name} />
@@ -72,13 +68,12 @@ const organization = {
     {site.analyticsSnippet && <Fragment set:html={site.analyticsSnippet} />}
   </head>
   <body class="flex min-h-screen flex-col">
-    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-white">Skip to content</a>
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-5 focus:py-3 focus:text-white">Skip to content</a>
     <Header />
     <main id="main" class="flex-1">
       <slot />
     </main>
     <Footer />
     <MobileBar />
-    <script>import '../scripts/ui';</script>
   </body>
 </html>
