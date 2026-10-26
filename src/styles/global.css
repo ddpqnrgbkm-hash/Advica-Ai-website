@@ -11,17 +11,19 @@
 @theme {
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, sans-serif;
 
-  /* Advica brand colours, taken from the logo and LinkedIn page */
-  --color-ink: #142449;       /* deep navy: main text */
-  --color-muted: #5a6478;     /* secondary text (AA on white and silver) */
-  --color-grey: #eef1f5;      /* silver panels */
-  --color-line: #d5dce4;      /* hairlines */
-  --color-blue: #2b5c97;      /* logo mid blue: links and buttons (AA with white) */
-  --color-blue-dark: #1f356d; /* logo navy: button hover */
-  --color-sky: #2fc6d6;       /* logo teal: links and accents on dark panels */
-  --color-night: #142449;     /* deep navy panels */
-  --color-night-2: #1f356d;   /* logo navy: cards on dark panels */
-  --color-dim: #a9b6cc;       /* secondary text on dark panels (AA) */
+  /* Advica brand colours, measured from the logo */
+  --color-ink: #1a1f2e;       /* near-black text, so the logo blues stand out */
+  --color-muted: #596173;     /* secondary text (AA on white and silver) */
+  --color-grey: #f2f5f8;      /* light silver panels (logo background) */
+  --color-line: #dde3ea;      /* hairlines */
+  --color-blue: #2647a8;      /* logo royal blue ("ADVICA"): buttons, links, coloured panels */
+  --color-blue-dark: #1e3a8f; /* hover */
+  --color-mid: #2a63bc;       /* logo mid blue */
+  --color-cyan: #3acbe8;      /* logo cyan: small details only */
+  --color-sky: #ffffff;       /* links on blue panels */
+  --color-night: #2647a8;     /* coloured panels use the logo royal blue */
+  --color-night-2: #2f55b8;   /* cards on blue panels */
+  --color-dim: #d6e6ff;       /* secondary text on blue panels (AA) */
 }
 
 @layer base {
@@ -72,10 +74,10 @@
 }
 
 /* Dark sections */
-.on-dark { color: #f5f5f7; }
+.on-dark { color: #ffffff; }
 .on-dark .more, .on-dark .link { color: var(--color-sky); }
 .on-dark .btn-secondary { border-color: var(--color-sky); color: var(--color-sky); }
-.on-dark .btn-secondary:hover { background: var(--color-sky); color: var(--color-night); }
+.on-dark .btn-secondary:hover { background: #fff; color: var(--color-blue); }
 
 /* Gentle fade-up as sections enter (transform only, so text keeps full contrast) */
 @supports (animation-timeline: view()) {
