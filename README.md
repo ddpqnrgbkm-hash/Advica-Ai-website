@@ -1,4 +1,4 @@
-# Advica AI Solutions — website
+# Advica AI Solutions website
 
 This is the code for **advicaaisolutions.co.uk**. You don't need to be a developer to change it: almost all the words live in a few plain files, and you can ask Claude to make changes for you.
 
@@ -11,7 +11,7 @@ This is the code for **advicaaisolutions.co.uk**. You don't need to be a develop
 
 1. A file in this repository is changed (by you on GitHub, or by Claude).
 2. The change is saved ("committed") to the `main` branch on GitHub.
-3. Netlify notices automatically, rebuilds the site and publishes it — usually within 1–2 minutes.
+3. Netlify notices automatically, rebuilds the site and publishes it, usually within 1 to 2 minutes.
 
 If a change breaks the build, Netlify keeps the previous version live, so the site never goes down. You'll see the failed build in Netlify under **Deploys**.
 
@@ -20,7 +20,7 @@ If a change breaks the build, Netlify keeps the previous version live, so the si
 2. Click the **pencil icon** (Edit this file).
 3. Make your change. Keep quote marks `' '` and commas exactly as they are.
 4. Click **Commit changes…**, write a short note (e.g. "Update phone number") and click **Commit changes** again.
-5. Wait 1–2 minutes and refresh the website.
+5. Wait 1 to 2 minutes and refresh the website.
 
 ---
 
@@ -58,7 +58,7 @@ If a change breaks the build, Netlify keeps the previous version live, so the si
 | Redirects from old web addresses | `netlify.toml` |
 | Original text from the old website (reference only) | `content-archive/` |
 
-Files ending `.md` are plain text with a settings block at the top between `---` lines. Files ending `.astro` or `.ts` contain some code — easiest to ask Claude to change those.
+Files ending `.md` are plain text with a settings block at the top between `---` lines. Files ending `.astro` or `.ts` contain some code, so it’s easiest to ask Claude to change those.
 
 ---
 
@@ -72,7 +72,7 @@ bookingUrl: 'https://cal.com/advica/discovery-call',
 Every "Book a call" button on the site (and the mobile bar) now opens it.
 
 ### Change contact details
-In `src/config/site.ts`, edit `email`, `phone` **and** `phoneLink` (the same number in international format with no spaces, e.g. `+442039166415` — this is what makes click-to-call work).
+In `src/config/site.ts`, edit `email`, `phone` **and** `phoneLink` (the same number in international format with no spaces, e.g. `+442039166415`; this is what makes click-to-call work).
 
 ### Turn on estimator prices
 1. In `src/config/site.ts`, find `estimator`.
@@ -142,14 +142,14 @@ Copy, adapt and paste these into a Claude Code session with this repository:
 - "Add my Calendly link https://calendly.com/advica/30min to the website."
 - "Write a new Insights article (about 600 words, plain English, UK spelling) on how small accountancy firms can use AI for client onboarding. Add it to the blog."
 - "Turn these notes into a case study and publish it: [paste notes]. The client is happy to be named."
-- "Set the estimator price ranges to: small £[min]–£[max], medium £[min]–£[max], large £[min]–£[max], extra large £[min]–£[max], and engineers £[min]–£[max] per month. Turn prices on."
+- "Set the estimator price ranges to: small £[min] to £[max], medium £[min] to £[max], large £[min] to £[max], extra large £[min] to £[max], and engineers £[min] to £[max] per month. Turn prices on."
 - "Change the homepage headline to '...' and show me a screenshot before you publish."
 - "Here's our new logo [attach file]. Put it on the site and regenerate the favicon and social-share image."
 - "Add a new FAQ to the Pricing page: [question] / [answer]."
 - "Add a fourth service called 'AI Training' with these details: ..."
-- "We now have ISO 27001 certification — certificate attached. Add it to the About page."
+- "We now have ISO 27001 certification. Certificate attached. Add it to the About page."
 - "Run a Lighthouse check on the live site and fix anything under 95."
-- "A client says the contact form isn't working — please investigate."
+- "A client says the contact form isn't working. Please investigate."
 
 ---
 
@@ -160,7 +160,7 @@ UK advertising rules (the CAP Code) and consumer protection law require claims o
 - statistics, client logos, certifications or awards that aren't Advica's own;
 - testimonials that aren't real, unedited and permitted;
 - invented case studies;
-- tax promises — financing pages say "consult your accountant".
+- tax promises (financing pages say "consult your accountant").
 
 If you're unsure about a claim, ask before publishing.
 

@@ -14,7 +14,7 @@ const config = { estimator, pricing };
   title="Project cost estimator"
   description="Answer five quick questions to see the likely size of your AI or software project and the best next step. Free, no sign-up needed."
 >
-  <PageHero eyebrow="Free tool · 2 minutes" title="What might my project cost?" intro="Answer five quick questions. We’ll show you the likely size of your project and the best next step — no sign-up needed." crumbs={[{ label: 'Cost estimator' }]} />
+  <PageHero eyebrow="Free tool · 2 minutes" title="What might my project cost?" intro="Answer five quick questions. We’ll show you the likely size of your project and the best next step. No sign-up needed." crumbs={[{ label: 'Cost estimator' }]} />
 
   <section class="py-16 sm:py-20">
     <div class="container-x max-w-3xl">
@@ -52,7 +52,7 @@ const config = { estimator, pricing };
           <p class="mt-4 text-lg text-mist" id="est-text"></p>
           <p class="text-shine mt-6 text-4xl font-semibold" id="est-price" hidden></p>
           <div class="mt-8 rounded-2xl border border-sky/30 bg-sky/[0.07] p-6 text-white/90 shadow-[0_0_60px_-30px_rgba(60,200,255,0.8)] [&_.font-semibold]:text-sky [&_a]:text-sky" id="est-next"></div>
-          <p class="mt-4 text-sm text-mist">This is an indicative guide, not a quote. Every project is different — a fixed price comes after Sprint 0.</p>
+          <p class="mt-4 text-sm text-mist">This is an indicative guide, not a quote. Every project is different, and a fixed price comes after Sprint 0.</p>
           <div class="mt-8 flex flex-col gap-3 sm:flex-row">
             <BookButton class="btn-primary" label="Book a free call" />
             <button type="button" data-restart class="btn-secondary">Start again</button>
@@ -118,8 +118,8 @@ const config = { estimator, pricing };
       $('est-text').textContent = `You’re looking for ${get('engineers')} (${get('skills')}), for ${get('duration')}. Engineers are usually priced at a monthly rate per person, depending on skills and seniority.`;
       const m = estimator.engineerMonthly;
       price.hidden = !(estimator.showPrices && m.max > 0);
-      price.textContent = `${gbp(m.min)} – ${gbp(m.max)} per engineer per month`;
-      $('est-next').innerHTML = '<p class="font-semibold">Recommended next step</p><p class="mt-1">A free discovery call to agree the skills you need. We’ll then give you a clear quote — no Sprint 0 needed.</p>';
+      price.textContent = `${gbp(m.min)} to ${gbp(m.max)} per engineer per month`;
+      $('est-next').innerHTML = '<p class="font-semibold">Recommended next step</p><p class="mt-1">A free discovery call to agree the skills you need. We’ll then give you a clear quote. No Sprint 0 needed.</p>';
       summary = `Extra engineers: ${get('engineers')}, ${get('skills')}, ${get('duration')}`;
     } else {
       const points = checked.reduce((t, i) => t + Number(i.dataset.points || 0), 0);
@@ -127,7 +127,7 @@ const config = { estimator, pricing };
       $('est-title').textContent = `This looks like a ${size.label.toLowerCase()} project`;
       $('est-text').textContent = `${size.example}.`;
       price.hidden = !(estimator.showPrices && size.max > 0);
-      price.textContent = `Indicative build cost: ${gbp(size.min)} – ${gbp(size.max)}`;
+      price.textContent = `Indicative build cost: ${gbp(size.min)} to ${gbp(size.max)}`;
       $('est-next').innerHTML = `<p class="font-semibold">Recommended next step: Sprint 0</p><p class="mt-1">A ${gbp(pricing.sprintZeroPrice)} discovery phase that gives you a full design and a fixed price for the build. ${gbp(pricing.sprintZeroCredit)} is credited back if you build with us. Prefer to spread the build cost? <a class="underline" href="/pricing">Monthly financing</a> is available to eligible businesses.</p>`;
       summary = `${size.label} project (${points} points)`;
     }

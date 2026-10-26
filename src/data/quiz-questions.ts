@@ -1,5 +1,5 @@
 /**
- * AI readiness quiz (/ai-readiness). Each answer scores 0–3.
+ * AI readiness quiz (/ai-readiness). Each answer scores 0 to 3.
  * "tip" is shown as a suggestion when someone scores 0 or 1 on that question.
  */
 export const quizQuestions = [
@@ -7,8 +7,8 @@ export const quizQuestions = [
     id: 'goals',
     topic: 'Goals',
     question: 'Do you know which business problems AI could help with?',
-    options: ['Not really, no', 'We have a few ideas', 'We have a list of possible uses', 'Yes — prioritised, with expected benefits'],
-    tip: 'List your most repetitive, time-consuming tasks. They’re usually the best first candidates for AI — and the easiest to measure.',
+    options: ['Not really, no', 'We have a few ideas', 'We have a list of possible uses', 'Yes, prioritised with expected benefits'],
+    tip: 'List your most repetitive, time-consuming tasks. They’re usually the best first candidates for AI, and the easiest to measure.',
   },
   {
     id: 'data-location',
@@ -22,14 +22,14 @@ export const quizQuestions = [
     topic: 'Data quality',
     question: 'How much do you trust that information?',
     options: ['Not much', 'It’s patchy', 'Mostly accurate', 'Accurate and kept up to date'],
-    tip: 'Pick one important dataset — customers, jobs or stock — and agree who owns keeping it accurate.',
+    tip: 'Pick one important dataset (customers, jobs or stock) and agree who owns keeping it accurate.',
   },
   {
     id: 'processes',
     topic: 'Processes',
     question: 'Are your main processes written down?',
-    options: ['No', 'They’re mostly in people’s heads', 'Some are documented', 'Yes — documented and followed consistently'],
-    tip: 'Map one process from start to finish. You can’t automate what isn’t clear — and the exercise often reveals quick wins.',
+    options: ['No', 'They’re mostly in people’s heads', 'Some are documented', 'Yes, documented and followed consistently'],
+    tip: 'Map one process from start to finish. You can’t automate what isn’t clear, and the exercise often reveals quick wins.',
   },
   {
     id: 'systems',
@@ -65,7 +65,7 @@ export const quizBands = [
   {
     min: 0,
     title: 'Early days',
-    summary: 'You’re at the start of the journey — which is a great time to get the foundations right. Focus on getting your data and processes in order before building anything big.',
+    summary: 'You’re at the start of the journey, which is a great time to get the foundations right. Focus on getting your data and processes in order before building anything big.',
     next: { label: 'Explore AI strategy & discovery', href: '/services/ai-and-data#ai-strategy' },
   },
   {

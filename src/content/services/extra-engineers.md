@@ -2,10 +2,10 @@
 title: Extra Engineers
 shortTitle: Extra Engineers
 order: 3
-seoTitle: Staff Augmentation — Embedded Software & AI Engineers
+seoTitle: Staff Augmentation: Embedded Software & AI Engineers
 seoDescription: Add experienced software, data and AI engineers to your team for as long as you need them. Flexible staff augmentation for growing UK businesses.
 headline: Experienced engineers who join your team and get on with it.
-summary: Need more hands or a skill your team doesn't have? We provide software, data and AI engineers who work inside your team, with your tools and your way of working — for weeks, months or longer.
+summary: Need more hands or a skill your team doesn't have? We provide software, data and AI engineers who work inside your team, with your tools and your way of working, for weeks, months or longer.
 menuText: Skilled engineers who join your team, for as long as you need
 accent: lilac
 capabilities:
@@ -50,7 +50,7 @@ process:
     text: Regular check-ins so you can scale up, down or hand over as needed.
 faqs:
   - q: Are the engineers employed by Advica?
-    a: They come from our established engineering delivery partner. Advica stays your single point of contact — we agree the brief, the contract and the working arrangements with you, and stay involved throughout.
+    a: They come from our established engineering delivery partner. Advica stays your single point of contact. We agree the brief, the contract and the working arrangements with you, and stay involved throughout.
   - q: How quickly can engineers start?
     a: It depends on the skills you need. Tell us on a discovery call and we'll give you a realistic start date before you commit.
   - q: Do the engineers work in our time zone?

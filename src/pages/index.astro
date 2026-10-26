@@ -12,7 +12,7 @@ import { steps } from '../data/steps';
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const caseStudies = (await getCollection('caseStudies', (c) => !c.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
 const shownTestimonials = testimonials.filter((t) => t.show);
-const marquee = services.flatMap((s) => s.data.capabilities.map((c) => c.name.split(' — ')[0]));
+const marquee = services.flatMap((s) => s.data.capabilities.map((c) => c.name.split(' (')[0]));
 const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 
 const reasons = [
@@ -23,7 +23,7 @@ const reasons = [
 ];
 
 const faqs = [
-  { q: 'What kind of businesses do you work with?', a: 'UK small and mid-sized businesses — typically firms that have outgrown spreadsheets and off-the-shelf tools, or want to use AI properly but need a technical partner to do it.' },
+  { q: 'What kind of businesses do you work with?', a: 'UK small and mid-sized businesses, typically firms that have outgrown spreadsheets and off-the-shelf tools, or want to use AI properly but need a technical partner to do it.' },
   { q: 'We’re not technical. Is that a problem?', a: 'Not at all. Bring the business problem and we’ll handle the technical side. We explain options in plain English, and you’ll always know what you’re paying for and why.' },
   { q: 'How much does a project cost?', a: 'It depends on what you need. Try our project cost estimator for an indicative guide. After Sprint 0 you get a fixed plan and price before the main build starts.' },
   { q: 'Can we spread the cost?', a: `Yes. As well as paying by milestone, eligible businesses can spread the cost monthly over ${pricing.financeYears} years through our finance partners, subject to their approval.` },
@@ -47,7 +47,7 @@ const faqLd = { '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Que
           AI and software, built around <span class="text-shine">how your business works.</span>
         </h1>
         <p class="mt-7 max-w-xl text-lg leading-relaxed text-mist sm:text-xl">
-          We design, build and support custom AI tools, apps and data platforms for UK small and mid-sized businesses — with a clear, fixed plan before the build begins.
+          We design, build and support custom AI tools, apps and data platforms for UK small and mid-sized businesses, with a clear, fixed plan before the build begins.
         </p>
         <div class="mt-10 flex flex-col gap-3 sm:flex-row">
           <BookButton class="btn-primary" label="Book a free call" />

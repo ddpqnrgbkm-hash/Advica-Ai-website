@@ -1,6 +1,6 @@
 /**
  * ============================================================
- *  SITE SETTINGS — the one file for company-wide details.
+ *  SITE SETTINGS - the one file for company-wide details.
  * ============================================================
  *  Edit the text between the quote marks. Keep the commas.
  *  Anything left as '' (empty) is simply hidden on the site.
@@ -15,7 +15,7 @@ export const site = {
   companyNumber: '17076839', // shown in the footer
   registeredIn: 'England and Wales',
   vatNumber: '',
-  icoNumber: '', // your ICO registration number, e.g. 'ZB123456' — shown in the privacy policy
+  icoNumber: '', // your ICO registration number, e.g. 'ZB123456', shown in the privacy policy
 
   // ---------- Contact ----------
   email: 'office@advicaaisolutions.co.uk',
@@ -45,8 +45,8 @@ export const site = {
 export const pricing = {
   sprintZeroPrice: 4250,   // £, Sprint 0 discovery phase
   sprintZeroCredit: 2125,  // £ credited back against the build if the client continues with us
-  vatNote: '', // e.g. 'All prices exclude VAT.' — shown under prices when filled in
-  financeYears: '3–5',
+  vatNote: '', // e.g. 'All prices exclude VAT.', shown under prices when filled in
+  financeYears: '3 to 5',
 };
 
 // ---------- Project cost estimator ----------
@@ -71,7 +71,7 @@ export const bookingIsExternal = Boolean(site.bookingUrl);
 
 // ---------- Main navigation (max 5 items) ----------
 // "Services" builds its dropdown automatically from the service files in src/content/services.
-// The other dropdowns are listed here: { label, href, text } — text is the small grey line under each link.
+// The other dropdowns are listed here: { label, href, text } - text is the small grey line under each link.
 type NavLink = { label: string; href: string; text?: string };
 export const nav: (NavLink & { dropdown?: 'services'; children?: NavLink[] })[] = [
   { label: 'Services', href: '/services', dropdown: 'services' },

@@ -12,19 +12,19 @@ const faqs = [
   { q: 'Why don’t you publish fixed prices for builds?', a: 'Every project is different, and a price without a plan is a guess. Sprint 0 gives you a fixed price based on a proper design. For a rough idea before then, try our project cost estimator.' },
   { q: 'Is the Sprint 0 credit guaranteed?', a: `If you go ahead with the build with us, ${gbp(pricing.sprintZeroCredit)} of your Sprint 0 fee is credited against your build invoice.` },
   { q: 'Who provides the monthly financing?', a: 'Independent technology finance providers we work with. They make their own lending decisions and agreements are between you and them.' },
-  { q: 'Are there tax benefits to financing?', a: 'Spreading the cost can have tax advantages for some businesses, but it depends on your circumstances. Please speak to your accountant before deciding — we can’t give tax advice.' },
+  { q: 'Are there tax benefits to financing?', a: 'Spreading the cost can have tax advantages for some businesses, but it depends on your circumstances. Please speak to your accountant before deciding, as we can’t give tax advice.' },
   { q: 'How are extra engineers priced?', a: 'Usually a monthly or day rate per engineer, depending on skills and seniority. We’ll give you a clear quote before anyone starts.' },
 ];
 ---
 <BaseLayout
-  title="Pricing — Sprint 0, milestone billing and monthly financing"
+  title="Pricing: Sprint 0, milestone billing and monthly financing"
   description={`Start with Sprint 0 (${gbp(pricing.sprintZeroPrice)}, with ${gbp(pricing.sprintZeroCredit)} credited if you build with us), then pay by milestone or spread the cost monthly over ${pricing.financeYears} years.`}
   jsonLd={[{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }]}
 >
   <PageHero
     eyebrow="Pricing"
     title="Clear pricing. Flexible ways to pay."
-    intro="Start with a fixed-price plan, then choose how you pay for the build — in stages, or spread monthly so your cash stays free for running the business."
+    intro="Start with a fixed-price plan, then choose how you pay for the build: in stages, or spread monthly so your cash stays free for running the business."
     crumbs={[{ label: 'Pricing' }]}
   />
 
@@ -93,7 +93,7 @@ const faqs = [
           </ul>
           <div class="mt-8 grid gap-4 rounded-2xl border border-white/[0.08] bg-void/40 p-5 text-sm text-mist sm:grid-cols-2">
             <p><span class="block font-medium text-white">Eligibility</span>Subject to the finance provider’s approval and checks. Typically at least 3 years’ trading and Sprint 0 completed.</p>
-            <p><span class="block font-medium text-white">Tax</span>Financing may offer tax advantages for some businesses. Please consult your accountant — we can’t give tax advice.</p>
+            <p><span class="block font-medium text-white">Tax</span>Financing may offer tax advantages for some businesses. Please consult your accountant, as we can’t give tax advice.</p>
           </div>
         </article>
       </div>

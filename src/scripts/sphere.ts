@@ -1,6 +1,6 @@
 /**
  * Hero visual: a rotating 3D network sphere with travelling light pulses.
- * Plain <canvas> 2D — no libraries. Pauses when off-screen; static for reduced-motion users.
+ * Plain <canvas> 2D - no libraries. Pauses when off-screen; static for reduced-motion users.
  */
 type P = { x: number; y: number; z: number };
 

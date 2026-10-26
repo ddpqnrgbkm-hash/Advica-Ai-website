@@ -18,8 +18,8 @@
   --color-edge: #1b2740;      /* hairline borders */
   --color-text: #e9eef8;      /* main text */
   --color-mist: #95a3ba;      /* secondary text (AA on void/ink) */
-  --color-sky: #3cc8ff;       /* logo cyan — primary accent */
-  --color-brand: #2f7bff;     /* logo blue — gradients, highlights */
+  --color-sky: #3cc8ff;       /* logo cyan, primary accent */
+  --color-brand: #2f7bff;     /* logo blue, gradients and highlights */
   --color-deep: #0a3a8c;      /* deep blue glow */
 
   /* legacy names still used by inner pages (restyled after homepage approval) */

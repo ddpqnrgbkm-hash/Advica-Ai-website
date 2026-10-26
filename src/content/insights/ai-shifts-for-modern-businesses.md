@@ -1,6 +1,6 @@
 ---
 title: "What the latest shifts in AI mean for modern businesses"
-description: "Generic chatbots are giving way to transparent, task-focused AI systems. What that means for your technology strategy — in plain English."
+description: "Generic chatbots are giving way to transparent, task-focused AI systems. What that means for your technology strategy, in plain English."
 date: 2026-08-04
 category: Strategic insights
 readingTime: 5 min read
@@ -12,7 +12,7 @@ Here's what that means for your technology plans.
 
 ## 1. Transparency rules are arriving
 
-The EU AI Act is being phased in, and it includes transparency duties — for example, making it clear when people are dealing with an AI system or AI-generated content. If you sell into the EU, these rules can apply to you even as a UK business.
+The EU AI Act is being phased in, and it includes transparency duties. For example, making it clear when people are dealing with an AI system or AI-generated content. If you sell into the EU, these rules can apply to you even as a UK business.
 
 **Why it matters:** it's far cheaper to design AI products properly from day one than to retrofit them. We build with security, data governance and compliance in mind from the start, so your systems stay reliable as rules evolve.
 
@@ -20,7 +20,7 @@ The EU AI Act is being phased in, and it includes transparency duties — for ex
 
 The bar for AI has moved. It's no longer about producing plausible answers to simple questions, but about working through complex, multi-step problems with results you can check.
 
-**Why it matters:** this reasoning ability can now be built into your own systems — for example, checking documents against rules, reconciling data across systems or preparing first drafts that a person approves.
+**Why it matters:** this reasoning ability can now be built into your own systems, for example checking documents against rules, reconciling data across systems or preparing first drafts that a person approves.
 
 ## 3. AI agents move into everyday operations
 

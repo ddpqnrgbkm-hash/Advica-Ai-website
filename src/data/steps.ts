@@ -8,7 +8,7 @@ export const steps = [
   {
     name: 'Sprint 0 plan',
     short: 'Design, scope & fixed price',
-    text: 'We design the solution, map your workflows and give you a clear roadmap with fixed milestones and costs — before any build begins.',
+    text: 'We design the solution, map your workflows and give you a clear roadmap with fixed milestones and costs, before any build begins.',
   },
   {
     name: 'Build',

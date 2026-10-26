@@ -26,9 +26,9 @@ export const estimatorQuestions: Question[] = [
     question: 'How big is the job?',
     help: 'Your best guess is fine.',
     options: [
-      { label: 'Simple — one main job, a handful of screens', points: 0 },
-      { label: 'Moderate — several features or types of user', points: 3 },
-      { label: 'Complex — lots of features, high security or heavy data', points: 6 },
+      { label: 'Simple: one main job, a handful of screens', points: 0 },
+      { label: 'Moderate: several features or types of user', points: 3 },
+      { label: 'Complex: lots of features, high security or heavy data', points: 6 },
     ],
   },
   {
@@ -37,8 +37,8 @@ export const estimatorQuestions: Question[] = [
     question: 'How many of your existing systems does it need to connect to?',
     help: 'For example: accounting, CRM, stock control, email.',
     options: [
-      { label: 'None — it can stand alone', points: 0 },
-      { label: '1–2 systems', points: 1 },
+      { label: 'None, it can stand alone', points: 0 },
+      { label: '1 to 2 systems', points: 1 },
       { label: '3 or more systems', points: 3 },
       { label: 'Not sure', points: 1 },
     ],
@@ -59,7 +59,7 @@ export const estimatorQuestions: Question[] = [
     question: 'When do you need it?',
     options: [
       { label: 'As soon as possible (within 3 months)', points: 1 },
-      { label: 'In the next 3–6 months', points: 0 },
+      { label: 'In the next 3 to 6 months', points: 0 },
       { label: 'We’re flexible', points: 0 },
     ],
   },
@@ -68,7 +68,7 @@ export const estimatorQuestions: Question[] = [
     id: 'engineers',
     path: 'engineers',
     question: 'How many engineers do you need?',
-    options: [{ label: '1 engineer' }, { label: '2–3 engineers' }, { label: '4 or more' }, { label: 'Not sure yet' }],
+    options: [{ label: '1 engineer' }, { label: '2 to 3 engineers' }, { label: '4 or more' }, { label: 'Not sure yet' }],
   },
   {
     id: 'skills',
@@ -86,7 +86,7 @@ export const estimatorQuestions: Question[] = [
     id: 'duration',
     path: 'engineers',
     question: 'For how long?',
-    options: [{ label: 'Under 3 months' }, { label: '3–6 months' }, { label: '6 months or more' }, { label: 'Not sure yet' }],
+    options: [{ label: 'Under 3 months' }, { label: '3 to 6 months' }, { label: '6 months or more' }, { label: 'Not sure yet' }],
   },
   {
     id: 'start',

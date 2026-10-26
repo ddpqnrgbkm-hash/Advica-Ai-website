@@ -6,7 +6,7 @@ category: Technical execution
 readingTime: 4 min read
 ---
 
-For the last couple of years, most people's experience of AI has been: ask a question, get an answer. That's changing. The focus is shifting from AI that *talks* to AI that *does* — often called "agentic" AI.
+For the last couple of years, most people's experience of AI has been: ask a question, get an answer. That's changing. The focus is shifting from AI that *talks* to AI that *does*, often called "agentic" AI.
 
 ## From reporting to doing
 
@@ -19,7 +19,7 @@ The person stays in charge. The AI does the legwork.
 
 ## Why control matters
 
-Businesses are increasingly cautious about sending sensitive data to general-purpose public AI tools. Agentic systems can be built to run in a controlled environment — inside your own cloud, with clear limits on what they can see and do, and a record of every action taken.
+Businesses are increasingly cautious about sending sensitive data to general-purpose public AI tools. Agentic systems can be built to run in a controlled environment: inside your own cloud, with clear limits on what they can see and do, and a record of every action taken.
 
 ## Where agentic AI helps
 

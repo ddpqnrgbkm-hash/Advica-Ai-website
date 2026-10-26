@@ -20,7 +20,7 @@ Three jobs, in this order. Allow about an hour, plus waiting time for the domain
    - Branch to deploy: `main`
    - Build command: `npm run build`
    - Publish directory: `dist`
-6. Click **Deploy**. After 1–2 minutes the status shows **Published** and you get a temporary address like `https://random-name-123.netlify.app`. Open it and check the site.
+6. Click **Deploy**. After 1 to 2 minutes the status shows **Published** and you get a temporary address like `https://random-name-123.netlify.app`. Open it and check the site.
 7. Give it a tidier temporary name: **Project configuration → General → Project details → Change project name**, then type e.g. `advica-ai`. Your temporary address becomes `https://advica-ai.netlify.app`. **Write this address down; you need it in step 3.**
 
 From now on, every change saved to GitHub publishes automatically.
@@ -48,7 +48,7 @@ The site has three forms: **contact** (enquiries), **estimate** (cost estimator)
 
 ### 2c. Test it
 1. Open your temporary address, go to **Contact**, and send a test enquiry.
-2. You should land on the "Thanks — we've got your message" page.
+2. You should land on the "Thanks, we've got your message" page.
 3. Check the office inbox, including the **spam/junk folder**. The email comes from Netlify (usually `formresponses@netlify.com`). If it's in spam, mark it **Not spam** or add that address to your safe senders in IONOS webmail.
 4. Do the same for the cost estimator and quiz (fill in your email at the end).
 
@@ -65,13 +65,13 @@ Your email (office@advicaaisolutions.co.uk) runs on IONOS. You will change **onl
 
 | Type | Host name | Value | What it does |
 |---|---|---|---|
-| MX | @ | `mx00.ionos.co.uk` | Receives your email — **keep** |
-| MX | @ | `mx01.ionos.co.uk` | Receives your email (backup) — **keep** |
-| TXT | @ | `v=spf1 include:_spf-eu.ionos.com ~all` | Stops your emails going to spam — **keep** |
-| CNAME | _dmarc | `dmarc.ionos.co.uk` | Email security — **keep** |
-| CNAME | autodiscover | `adsredir.ionos.info` | Sets up email on phones/Outlook — **keep** |
-| TXT | @ | `google-site-verification=…` | Google Search Console — **keep** |
-| NS | @ | `ns10xx.ui-dns…` | IONOS name servers — **keep** |
+| MX | @ | `mx00.ionos.co.uk` | Receives your email: **keep** |
+| MX | @ | `mx01.ionos.co.uk` | Receives your email (backup): **keep** |
+| TXT | @ | `v=spf1 include:_spf-eu.ionos.com ~all` | Stops your emails going to spam: **keep** |
+| CNAME | _dmarc | `dmarc.ionos.co.uk` | Email security: **keep** |
+| CNAME | autodiscover | `adsredir.ionos.info` | Sets up email on phones/Outlook: **keep** |
+| TXT | @ | `google-site-verification=…` | Google Search Console: **keep** |
+| NS | @ | `ns10xx.ui-dns…` | IONOS name servers: **keep** |
 
 Do **not** switch to "Netlify DNS" or change name servers. That would move your email settings.
 
@@ -102,7 +102,7 @@ Do **not** switch to "Netlify DNS" or change name servers. That would move your 
 > **If Netlify shows a different IP address** for the A record than `75.2.60.5`, use the one Netlify shows.
 
 ### 3c. Finish in Netlify
-1. Changes usually take effect within 15–60 minutes, occasionally up to 48 hours.
+1. Changes usually take effect within 15 to 60 minutes, occasionally up to 48 hours.
 2. In Netlify, go to **Domain management**. When both domains show as verified, open **HTTPS** and click **Verify DNS configuration**. Netlify then issues a free security certificate (the padlock) automatically.
 3. Make sure `advicaaisolutions.co.uk` is set as the **Primary domain**, so `www.` addresses redirect to it.
 4. Visit **https://advicaaisolutions.co.uk** and **https://www.advicaaisolutions.co.uk**. Both should show the new site with a padlock.

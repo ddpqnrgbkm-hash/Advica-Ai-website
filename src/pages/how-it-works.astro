@@ -12,7 +12,7 @@ const gbp = (n: number) => '£' + n.toLocaleString('en-GB');
 const detail = [
   {
     get: ['An honest view of whether we can help', 'Rough options and next steps', 'No cost, no obligation'],
-    note: 'Book online or call us. Bring the problem — you don’t need a specification.',
+    note: 'Book online or call us. Bring the problem. You don’t need a specification.',
   },
   {
     get: ['Technical design of the whole system, including the data it needs', 'Wireframes and workflow maps so you can see how it will work', 'A clear roadmap with milestones, timeline and a fixed price for the build'],
@@ -29,15 +29,15 @@ const detail = [
 ];
 
 const faqs = [
-  { q: 'What do I need to prepare before we start?', a: 'Just your idea or the problem you want solved. You don’t need every technical detail — working out the scope, design and technical plan is exactly what Sprint 0 is for.' },
-  { q: 'Do I have to do Sprint 0?', a: 'For most new builds, yes — it’s how we give you a fixed price you can rely on. For smaller pieces of work or extra engineers we may be able to quote directly; we’ll tell you on the discovery call.' },
+  { q: 'What do I need to prepare before we start?', a: 'Just your idea or the problem you want solved. You don’t need every technical detail. Working out the scope, design and technical plan is exactly what Sprint 0 is for.' },
+  { q: 'Do I have to do Sprint 0?', a: 'For most new builds, yes. It’s how we give you a fixed price you can rely on. For smaller pieces of work or extra engineers we may be able to quote directly; we’ll tell you on the discovery call.' },
   { q: 'What does starting a project involve?', a: 'Once you’re ready to go ahead, we complete a short onboarding form and our service agreement, take an agreed deposit, then schedule a kick-off call and get started.' },
   { q: 'How do we communicate during the project?', a: 'You get a named point of contact, a shared channel for quick questions and regular demos, so you always know how the build is progressing.' },
   { q: 'Who actually builds the software?', a: 'Advica scopes, plans and manages your project and remains your point of contact. The engineering is carried out by our established delivery partner’s specialist engineers, working to the plan agreed in Sprint 0.' },
 ];
 ---
 <BaseLayout
-  title="How it works — from discovery call to launch"
+  title="How it works: from discovery call to launch"
   description="Our four-step process: free discovery call, Sprint 0 plan with a fixed price, build in stages with regular demos, then handover or ongoing support."
   jsonLd={[{ '@type': 'FAQPage', mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }]}
 >

@@ -3,7 +3,7 @@ import { glob } from 'astro/loaders';
 
 const faq = z.object({ q: z.string(), a: z.string() });
 
-/** src/content/services/*.md — one file per service page */
+/** src/content/services/*.md - one file per service page */
 const services = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/services' }),
   schema: z.object({
@@ -26,7 +26,7 @@ const services = defineCollection({
   }),
 });
 
-/** src/content/insights/*.md — blog posts */
+/** src/content/insights/*.md - blog posts */
 const insights = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/insights' }),
   schema: z.object({
@@ -41,7 +41,7 @@ const insights = defineCollection({
   }),
 });
 
-/** src/content/case-studies/*.md — real client projects only */
+/** src/content/case-studies/*.md - real client projects only */
 const caseStudies = defineCollection({
   loader: glob({ pattern: '**/[^_]*.md', base: './src/content/case-studies' }),
   schema: z.object({

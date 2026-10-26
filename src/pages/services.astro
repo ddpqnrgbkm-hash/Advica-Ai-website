@@ -8,19 +8,19 @@ import CtaBand from '../components/CtaBand.astro';
 const services = (await getCollection('services')).sort((a, b) => a.data.order - b.data.order);
 const guide = [
   { need: 'You want to use AI, automate admin or make sense of your data', go: 'ai-and-data' },
-  { need: 'You need a new app, portal or system — or a better cloud setup', go: 'software-and-cloud' },
+  { need: 'You need a new app, portal or system, or a better cloud setup', go: 'software-and-cloud' },
   { need: 'You already have a tech team and need more skilled people', go: 'extra-engineers' },
 ];
 const title = (id: string) => services.find((s) => s.id === id)?.data.title;
 ---
 <BaseLayout
-  title="Services — AI, software, cloud and extra engineers"
+  title="Services: AI, software, cloud and extra engineers"
   description="Bespoke AI and data, custom software and cloud, and embedded engineers for UK SMEs and mid-market businesses. See what we do and find the right fit."
 >
   <PageHero
     eyebrow="Services"
     title="Everything you need to build with AI and software."
-    intro="Three ways we help UK businesses — from a single AI tool to a full product build or extra engineers for your team."
+    intro="Three ways we help UK businesses, from a single AI tool to a full product build or extra engineers for your team."
     crumbs={[{ label: 'Services' }]}
   />
 

@@ -14,12 +14,12 @@ export const projectTypes = [
 
 export const budgetRanges = [
   'Under £10,000',
-  '£10,000 – £25,000',
-  '£25,000 – £50,000',
-  '£50,000 – £100,000',
+  '£10,000 to £25,000',
+  '£25,000 to £50,000',
+  '£50,000 to £100,000',
   'Over £100,000',
   'Interested in monthly financing',
   'Not sure yet',
 ];
 
-export const timelines = ['As soon as possible', 'Within 1–3 months', 'In 3–6 months', 'Just exploring'];
+export const timelines = ['As soon as possible', 'Within 1 to 3 months', 'In 3 to 6 months', 'Just exploring'];

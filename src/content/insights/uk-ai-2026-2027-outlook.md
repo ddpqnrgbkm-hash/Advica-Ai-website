@@ -6,14 +6,14 @@ category: Strategic outlook
 readingTime: 5 min read
 ---
 
-As we move through 2026 and towards 2027, UK businesses are leaving the era of unplanned AI experiments behind. Customers, partners and regulators increasingly expect AI to be used responsibly — and to be able to see how it's being used.
+As we move through 2026 and towards 2027, UK businesses are leaving the era of unplanned AI experiments behind. Customers, partners and regulators increasingly expect AI to be used responsibly, and to be able to see how it's being used.
 
 ## 1. A maturing regulatory picture
 
 The UK has favoured a flexible, sector-by-sector approach to AI rather than one single rulebook. But expectations are rising:
 
 - **Accountability for personal data.** UK data protection law already applies to AI. That means a lawful basis for processing, using only the data you need, and proper safeguards around automated decisions that affect people.
-- **International standards.** Businesses that trade overseas — particularly with the EU — increasingly need to show their AI systems meet those markets' rules too.
+- **International standards.** Businesses that trade overseas, particularly with the EU, increasingly need to show their AI systems meet those markets' rules too.
 
 ## 2. From black boxes to explainable systems
 
@@ -23,8 +23,8 @@ Businesses can't afford to rely on AI whose decisions can't be explained or chec
 
 It's tempting to see governance as red tape. We see it differently: trust sells. When mid-sized and larger organisations buy software, they look hard at risk. Businesses that build in good practice from the start benefit from:
 
-- **Smoother sales to larger clients** — passing security and compliance reviews quickly.
-- **Fewer expensive rebuilds** — avoiding costly changes as rules tighten.
+- **Smoother sales to larger clients:** passing security and compliance reviews quickly.
+- **Fewer expensive rebuilds:** avoiding costly changes as rules tighten.
 
 ## Looking ahead
 

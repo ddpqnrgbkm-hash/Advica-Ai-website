@@ -5,7 +5,7 @@ order: 1
 seoTitle: AI Engineering, MLOps & Data Platforms
 seoDescription: Custom AI tools, machine learning in production and reliable data platforms for UK SMEs and mid-market firms. Plan first, then build what pays back.
 headline: Put AI to work on the jobs that slow your team down.
-summary: We find the tasks where AI genuinely saves time or money, then build and run tools that fit the way your business already works — on data you can trust.
+summary: We find the tasks where AI genuinely saves time or money, then build and run tools that fit the way your business already works, on data you can trust.
 menuText: Custom AI tools, automation, machine learning and data platforms
 accent: sky
 capabilities:
@@ -15,18 +15,18 @@ capabilities:
     tags: [Opportunity mapping, Data readiness check, AI roadmap]
   - id: generative-ai
     name: AI assistants & generative AI
-    text: Assistants and "knowledge engines" that answer questions, write drafts and summarise documents using your own information — set up so your data stays under your control.
+    text: Assistants and "knowledge engines" that answer questions, write drafts and summarise documents using your own information, set up so your data stays under your control.
     tags: [Custom AI assistants, Large language models, Summarisation, Fine-tuning]
   - id: automation
     name: Intelligent automation & document processing
-    text: AI that reads invoices, contracts, drawings and emails, pulls out what matters and moves it into your systems — taking the copy-and-paste out of everyday work.
+    text: AI that reads invoices, contracts, drawings and emails, pulls out what matters and moves it into your systems, taking the copy-and-paste out of everyday work.
     tags: [Document processing, AI agents, Process automation, Chatbots]
   - id: machine-learning
     name: Predictive analytics & machine learning
     text: Models that forecast demand, spot risks early, recognise what's in images and recommend the right product to the right customer.
     tags: [Forecasting, Computer vision, Recommendations, Personalisation]
   - id: mlops
-    name: MLOps — running AI reliably
+    name: MLOps (running AI reliably)
     text: Getting AI out of the experiment stage and into daily use, with monitoring, retraining and controls so it stays accurate, secure and affordable.
     tags: [Deployment, Monitoring, Retraining, Governance]
   - id: data-platforms

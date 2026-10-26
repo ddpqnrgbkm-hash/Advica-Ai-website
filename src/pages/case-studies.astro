@@ -7,8 +7,8 @@ import CtaBand from '../components/CtaBand.astro';
 
 const studies = (await getCollection('caseStudies', (c) => !c.data.draft)).sort((a, b) => +b.data.date - +a.data.date);
 ---
-<BaseLayout title="Case studies" description="Real projects delivered by Advica AI Solutions for UK businesses — the problem, what we built and what changed.">
-  <PageHero eyebrow="Case studies" title="Real projects, real results." intro="The problem, what we built and what changed — shared with our clients’ permission." crumbs={[{ label: 'Case Studies' }]} />
+<BaseLayout title="Case studies" description="Real projects delivered by Advica AI Solutions for UK businesses: the problem, what we built and what changed.">
+  <PageHero eyebrow="Case studies" title="Real projects, real results." intro="The problem, what we built and what changed, shared with our clients’ permission." crumbs={[{ label: 'Case Studies' }]} />
 
   <section class="py-20 sm:py-28">
     <div class="container-x">

@@ -1,6 +1,6 @@
 ---
 title: "The digital blueprint: why construction firms are going all-in on AI"
-description: "Construction has long been one of the least digitised industries. Here's where AI is making a practical difference — and how to add it without disrupting your operations."
+description: "Construction has long been one of the least digitised industries. Here's where AI is making a practical difference, and how to add it without disrupting your operations."
 date: 2026-10-06
 category: Industry analysis
 readingTime: 6 min read
@@ -8,22 +8,22 @@ readingTime: 6 min read
 
 For decades, construction had a reputation as one of the least digitised industries. Paper drawings, manual spreadsheet estimating and patchy communication between site and office were simply how things worked.
 
-That's changing fast. Tight labour markets, thin margins and increasingly complex projects are pushing contractors towards digital tools — and the firms adopting AI that fits their own workflows are seeing the biggest gains.
+That's changing fast. Tight labour markets, thin margins and increasingly complex projects are pushing contractors towards digital tools, and the firms adopting AI that fits their own workflows are seeing the biggest gains.
 
 ## The problem with off-the-shelf software
 
 Many contractors who try to modernise hit the same wall: off-the-shelf software forces teams to change how they work to fit rigid templates. The result is often:
 
-- **Re-keying data** — constant copy-and-paste between field apps, Excel and accounting software.
-- **Low adoption on site** — complicated apps drive teams back to WhatsApp groups and paper.
-- **No single view** — nobody can see live job costs or material delays in one place.
+- **Re-keying data:** constant copy-and-paste between field apps, Excel and accounting software.
+- **Low adoption on site:** complicated apps drive teams back to WhatsApp groups and paper.
+- **No single view:** nobody can see live job costs or material delays in one place.
 
 ## Where AI makes a practical difference
 
 Applied to everyday pain points, tailored AI tools can pay back quickly in three areas:
 
 ### 1. Take-offs and bidding
-AI can read long specification PDFs and drawings, pick out the line items and quantities, and drop them into your estimating sheet — turning hours of manual work into minutes of checking.
+AI can read long specification PDFs and drawings, pick out the line items and quantities, and drop them into your estimating sheet, turning hours of manual work into minutes of checking.
 
 ### 2. Site-to-office updates
 Simple apps can take voice notes and photos from site and turn them into structured daily logs, snagging lists and progress reports automatically.
