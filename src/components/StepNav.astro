@@ -1,0 +1,11 @@
+---
+/** Progress bar and Back / Next buttons for a stepper form (hidden until JavaScript runs). */
+---
+<div data-nav hidden class="mt-8">
+  <div class="h-2 overflow-hidden rounded-full bg-ink/10" aria-hidden="true"><div data-bar class="h-full w-0 rounded-full bg-brand transition-all"></div></div>
+  <div class="mt-6 flex items-center justify-between gap-4">
+    <button type="button" data-back class="btn-secondary disabled:invisible">Back</button>
+    <span data-count class="text-sm text-muted" aria-live="polite"></span>
+    <button type="button" data-next class="btn-primary disabled:cursor-not-allowed disabled:opacity-40">Next</button>
+  </div>
+</div>

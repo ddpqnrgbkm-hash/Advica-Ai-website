@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import ChoiceStep from '../components/ChoiceStep.astro';
+import StepNav from '../components/StepNav.astro';
+import BookButton from '../components/BookButton.astro';
+import { quizQuestions, quizBands } from '../data/quiz-questions';
+
+const field = 'mt-2 block w-full rounded-xl border border-ink/20 bg-white px-4 py-3 text-base focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/30';
+---
+<BaseLayout
+  title="AI readiness quiz — how ready is your business for AI?"
+  description="Eight quick questions to score how ready your business is for AI, with practical, tailored next steps. Free and instant — no sign-up needed."
+>
+  <PageHero eyebrow="Free quiz · 3 minutes" title="How ready is your business for AI?" intro="Eight quick questions. Get an instant score and practical suggestions tailored to your answers." crumbs={[{ label: 'AI readiness quiz' }]} accent="lime" />
+
+  <section class="py-16 sm:py-20">
+    <div class="container-x max-w-3xl">
+      <form
+        id="quiz"
+        data-stepper
+        name="ai-readiness"
+        method="POST"
+        action="/thank-you"
+        data-netlify="true"
+        netlify-honeypot="bot-field"
+        class="card space-y-10 sm:p-12"
+      >
+        <input type="hidden" name="form-name" value="ai-readiness" />
+        <input type="hidden" name="score" value="" />
+        <p class="hidden"><label>Don’t fill this out: <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+
+        {quizQuestions.map((q) => (
+          <ChoiceStep name={q.id} question={q.question} options={q.options.map((o, i) => ({ label: o, points: i }))} />
+        ))}
+
+        <StepNav />
+
+        <!-- Result -->
+        <div data-after hidden aria-live="polite">
+          <p class="eyebrow">Your AI readiness score</p>
+          <div class="mt-4 flex items-center gap-6">
+            <div class="relative grid size-32 shrink-0 place-items-center rounded-full" id="q-ring">
+              <span class="grid size-24 place-items-center rounded-full bg-white font-display text-3xl font-bold" id="q-score"></span>
+            </div>
+            <h2 data-focus tabindex="-1" class="font-display text-3xl font-bold outline-none sm:text-4xl" id="q-title"></h2>
+          </div>
+          <p class="mt-6 text-lg text-muted" id="q-summary"></p>
+
+          <div class="mt-8" id="q-tips-wrap">
+            <h3 class="font-display text-xl font-bold">Your top suggestions</h3>
+            <ol class="mt-4 space-y-3" id="q-tips"></ol>
+          </div>
+
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a href="#" id="q-next" class="btn-primary"></a>
+            <BookButton class="btn-secondary" label="Talk it through" />
+            <button type="button" data-restart class="btn-secondary">Retake</button>
+          </div>
+        </div>
+
+        <!-- Optional email capture -->
+        <div data-after class="border-t border-line pt-10">
+          <h2 class="font-display text-2xl font-bold">Want your results and a follow-up chat?</h2>
+          <p class="mt-2 text-muted">Optional. Leave your email and we’ll be in touch to talk through your score and what to do first.</p>
+          <div class="mt-6 grid gap-5 sm:grid-cols-2">
+            <div>
+              <label for="q-name" class="block text-sm font-semibold">Your name</label>
+              <input id="q-name" name="name" autocomplete="name" class={field} />
+            </div>
+            <div>
+              <label for="q-email" class="block text-sm font-semibold">Email <span class="text-brand" aria-hidden="true">*</span></label>
+              <input id="q-email" name="email" type="email" required autocomplete="email" class={field} />
+            </div>
+            <div class="sm:col-span-2">
+              <label for="q-company" class="block text-sm font-semibold">Company</label>
+              <input id="q-company" name="company" autocomplete="organization" class={field} />
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-muted">We’ll only use your details to follow up on your quiz. See our <a class="link" href="/privacy">privacy policy</a>.</p>
+          <button type="submit" class="btn-primary mt-6">Send me a follow-up</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <script type="application/json" id="quiz-config" set:html={JSON.stringify({ quizQuestions, quizBands })} />
+</BaseLayout>
+
+<script>
+  import { initStepper } from '../scripts/stepper';
+  import type { quizQuestions as Q, quizBands as B } from '../data/quiz-questions';
+
+  const form = document.getElementById('quiz') as HTMLFormElement;
+  const { quizQuestions, quizBands } = JSON.parse(document.getElementById('quiz-config')!.textContent!) as { quizQuestions: typeof Q; quizBands: typeof B };
+  const $ = (id: string) => document.getElementById(id)!;
+
+  initStepper(form);
+
+  form.addEventListener('stepper:done', () => {
+    const scores = quizQuestions.map((q) => Number(form.querySelector<HTMLInputElement>(`input[name="${q.id}"]:checked`)?.dataset.points ?? 0));
+    const pct = Math.round((scores.reduce((a, b) => a + b, 0) / (quizQuestions.length * 3)) * 100);
+    const band = [...quizBands].reverse().find((b) => pct >= b.min)!;
+
+    $('q-score').textContent = `${pct}%`;
+    $('q-ring').style.background = `conic-gradient(var(--color-brand) ${pct * 3.6}deg, var(--color-line) 0)`;
+    $('q-title').textContent = band.title;
+    $('q-summary').textContent = band.summary;
+
+    const next = $('q-next') as HTMLAnchorElement;
+    next.href = band.next.href;
+    next.textContent = band.next.label;
+
+    // Tailored suggestions: lowest-scoring areas first (max 3)
+    const tips = quizQuestions
+      .map((q, i) => ({ q, s: scores[i] }))
+      .filter((x) => x.s <= 1)
+      .sort((a, b) => a.s - b.s)
+      .slice(0, 3);
+    const list = $('q-tips');
+    list.replaceChildren(
+      ...(tips.length ? tips : [{ q: { topic: 'Keep going', tip: 'You scored well across the board. Pick the opportunity with the clearest payback and build a proper plan for it.' } as (typeof Q)[number], s: 3 }]).map(({ q }, i) => {
+        const li = document.createElement('li');
+        li.className = 'flex gap-4 rounded-2xl bg-paper p-5';
+        li.innerHTML = `<span class="grid size-8 shrink-0 place-items-center rounded-full bg-lime font-bold">${i + 1}</span><span><span class="block font-semibold"></span><span class="block text-muted"></span></span>`;
+        const [t, d] = li.querySelectorAll('span > span');
+        t.textContent = q.topic;
+        d.textContent = q.tip;
+        return li;
+      }),
+    );
+
+    (form.querySelector('input[name="score"]') as HTMLInputElement).value = `${pct}% — ${band.title}`;
+  });
+</script>

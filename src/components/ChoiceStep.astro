@@ -1,0 +1,28 @@
+---
+/** One multiple-choice question for the estimator/quiz (a <fieldset> of radio buttons). */
+interface Props {
+  name: string;
+  question: string;
+  help?: string;
+  path?: string;
+  options: { label: string; value?: string; points?: number; choosePath?: string }[];
+}
+const { name, question, help, path, options } = Astro.props;
+---
+<fieldset data-step data-path={path} class="space-y-3">
+  <legend class="mb-2 font-display text-2xl font-bold leading-snug outline-none sm:text-3xl">{question}</legend>
+  {help && <p class="pb-2 text-muted">{help}</p>}
+  {options.map((o) => (
+    <label class="flex cursor-pointer items-center gap-4 rounded-2xl border border-ink/15 bg-white p-4 transition-colors hover:border-ink/40 has-[:checked]:border-brand has-[:checked]:bg-brand/[0.06] has-[:focus-visible]:outline has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-brand sm:p-5">
+      <input
+        type="radio"
+        name={name}
+        value={o.value ?? o.label}
+        data-points={o.points ?? 0}
+        data-choose-path={o.choosePath}
+        class="size-5 shrink-0 accent-brand"
+      />
+      <span class="font-medium">{o.label}</span>
+    </label>
+  ))}
+</fieldset>

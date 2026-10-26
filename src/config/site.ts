@@ -49,6 +49,22 @@ export const pricing = {
   financeYears: '3–5',
 };
 
+// ---------- Project cost estimator ----------
+// The estimator works out a project SIZE from the visitor's answers.
+// To also show an indicative £ range, fill in min/max for each size and set showPrices: true.
+// Prices are for the build only (Sprint 0 is shown separately above).
+export const estimator = {
+  showPrices: false,
+  sizes: {
+    small:  { label: 'Small',       min: 0, max: 0, example: 'A focused tool that does one main job well' },
+    medium: { label: 'Medium',      min: 0, max: 0, example: 'Several features or user types, connected to one or two systems' },
+    large:  { label: 'Large',       min: 0, max: 0, example: 'A substantial platform with many features and integrations' },
+    xl:     { label: 'Extra large', min: 0, max: 0, example: 'A complex, business-critical system or multi-phase programme' },
+  },
+  // Extra engineers: indicative cost per engineer per month (used when showPrices is true)
+  engineerMonthly: { min: 0, max: 0 },
+};
+
 /** Where "Book a Call" buttons point. */
 export const bookingHref = site.bookingUrl || '/contact';
 export const bookingIsExternal = Boolean(site.bookingUrl);
